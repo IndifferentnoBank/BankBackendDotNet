@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/BankBackendDotnet.csproj": {}
+    "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj": {}
   },
   "projects": {
-    "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/BankBackendDotnet.csproj": {
+    "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/BankBackendDotnet.csproj",
-        "projectName": "BankBackendDotnet",
-        "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/BankBackendDotnet.csproj",
+        "projectUniqueName": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj",
+        "projectName": "CoreService.Domain",
+        "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj",
         "packagesPath": "/Users/andreivasilev/.nuget/packages/",
-        "outputPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/obj/",
+        "outputPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/andreivasilev/.nuget/NuGet/NuGet.Config"
@@ -44,12 +44,6 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -62,9 +56,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
