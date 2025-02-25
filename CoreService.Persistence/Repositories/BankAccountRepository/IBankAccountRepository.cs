@@ -9,4 +9,6 @@ public interface IBankAccountRepository : IGenericRepository<BankAccount>
     Task<List<BankAccount>> GetAllAccountsByUserIdAsync(Guid userId);
     Task<bool> CheckIfBankAccountExistsByAccountNumberAsync(string accountNumber);
     Task<bool> CheckIfBankAccountExistsByAccountId(Guid id);
+    Task<bool> CheckIfBankAccountBelongsToUserAsync(Guid bankAccountId, Guid userId);
+    Task<IQueryable<BankAccount>> GetAllBankAccountsAsync();
 }

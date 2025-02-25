@@ -17,7 +17,7 @@ public class BankAccount(Guid userId, string name, string accountNumber)
 
     public bool isClosed { get; set; } = false;
 
-    public DateTime CreatedDate { get; init; } = DateTime.Now;
+    public DateTime CreatedDate { get; init; } = DateTime.UtcNow;
 
     [Required] 
     public Guid UserId { get; init; } = userId;

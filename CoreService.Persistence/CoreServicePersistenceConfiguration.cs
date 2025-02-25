@@ -1,4 +1,5 @@
 
+using Common.GenericRepository;
 using CoreService.Persistence.Repositories.BankAccountRepository;
 using CoreService.Persistence.Repositories.TransactionsRepository;
 using Microsoft.AspNetCore.Builder;
@@ -15,7 +16,9 @@ public static class CoreServicePersistenceConfiguration
         builder.Services.AddDbContext<CoreServiceDbContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("PostrgesDb")));
         
+        builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         builder.Services.AddTransient<IBankAccountRepository, BankAccountRepository>();
         builder.Services.AddTransient<ITransactionRepository, TransactionRepository>();
+
     }
 }

@@ -9,9 +9,9 @@ public class TransactionRepository : GenericRepository<Transaction>, ITransactio
 {
     private readonly CoreServiceDbContext _dbContext;
     
-    public TransactionRepository(DbContext context, CoreServiceDbContext dbContext) : base(context)
+    public TransactionRepository(CoreServiceDbContext context) : base(context)
     {
-        _dbContext = dbContext;
+        _dbContext = context;
     }
 
     public async Task<List<Transaction>> GetAllByAccountIdAsync(Guid accountId)

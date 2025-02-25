@@ -1,4 +1,3 @@
-using CoreService.Application.Helpers;
 using CoreService.Application.Helpers.BankAccountNumberGenerator;
 using CoreService.Domain.Entities;
 using CoreService.Persistence.Repositories.BankAccountRepository;
@@ -25,7 +24,7 @@ public class CreateBankAccountCommandHandler : IRequestHandler<CreateBankAccount
 
         var bankAccountNumber = await GenerateUniqueBankAccountNumber();
 
-        var bankAccount = new BankAccount(request.CreateBankAccountDto.UserId, request.CreateBankAccountDto.Name,
+        var bankAccount = new BankAccount(request.UserId, request.CreateBankAccountDto.Name,
             bankAccountNumber);
 
         await _bankAccountRepository.AddAsync(bankAccount);

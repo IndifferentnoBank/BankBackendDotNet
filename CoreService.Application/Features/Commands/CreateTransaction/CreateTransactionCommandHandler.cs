@@ -1,4 +1,5 @@
 using Common.Exceptions;
+using CoreService.Application.Helpers.TransactionExecutor;
 using CoreService.Domain.Entities;
 using CoreService.Domain.Enums;
 using CoreService.Persistence.Repositories.BankAccountRepository;
@@ -11,12 +12,14 @@ public class CreateTransactionCommandHandler: IRequestHandler<CreateTransactionC
 {
     private readonly ITransactionRepository _transactionRepository;
     private readonly IBankAccountRepository _bankAccountRepository;
+    private readonly ITransactionExecutor _transactionExecutor;
 
 
-    public CreateTransactionCommandHandler(ITransactionRepository transactionRepository, IBankAccountRepository bankAccountRepository)
+    public CreateTransactionCommandHandler(ITransactionRepository transactionRepository, IBankAccountRepository bankAccountRepository, ITransactionExecutor transactionExecutor)
     {
         _transactionRepository = transactionRepository;
         _bankAccountRepository = bankAccountRepository;
+        _transactionExecutor = transactionExecutor;
     }
 
     public async Task<Unit> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
@@ -41,6 +44,8 @@ public class CreateTransactionCommandHandler: IRequestHandler<CreateTransactionC
        var transaction = new Transaction(request.CreateTransactionDto.Type, request.CreateTransactionDto.Amount, request.CreateTransactionDto.Comment, bankAccount);
 
        await _transactionRepository.AddAsync(transaction);
+       
+       await _transactionExecutor.ExecuteTransaction(transaction);
        
        return Unit.Value;
     }

@@ -3,4 +3,4 @@ using MediatR;
 
 namespace CoreService.Application.Features.Commands.CreateTransaction;
 
-public record CreateTransactionCommand(Guid BankAccountId, CreateTransactionDto CreateTransactionDto): IRequest<Unit>;
+public record CreateTransactionCommand(Guid BankAccountId, Guid UserId, CreateTransactionDto CreateTransactionDto): IRequest<Unit>;

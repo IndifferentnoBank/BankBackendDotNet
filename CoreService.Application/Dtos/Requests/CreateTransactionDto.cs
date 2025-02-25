@@ -9,6 +9,7 @@ public class CreateTransactionDto
     public TransactionType Type { get; set; }
     
     [Required]
+    [Range(0.01, double.MaxValue)]
     public double Amount { get; set; }
     
     public string? Comment { get; set; }

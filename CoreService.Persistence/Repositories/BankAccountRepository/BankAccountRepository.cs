@@ -8,9 +8,9 @@ public class BankAccountRepository : GenericRepository<BankAccount>, IBankAccoun
 {
     private readonly CoreServiceDbContext _dbContext;
     
-    public BankAccountRepository(DbContext context, CoreServiceDbContext dbContext) : base(context)
+    public BankAccountRepository(CoreServiceDbContext context) : base(context)
     {
-        _dbContext = dbContext;
+        _dbContext = context;
     }
 
     public async Task<BankAccount> GetByIdAsync(Guid id)
@@ -32,5 +32,14 @@ public class BankAccountRepository : GenericRepository<BankAccount>, IBankAccoun
     {
         return await _dbContext.BankAccounts.AnyAsync(x=>x.Id == id);
     }
-    
+
+    public async Task<bool> CheckIfBankAccountBelongsToUserAsync(Guid bankAccountId, Guid userId)
+    {
+        return await _dbContext.BankAccounts.AnyAsync(x=>x.Id == bankAccountId && x.UserId == userId);
+    }
+
+    public Task<IQueryable<BankAccount>> GetAllBankAccountsAsync()
+    {
+        return Task.FromResult(_dbContext.BankAccounts.AsQueryable());
+    }
 }

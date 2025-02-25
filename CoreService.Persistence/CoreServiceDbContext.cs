@@ -10,16 +10,20 @@ public class CoreServiceDbContext : DbContext
     public DbSet<Transaction> Transactions { get; set; }
 
 
+    public CoreServiceDbContext(DbContextOptions<CoreServiceDbContext> options) : base(options)
+    {
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<BankAccount>(entity =>
         {
             entity.HasIndex(e => e.AccountNumber)
                 .IsUnique();
-            
-            entity.HasMany(e=> e.Transactions)
-                .WithOne(e=>e.BankAccount)
-                .HasForeignKey(e=>e.BankAccountId)
+
+            entity.HasMany(e => e.Transactions)
+                .WithOne(e => e.BankAccount)
+                .HasForeignKey(e => e.BankAccountId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
     }

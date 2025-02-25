@@ -4,25 +4,38 @@ using CoreService.Domain.Enums;
 
 namespace CoreService.Domain.Entities;
 
-public class Transaction(TransactionType transactionType, double amount, string? comment, BankAccount bankAccount)
+public class Transaction
 {
+    public Transaction() { }
+
+    public Transaction(TransactionType transactionType, double amount, string? comment, BankAccount bankAccount)
+    {
+        Id = Guid.NewGuid();
+        Date = DateTime.UtcNow;
+        Amount = amount;
+        Comment = comment;
+        Type = transactionType;
+        BankAccountId = bankAccount.Id;
+        BankAccount = bankAccount;
+    }
+    
     [Key]
-    public Guid Id { get; init; } = Guid.NewGuid();
+    public Guid Id { get; init; }
     
     [Required]
-    public DateTime Date { get; init; } = DateTime.Now;
+    public DateTime Date { get; init; } 
 
     [Required]
     [Range(0.01, double.MaxValue)]
-    public double Amount { get; init; } = amount;
+    public double Amount { get; init; }
 
-    public string? Comment { get; init; } = comment;
+    public string? Comment { get; init; }
     
     [Required]
-    public TransactionType Type { get; init; } = transactionType;
+    public TransactionType Type { get; init; } 
     
     [ForeignKey("BankAccount")]
-    public Guid BankAccountId { get; init; } = bankAccount.Id;
+    public Guid BankAccountId { get; init; } 
 
-    public BankAccount BankAccount { get; init; } = bankAccount;
+    public BankAccount BankAccount { get; init; }
 }
