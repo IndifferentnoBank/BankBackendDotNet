@@ -17,6 +17,7 @@ public class Transaction
         Type = transactionType;
         BankAccountId = bankAccount.Id;
         BankAccount = bankAccount;
+        Status = TransactionStatus.Processing;
     }
     
     [Key]
@@ -32,10 +33,13 @@ public class Transaction
     public string? Comment { get; init; }
     
     [Required]
-    public TransactionType Type { get; init; } 
+    public TransactionType Type { get; init; }
+
+    [Required] 
+    public TransactionStatus Status { get; set; } = TransactionStatus.Processing;
     
     [ForeignKey("BankAccount")]
     public Guid BankAccountId { get; init; } 
-
+    
     public BankAccount BankAccount { get; init; }
 }

@@ -34,7 +34,7 @@ public class CreateTransactionCommandHandler: IRequestHandler<CreateTransactionC
        if(bankAccount.isClosed)
            throw new BadRequest("Bank Account Is Closed");
        
-       if (request.CreateTransactionDto.Type is TransactionType.WITHDRAW or TransactionType.PAY_LOAN or TransactionType.AUTOPAY_LOAN)
+       if (request.CreateTransactionDto.Type is TransactionType.WITHDRAW or TransactionType.PAY_LOAN)
        {
            if (bankAccount.Balance < Convert.ToDecimal(request.CreateTransactionDto.Amount))
            {
@@ -45,7 +45,7 @@ public class CreateTransactionCommandHandler: IRequestHandler<CreateTransactionC
 
        await _transactionRepository.AddAsync(transaction);
        
-       await _transactionExecutor.ExecuteTransaction(transaction);
+       await _transactionExecutor.ExecuteTransactionAsync(transaction);
        
        return Unit.Value;
     }

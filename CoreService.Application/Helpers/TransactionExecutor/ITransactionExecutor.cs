@@ -4,5 +4,5 @@ namespace CoreService.Application.Helpers.TransactionExecutor;
 
 public interface ITransactionExecutor
 {
-    Task ExecuteTransaction(Transaction transaction);
+    Task ExecuteTransactionAsync(Transaction transaction);
 }

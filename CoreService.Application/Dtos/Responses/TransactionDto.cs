@@ -18,4 +18,7 @@ public class TransactionDto
     
     [Required]
     public TransactionType Type { get; set; } 
+    
+    [Required]
+    public TransactionStatus Status { get; set; }
 }
