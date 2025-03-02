@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "EWKYuExf5dk=",
+  "success": true,
+  "projectFilePath": "D:\\3grade\\Патерны\\BankBackendDotnet\\BankBackendDotnet.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kfk55\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.0\\microsoft.aspnetcore.openapi.9.0.0.nupkg.sha512",
+    "C:\\Users\\kfk55\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
