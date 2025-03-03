@@ -129,3 +129,15 @@ D:\3grade\Патерны\UserService.Presentation\obj\Debug\net9.0\refint\UserSe
 D:\3grade\Патерны\UserService.Presentation\obj\Debug\net9.0\UserService.Presentation.pdb
 D:\3grade\Патерны\UserService.Presentation\obj\Debug\net9.0\UserService.Presentation.genruntimeconfig.cache
 D:\3grade\Патерны\UserService.Presentation\obj\Debug\net9.0\ref\UserService.Presentation.dll
+D:\3grade\Патерны\UserService.Presentation\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\AutoMapper.dll
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\MediatR.dll
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\MediatR.Contracts.dll
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\CoreService.Application.dll
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\CoreService.Domain.dll
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\CoreService.Persistence.dll
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\UserService.Application.dll
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\CoreService.Application.pdb
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\UserService.Application.pdb
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\CoreService.Domain.pdb
+D:\3grade\Патерны\UserService.Presentation\bin\Debug\net9.0\CoreService.Persistence.pdb
