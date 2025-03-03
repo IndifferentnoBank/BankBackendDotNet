@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UserSevice.Persistence.Repositories.UserRepository;
 
 namespace UserSevice.Persistence
 {
@@ -12,7 +13,8 @@ namespace UserSevice.Persistence
         {
             builder.Services.AddDbContext<UserServiceDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("UserDb")));
-            
+
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
         }
     }
 }
