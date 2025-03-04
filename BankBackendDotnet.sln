@@ -27,6 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Presentation", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Application", "UserService.Application\UserService.Application.csproj", "{BEAE9195-0AD4-491A-8255-A4F4926B816C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3725753-CF42-49EF-B662-861FC7BCA610}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

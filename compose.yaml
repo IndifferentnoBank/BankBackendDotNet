@@ -1,0 +1,50 @@
+﻿services:
+  coreservice.presentation:
+    image: coreservice.presentation
+    build:
+      context: .
+      dockerfile: CoreService.Presentation/Dockerfile
+    environment:
+      - ConnectionStrings__Default=Host=coreservice-db;Port=5432;Database=coreservice_db;Username=coreservice_user;Password=coreservice_password
+    depends_on:
+      - coreservice-db
+
+  userservice.presentation:
+    image: userservice.presentation
+    build:
+      context: .
+      dockerfile: UserService.Presentation/Dockerfile
+    environment:
+      - ConnectionStrings__Default=Host=userservice-db;Port=5432;Database=userservice_db;Username=userservice_user;Password=userservice_password
+    depends_on:
+      - userservice-db
+
+  coreservice-db:
+    image: postgres:15
+    container_name: coreservice-db
+    restart: always
+    environment:
+      POSTGRES_DB: coreservice_db
+      POSTGRES_USER: coreservice_user
+      POSTGRES_PASSWORD: coreservice_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - coreservice_data:/var/lib/postgresql/data
+
+  userservice-db:
+    image: postgres:15
+    container_name: userservice-db
+    restart: always
+    environment:
+      POSTGRES_DB: userservice_db
+      POSTGRES_USER: userservice_user
+      POSTGRES_PASSWORD: userservice_password
+    ports:
+      - "5434:5432"
+    volumes:
+      - userservice_data:/var/lib/postgresql/data
+
+volumes:
+  coreservice_data: {}
+  userservice_data: {}

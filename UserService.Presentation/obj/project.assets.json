@@ -1233,7 +1233,8 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "9.0.2",
-          "Swashbuckle.AspNetCore.SwaggerGen": "7.2.0"
+          "Swashbuckle.AspNetCore.Swagger": "7.3.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "7.3.1"
         },
         "compile": {
           "bin/placeholder/Common.dll": {}
@@ -1247,6 +1248,7 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "AutoMapper": "14.0.0",
+          "CoreService.Infrastructure": "1.0.0",
           "CoreService.Persistence": "1.0.0",
           "MediatR": "12.4.1",
           "Microsoft.Extensions.Configuration": "9.0.2",
@@ -1270,14 +1272,29 @@
           "bin/placeholder/CoreService.Domain.dll": {}
         }
       },
+      "CoreService.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CoreService.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CoreService.Infrastructure.dll": {}
+        }
+      },
       "CoreService.Persistence/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Common": "1.0.0",
           "CoreService.Domain": "1.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.3",
-          "Swashbuckle.AspNetCore.SwaggerGen": "7.2.0"
+          "Npgsql": "9.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+          "Swashbuckle.AspNetCore.Swagger": "7.3.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "7.3.1"
         },
         "compile": {
           "bin/placeholder/CoreService.Persistence.dll": {}
@@ -1323,7 +1340,9 @@
           "Npgsql": "9.0.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
           "Swashbuckle.AspNetCore": "7.2.0",
-          "Swashbuckle.AspNetCore.Swagger": "7.2.0",
+          "Swashbuckle.AspNetCore.Swagger": "7.3.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "7.3.1",
+          "Swashbuckle.AspNetCore.SwaggerUI": "7.3.1",
           "UserService.Domain": "1.0.0"
         },
         "compile": {
@@ -3913,6 +3932,11 @@
       "type": "project",
       "path": "../CoreService.Domain/CoreService.Domain.csproj",
       "msbuildProject": "../CoreService.Domain/CoreService.Domain.csproj"
+    },
+    "CoreService.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../CoreService.Infrastructure/CoreService.Infrastructure.csproj",
+      "msbuildProject": "../CoreService.Infrastructure/CoreService.Infrastructure.csproj"
     },
     "CoreService.Persistence/1.0.0": {
       "type": "project",

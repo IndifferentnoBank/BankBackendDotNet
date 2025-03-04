@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoreService.Presentation.Controllers;
 
 [ApiController]
+[Route("bank_accounts")]
 public class BankAccountsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -20,41 +21,35 @@ public class BankAccountsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("bank_accounts")]
-    public async Task<IActionResult> GetBankAccounts(string? accountNumber = null, string? accountName = null)
+    public async Task<IActionResult> GetBankAccounts(Guid userId, string? accountNumber = null, string? accountName = null)
     {
-        var userId = Guid.Parse("741eb8f8-fe51-4d24-ba62-9a133bc61893");
         return Ok(await _mediator.Send(new GetBankAccountsCommand(userId, accountNumber, accountName)));
     }
 
     [HttpGet]
-    [Route("bank_accounts/{id:guid}")]
-    public async Task<IActionResult> GetBankAccount(Guid id)
+    [Route("{id:guid}")]
+    public async Task<IActionResult> GetBankAccount(Guid id, Guid userId)
     {
-        var userId = Guid.Parse("741eb8f8-fe51-4d24-ba62-9a133bc61893");
         return Ok(await _mediator.Send(new GetBankAccountByIdCommand(id, userId)));
     }
 
     [HttpGet]
-    [Route("users/{userId:guid}/bank_accounts")]
-    public async Task<IActionResult> GetBankAccounts(Guid userId)
+    [Route("{clientId:guid}/bank_accounts")]
+    public async Task<IActionResult> GetBankAccounts(Guid userId, Guid clientId)
     {
-        return Ok(await _mediator.Send(new GetBankAccountsByUserCommand(userId)));
+        return Ok(await _mediator.Send(new GetBankAccountsByUserCommand(userId, clientId)));
     }
 
     [HttpDelete]
-    [Route("bank_accounts/{id:guid}")]
-    public async Task<IActionResult> ClosBankAccount(Guid id)
+    [Route("{id:guid}")]
+    public async Task<IActionResult> ClosBankAccount(Guid id, Guid userId)
     {
-        var userId = Guid.Parse("741eb8f8-fe51-4d24-ba62-9a133bc61893");;
         return Ok(await _mediator.Send(new CloseBankAccountCommand(id, userId)));
     }
 
     [HttpPost]
-    [Route("bank_accounts")]
-    public async Task<IActionResult> CreateBankAccount([FromBody] CreateBankAccountDto accountDto)
+    public async Task<IActionResult> CreateBankAccount([FromBody] CreateBankAccountDto accountDto, Guid userId)
     {
-        var userId = Guid.Parse("741eb8f8-fe51-4d24-ba62-9a133bc61893");;
         return Ok(await _mediator.Send(new CreateBankAccountCommand(userId, accountDto)));
     }
 }

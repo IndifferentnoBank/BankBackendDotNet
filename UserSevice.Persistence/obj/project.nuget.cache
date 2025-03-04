@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "n5EGWteACs8=",
+  "dgSpecHash": "vzNECX5Y2Ok=",
   "success": true,
   "projectFilePath": "/Users/andreivasilev/Desktop/BankBackendDotNet/UserSevice.Persistence/UserService.Persistence.csproj",
   "expectedPackageFiles": [
@@ -37,9 +37,9 @@
     "/Users/andreivasilev/.nuget/packages/npgsql/9.0.3/npgsql.9.0.3.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.4/npgsql.entityframeworkcore.postgresql.9.0.4.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore/7.2.0/swashbuckle.aspnetcore.7.2.0.nupkg.sha512",
-    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swagger/7.2.0/swashbuckle.aspnetcore.swagger.7.2.0.nupkg.sha512",
-    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggergen/7.2.0/swashbuckle.aspnetcore.swaggergen.7.2.0.nupkg.sha512",
-    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/7.2.0/swashbuckle.aspnetcore.swaggerui.7.2.0.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swagger/7.3.1/swashbuckle.aspnetcore.swagger.7.3.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggergen/7.3.1/swashbuckle.aspnetcore.swaggergen.7.3.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/7.3.1/swashbuckle.aspnetcore.swaggerui.7.3.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.codedom/6.0.0/system.codedom.6.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.collections.immutable/7.0.0/system.collections.immutable.7.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.composition/7.0.0/system.composition.7.0.0.nupkg.sha512",

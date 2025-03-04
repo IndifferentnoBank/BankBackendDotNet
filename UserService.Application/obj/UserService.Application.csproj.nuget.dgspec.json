@@ -49,9 +49,13 @@
               "target": "Package",
               "version": "[9.0.2, )"
             },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
             "Swashbuckle.AspNetCore.SwaggerGen": {
               "target": "Package",
-              "version": "[7.2.0, )"
+              "version": "[7.3.1, )"
             }
           },
           "imports": [
@@ -194,13 +198,21 @@
               "target": "Package",
               "version": "[9.0.2, )"
             },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+            "Npgsql": {
               "target": "Package",
               "version": "[9.0.3, )"
             },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
             "Swashbuckle.AspNetCore.SwaggerGen": {
               "target": "Package",
-              "version": "[7.2.0, )"
+              "version": "[7.3.1, )"
             }
           },
           "imports": [
@@ -444,7 +456,15 @@
             },
             "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
-              "version": "[7.2.0, )"
+              "version": "[7.3.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[7.3.1, )"
             }
           },
           "imports": [

@@ -49,9 +49,13 @@
               "target": "Package",
               "version": "[9.0.2, )"
             },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
             "Swashbuckle.AspNetCore.SwaggerGen": {
               "target": "Package",
-              "version": "[7.2.0, )"
+              "version": "[7.3.1, )"
             }
           },
           "imports": [
@@ -97,6 +101,9 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/CoreService.Infrastructure.csproj": {
+                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/CoreService.Infrastructure.csproj"
+              },
               "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/CoreService.Persistence.csproj": {
                 "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/CoreService.Persistence.csproj"
               }
@@ -220,6 +227,70 @@
         }
       }
     },
+    "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/CoreService.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/CoreService.Infrastructure.csproj",
+        "projectName": "CoreService.Infrastructure",
+        "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/CoreService.Infrastructure.csproj",
+        "packagesPath": "/Users/andreivasilev/.nuget/packages/",
+        "outputPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/andreivasilev/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj": {
+                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/CoreService.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -280,13 +351,21 @@
               "target": "Package",
               "version": "[9.0.2, )"
             },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+            "Npgsql": {
               "target": "Package",
               "version": "[9.0.3, )"
             },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
             "Swashbuckle.AspNetCore.SwaggerGen": {
               "target": "Package",
-              "version": "[7.2.0, )"
+              "version": "[7.3.1, )"
             }
           },
           "imports": [
@@ -637,7 +716,15 @@
             },
             "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
-              "version": "[7.2.0, )"
+              "version": "[7.3.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[7.3.1, )"
             }
           },
           "imports": [
