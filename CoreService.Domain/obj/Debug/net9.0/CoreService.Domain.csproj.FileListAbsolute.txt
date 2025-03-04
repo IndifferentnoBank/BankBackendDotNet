@@ -1,0 +1,12 @@
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/bin/Debug/net9.0/CoreService.Domain.deps.json
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/bin/Debug/net9.0/CoreService.Domain.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/bin/Debug/net9.0/CoreService.Domain.pdb
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/Debug/net9.0/CoreService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/Debug/net9.0/CoreService.Domain.AssemblyInfoInputs.cache
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/Debug/net9.0/CoreService.Domain.AssemblyInfo.cs
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/Debug/net9.0/CoreService.Domain.csproj.CoreCompileInputs.cache
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/Debug/net9.0/CoreService.Domain.sourcelink.json
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/Debug/net9.0/CoreService.Domain.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/Debug/net9.0/refint/CoreService.Domain.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/Debug/net9.0/CoreService.Domain.pdb
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/obj/Debug/net9.0/ref/CoreService.Domain.dll
