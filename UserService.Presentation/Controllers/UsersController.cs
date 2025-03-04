@@ -46,7 +46,7 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
-    [HttpGet("/phone")]
+    [HttpGet("phone")]
     public async Task<IActionResult> GetUserByPhone([FromQuery] string phone)
     {
         var user = await _userService.GetUserByPhone(phone);

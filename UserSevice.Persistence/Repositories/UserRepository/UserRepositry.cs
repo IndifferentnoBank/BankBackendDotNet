@@ -1,5 +1,6 @@
 ﻿using Common.GenericRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders.Physical;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -39,6 +40,7 @@ namespace UserSevice.Persistence.Repositories.UserRepository
             var user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == userId);
             user.FullName = name;
             user.Passport = passport;
+            user.PhoneNumber = phone;
             user.Email = email;
             user.Role = role;
             _dbContext.User.Update(user);
