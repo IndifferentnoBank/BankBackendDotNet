@@ -74,6 +74,9 @@ namespace CoreService.Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
