@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: CoreService.Presentation/Dockerfile
     environment:
-      - ConnectionStrings__UserDb=Host=coreservice-db;Port=5432;Database=coreservice_db;Username=coreservice_user;Password=coreservice_password
+      - ConnectionStrings__PostgresDb=Host=coreservice-db;Port=5432;Database=coreservice_db;Username=coreservice_user;Password=coreservice_password
     depends_on:
       - coreservice-db
     ports:

@@ -20,7 +20,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.ConfigureUserServicePersistence();
 app.UseMiddleware<Middleware>();
 app.UseHttpsRedirection();
 
