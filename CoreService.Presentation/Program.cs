@@ -23,7 +23,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.ConfigureCoreServicePersistence();
 app.UseHttpsRedirection();
 
 app.UseHttpsRedirection();

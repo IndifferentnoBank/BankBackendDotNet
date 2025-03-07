@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: CoreService.Presentation/Dockerfile
     environment:
-      - ConnectionStrings__Default=Host=coreservice-db;Port=5432;Database=coreservice_db;Username=coreservice_user;Password=coreservice_password
+      - ConnectionStrings__PostgresDb=Host=coreservice-db;Port=5432;Database=coreservice_db;Username=coreservice_user;Password=coreservice_password
     depends_on:
       - coreservice-db
     ports:
@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: UserService.Presentation/Dockerfile
     environment:
-      - ConnectionStrings__Default=Host=userservice-db;Port=5432;Database=userservice_db;Username=userservice_user;Password=userservice_password
+      - ConnectionStrings__UserDb=Host=userservice-db;Port=5432;Database=userservice_db;Username=userservice_user;Password=userservice_password
     depends_on:
       - userservice-db
     ports:
