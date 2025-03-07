@@ -1,26 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/BankBackendDotnet.csproj": {}
+    "D:\\3grade\\Патерны\\BankBackendDotnet\\BankBackendDotnet.csproj": {}
   },
   "projects": {
-    "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/BankBackendDotnet.csproj": {
+    "D:\\3grade\\Патерны\\BankBackendDotnet\\BankBackendDotnet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/BankBackendDotnet.csproj",
+        "projectUniqueName": "D:\\3grade\\Патерны\\BankBackendDotnet\\BankBackendDotnet.csproj",
         "projectName": "BankBackendDotnet",
-        "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/BankBackendDotnet.csproj",
-        "packagesPath": "/Users/andreivasilev/.nuget/packages/",
-        "outputPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/BankBackendDotnet/obj/",
+        "projectPath": "D:\\3grade\\Патерны\\BankBackendDotnet\\BankBackendDotnet.csproj",
+        "packagesPath": "C:\\Users\\kfk55\\.nuget\\packages\\",
+        "outputPath": "D:\\3grade\\Патерны\\BankBackendDotnet\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/andreivasilev/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\kfk55\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -69,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
