@@ -21,4 +21,11 @@ public static class CoreServicePersistenceConfiguration
         builder.Services.AddTransient<ITransactionRepository, TransactionRepository>();
 
     }
+    
+    public static void ConfigureCoreServicePersistence(this WebApplication app)
+    {
+        using var serviceScope = app.Services.CreateScope();
+        var dbContext = serviceScope.ServiceProvider.GetService<CoreServiceDbContext>();
+        dbContext?.Database.Migrate();
+    }
 }
