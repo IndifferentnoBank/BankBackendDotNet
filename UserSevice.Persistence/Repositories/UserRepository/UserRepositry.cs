@@ -18,7 +18,7 @@ namespace UserSevice.Persistence.Repositories.UserRepository
             _dbContext = dbContext;
         }
 
-        public async Task<User> CreateUserAsync(string name, string email, string phone, string passport, UserRole role)
+        public async Task<User> CreateUserAsync(string name, string email, string phone, string passport, UserRole role, string password)
         {
             var user = new User
             {
@@ -27,7 +27,8 @@ namespace UserSevice.Persistence.Repositories.UserRepository
                 PhoneNumber = phone,
                 Passport = passport,
                 Role = role,
-                IsLocked = false 
+                IsLocked = false,
+                Password = password
             };
 
             await _dbContext.User.AddAsync(user);
@@ -35,7 +36,7 @@ namespace UserSevice.Persistence.Repositories.UserRepository
 
             return user;
         }
-        public async Task<User> UpdateUserAsync(Guid userId, string name, string email, string phone, string passport, UserRole role)
+        public async Task<User> UpdateUserAsync(Guid userId, string name, string email, string phone, string passport, UserRole role, string password)
         {
             var user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == userId);
             user.FullName = name;
@@ -43,6 +44,7 @@ namespace UserSevice.Persistence.Repositories.UserRepository
             user.PhoneNumber = phone;
             user.Email = email;
             user.Role = role;
+            user.Password = password;
             _dbContext.User.Update(user);
             await _dbContext.SaveChangesAsync();
 

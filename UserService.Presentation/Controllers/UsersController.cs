@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserService.Application.Dtos.Requests;
 using UserService.Application.Services;
+using UserService.Domain.Entities;
 using UserService.Domain.Enums;
 
 [ApiController]
@@ -23,6 +24,12 @@ public class UserController : ControllerBase
     {
         var user = await _userService.CreateUser(createUserDto);
         return Ok(user);
+    }
+    [HttpPost("login")]
+    public async Task<IActionResult> LoginUser([FromBody] LoginUserDto loginUserDto)
+    {
+        var userId = await _userService.LoginUser(loginUserDto);
+        return Ok(new { userId = $"{userId}" });
     }
 
     [HttpPut("{id}")]
@@ -49,8 +56,8 @@ public class UserController : ControllerBase
     [HttpGet("phone")]
     public async Task<IActionResult> GetUserByPhone([FromQuery] string phone)
     {
-        var user = await _userService.GetUserByPhone(phone);
-        return Ok(user);
+        var userIdResponse = await _userService.GetUserByPhone(phone);
+        return Ok(new { userId = $"{userIdResponse}" });
     }
 
     [HttpGet]
