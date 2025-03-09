@@ -34,7 +34,7 @@ public class GetTransactionsCommandHandler : IRequestHandler<GetTransactionsComm
 
         var user = await _userService.GetUserInfoAsync(request.UserId);
 
-        if (user.Id != request.clientId && user.Role != "STAFF")
+        if (user.Id != request.ClientId && user.Role != "STAFF")
             throw new Forbidden("You do not have permission to access this command");
 
 

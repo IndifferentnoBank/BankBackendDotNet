@@ -29,9 +29,20 @@ public class GetBankAccountByIdCommandHandler : IRequestHandler<GetBankAccountBy
 
         var bankAccount = await _repository.GetByIdAsync(request.Id);
         
-        if (user.Id != bankAccount.UserId || user.Role != "STAFF" || user.IsLocked)
-            throw new Forbidden("You do not have permission to access this bank account");
+        if (user == null)
+        {
+            throw new Forbidden("User not found.");
+        }
 
+        if (user.Id != bankAccount.UserId && user.Role != "STAFF")
+        {
+            throw new Forbidden("You do not have permission to access this bank account.");
+        }
+
+        if (user.IsLocked)
+        {
+            throw new Forbidden("Your account is locked. Please contact support.");
+        }
         return _mapper.Map<BankAccountDto>(bankAccount);
     }
 }
