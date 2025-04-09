@@ -14,7 +14,7 @@ public static class CoreServicePersistenceConfiguration
     public static void ConfigureCoreServicePersistence(this WebApplicationBuilder builder)
     {
         builder.Services.AddDbContext<CoreServiceDbContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("PostrgesDb")));
+            options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresDb")));
         
         builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         builder.Services.AddTransient<IBankAccountRepository, BankAccountRepository>();

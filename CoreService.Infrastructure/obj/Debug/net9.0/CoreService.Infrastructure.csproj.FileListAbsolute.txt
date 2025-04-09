@@ -1,0 +1,16 @@
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/bin/Debug/net9.0/CoreService.Infrastructure.deps.json
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/bin/Debug/net9.0/CoreService.Infrastructure.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/bin/Debug/net9.0/CoreService.Infrastructure.pdb
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/bin/Debug/net9.0/Common.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/bin/Debug/net9.0/Common.pdb
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/CoreService.Infrastructure.csproj.AssemblyReference.cache
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/CoreService.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/CoreService.Infrastructure.AssemblyInfoInputs.cache
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/CoreService.Infrastructure.AssemblyInfo.cs
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/CoreService.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/CoreService.Infrastructure.sourcelink.json
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/CoreServ.A10C8F24.Up2Date
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/CoreService.Infrastructure.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/refint/CoreService.Infrastructure.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/CoreService.Infrastructure.pdb
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/ref/CoreService.Infrastructure.dll

@@ -1,5 +1,7 @@
+using Common.Exceptions;
 using CoreService.Application.Helpers.BankAccountNumberGenerator;
 using CoreService.Domain.Entities;
+using CoreService.Infrastructure.ExternalServices.UserService;
 using CoreService.Persistence.Repositories.BankAccountRepository;
 using MediatR;
 
@@ -9,18 +11,22 @@ public class CreateBankAccountCommandHandler : IRequestHandler<CreateBankAccount
 {
     private readonly IBankAccountNumberGenerator _bankAccountNumberGenerator;
     private readonly IBankAccountRepository _bankAccountRepository;
+    private readonly IUserService _userService;
 
-    public CreateBankAccountCommandHandler(IBankAccountNumberGenerator bankAccountNumberGenerator, IBankAccountRepository bankAccountRepository)
+    public CreateBankAccountCommandHandler(IBankAccountNumberGenerator bankAccountNumberGenerator,
+        IBankAccountRepository bankAccountRepository, IUserService userService)
     {
         _bankAccountNumberGenerator = bankAccountNumberGenerator;
         _bankAccountRepository = bankAccountRepository;
+        _userService = userService;
     }
 
 
     public async Task<Unit> Handle(CreateBankAccountCommand request, CancellationToken cancellationToken)
     {
-        //todo: check if user exists and not blocked
-        //think of adding some more checkers
+        var user = await _userService.GetUserInfoAsync(request.UserId);
+        
+        if (user.IsLocked) throw new Forbidden("You are not allowed to create bank account.");
 
         var bankAccountNumber = await GenerateUniqueBankAccountNumber();
 

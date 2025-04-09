@@ -1,0 +1,68 @@
+version: "3.8"
+
+services:
+  coreservice.presentation:
+    image: coreservice.presentation
+    build:
+      context: .
+      dockerfile: CoreService.Presentation/Dockerfile
+    environment:
+      - ConnectionStrings__PostgresDb=Host=coreservice-db;Port=5432;Database=coreservice_db;Username=coreservice_user;Password=coreservice_password
+    depends_on:
+      - coreservice-db
+    ports:
+      - "8081:8080" 
+    networks:
+      - backend
+
+  userservice.presentation:
+    image: userservice.presentation
+    build:
+      context: .
+      dockerfile: UserService.Presentation/Dockerfile
+    environment:
+      - ConnectionStrings__UserDb=Host=userservice-db;Port=5432;Database=userservice_db;Username=userservice_user;Password=userservice_password
+    depends_on:
+      - userservice-db
+    ports:
+      - "8082:8080"
+    networks:
+      - backend
+
+  coreservice-db:
+    image: postgres:15
+    container_name: coreservice-db
+    restart: always
+    environment:
+      POSTGRES_DB: coreservice_db
+      POSTGRES_USER: coreservice_user
+      POSTGRES_PASSWORD: coreservice_password
+    expose:
+      - "5432" 
+    volumes:
+      - coreservice_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  userservice-db:
+    image: postgres:15
+    container_name: userservice-db
+    restart: always
+    environment:
+      POSTGRES_DB: userservice_db
+      POSTGRES_USER: userservice_user
+      POSTGRES_PASSWORD: userservice_password
+    expose:
+      - "5432" 
+    volumes:
+      - userservice_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+volumes:
+  coreservice_data: {}
+  userservice_data: {}
+
+networks:
+  backend:
+    driver: bridge

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoreService.Presentation.Controllers;
 
 [ApiController]
+[Route("bank_accounts")]
 public class TransactionsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -17,18 +18,16 @@ public class TransactionsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("bank_accounts/{id:guid}transactions")]
-    public async Task<IActionResult> GetTransactions(Guid id)
+    [Route("{id:guid}/transactions")]
+    public async Task<IActionResult> GetTransactions(Guid id, Guid userId, Guid clientId)
     {
-        var userId = Guid.Parse("741eb8f8-fe51-4d24-ba62-9a133bc61893");;
-        return Ok(await _mediator.Send(new GetTransactionsCommand(id, userId)));
+        return Ok(await _mediator.Send(new GetTransactionsCommand(id, userId, clientId)));
     }
 
     [HttpPost]
-    [Route("bank_accounts/{id:guid}/transactions")]
-    public async Task<IActionResult> CreateTransaction(Guid id, CreateTransactionDto transaction)
+    [Route("{id:guid}/transactions")]
+    public async Task<IActionResult> CreateTransaction(Guid id, Guid userId, CreateTransactionDto transaction)
     {
-        var userId = Guid.Parse("741eb8f8-fe51-4d24-ba62-9a133bc61893");
         return Ok(await _mediator.Send(new CreateTransactionCommand(id, userId, transaction)));
     }
 }
