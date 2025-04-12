@@ -32,8 +32,8 @@ namespace UserService.Domain.Entities
         [Required]
         public UserRole Role { get; set; }
 
-        [Required]
-        public string Password { get; set; }
+        //[Required]
+        //public string Password { get; set; }
 
     }
 }
