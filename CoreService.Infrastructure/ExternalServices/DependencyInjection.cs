@@ -2,11 +2,11 @@ using CoreService.Infrastructure.ExternalServices.UserService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoreService.Infrastructure;
+namespace CoreService.Infrastructure.ExternalServices;
 
-public static class CoreServiceInfrastructureConfiguration
+public static class DependencyInjection
 {
-    public static void ConfigureCoreServiceInfrastructure(this WebApplicationBuilder builder)
+    public static void ConfigureExternalServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddHttpClient("UserServiceClient", client =>
         {
@@ -14,6 +14,6 @@ public static class CoreServiceInfrastructureConfiguration
             client.DefaultRequestHeaders.Add("Accept", "application/json");
         });
 
-        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IUserService, UserService.UserService>();
     }
 }

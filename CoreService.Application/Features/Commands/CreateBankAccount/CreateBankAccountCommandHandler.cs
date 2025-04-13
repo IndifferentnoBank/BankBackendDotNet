@@ -31,7 +31,7 @@ public class CreateBankAccountCommandHandler : IRequestHandler<CreateBankAccount
         var bankAccountNumber = await GenerateUniqueBankAccountNumber();
 
         var bankAccount = new BankAccount(request.UserId, request.CreateBankAccountDto.Name,
-            bankAccountNumber);
+            bankAccountNumber, request.CreateBankAccountDto.Currency);
 
         await _bankAccountRepository.AddAsync(bankAccount);
 

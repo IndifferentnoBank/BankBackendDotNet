@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Common\Common.csproj" />
+      <ProjectReference Include="..\CoreService.Application\CoreService.Application.csproj" />
+      <ProjectReference Include="..\CoreService.Kafka.Contracts\CoreService.Kafka.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>

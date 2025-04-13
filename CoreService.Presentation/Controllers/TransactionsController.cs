@@ -1,5 +1,6 @@
 using CoreService.Application.Dtos.Requests;
 using CoreService.Application.Features.Commands.CreateTransaction;
+using CoreService.Application.Features.Commands.TransferMoney;
 using CoreService.Application.Features.Queries.GetTransactions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,5 +30,12 @@ public class TransactionsController : ControllerBase
     public async Task<IActionResult> CreateTransaction(Guid id, Guid userId, CreateTransactionDto transaction)
     {
         return Ok(await _mediator.Send(new CreateTransactionCommand(id, userId, transaction)));
+    }
+
+    [HttpPost]
+    [Route("/transfer")]
+    public async Task<IActionResult> TransferMoney(Guid userId, [FromBody] TransferMoneyDto transferMoneyDto)
+    {
+        return Ok(await _mediator.Send(new TransferMoneyCommand(userId, transferMoneyDto)));
     }
 }

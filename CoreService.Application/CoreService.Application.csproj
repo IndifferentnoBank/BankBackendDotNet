@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CoreService.Infrastructure\CoreService.Infrastructure.csproj" />
+      <ProjectReference Include="..\CoreService.Kafka.Contracts\CoreService.Kafka.Contracts.csproj" />
       <ProjectReference Include="..\CoreService.Persistence\CoreService.Persistence.csproj" />
     </ItemGroup>
 

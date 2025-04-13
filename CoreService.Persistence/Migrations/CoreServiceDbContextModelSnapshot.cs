@@ -38,6 +38,9 @@ namespace CoreService.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("Currency")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -56,6 +59,19 @@ namespace CoreService.Persistence.Migrations
                     b.ToTable("BankAccounts");
                 });
 
+            modelBuilder.Entity("CoreService.Domain.Entities.ExpiredToken", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("ExpiredTokens");
+                });
+
             modelBuilder.Entity("CoreService.Domain.Entities.Transaction", b =>
                 {
                     b.Property<Guid>("Id")
@@ -71,8 +87,14 @@ namespace CoreService.Persistence.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("text");
 
+                    b.Property<int>("Currency")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("RelatedTransactionId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");

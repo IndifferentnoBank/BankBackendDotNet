@@ -2,6 +2,7 @@ using Common.Configurations;
 using CoreService.Application;
 using CoreService.Application.BackgroundService;
 using CoreService.Infrastructure;
+using CoreService.Kafka;
 using CoreService.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.ConfigureCoreServicePersistence();
 builder.ConfigureCoreServiceApplication();
 builder.ConfigureCoreServiceInfrastructure();
 builder.ConfigureSwagger();
+builder.AddKafka();
 
 var app = builder.Build();
 

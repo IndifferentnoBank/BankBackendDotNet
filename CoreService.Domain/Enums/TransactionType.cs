@@ -9,5 +9,6 @@ public enum TransactionType
     DEPOSIT,
     AUTOPAY_LOAN,
     PAY_LOAN,
-    TAKE_LOAN
+    TAKE_LOAN,
+    TRANSFER
 }

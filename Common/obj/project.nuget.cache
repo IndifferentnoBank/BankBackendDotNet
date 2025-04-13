@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Uy0vmbEnvbI=",
+  "dgSpecHash": "TangnhqQ5b0=",
   "success": true,
   "projectFilePath": "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj",
   "expectedPackageFiles": [
+    "/Users/andreivasilev/.nuget/packages/confluent.kafka/2.9.0/confluent.kafka.2.9.0.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/librdkafka.redist/2.8.0/librdkafka.redist.2.8.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.entityframeworkcore/9.0.2/microsoft.entityframeworkcore.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.2/microsoft.entityframeworkcore.abstractions.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.2/microsoft.entityframeworkcore.analyzers.9.0.2.nupkg.sha512",

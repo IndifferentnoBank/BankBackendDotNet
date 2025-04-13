@@ -5,11 +5,10 @@ using CoreService.Application.Helpers.TransactionExecutor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
-using Quartz.Spi;
 
 namespace CoreService.Application;
 
-public static class CoreServiceApplicationConfiguration
+public static class DependencyInjection
 {
     public static void ConfigureCoreServiceApplication(this WebApplicationBuilder builder)
     {
