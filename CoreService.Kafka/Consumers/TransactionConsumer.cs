@@ -7,8 +7,6 @@ using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using CoreService.Infrastructure.SignalR;
-using CoreService.Persistence.Repositories.BankAccountRepository;
-using CoreService.Persistence.Repositories.TransactionsRepository;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 

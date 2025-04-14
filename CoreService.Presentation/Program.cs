@@ -4,6 +4,7 @@ using CoreService.Application.BackgroundService;
 using CoreService.Infrastructure;
 using CoreService.Kafka;
 using CoreService.Persistence;
+using CoreService.Presentation.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.ConfigureCoreServiceApplication();
 builder.ConfigureCoreServiceInfrastructure();
 builder.ConfigureSwagger();
 builder.AddKafka();
+builder.ConfigureCoreServiceAuthorization();
 builder.Services.AddCors(options =>
 {
     if (builder.Environment.IsDevelopment())

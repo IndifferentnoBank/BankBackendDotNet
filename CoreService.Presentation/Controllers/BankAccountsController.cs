@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreService.Presentation.Controllers;
 
-[Authorize]
 [ApiController]
+[Authorize(Policy = "CustomPolicy")]
 [Route("bank_accounts")]
 public class BankAccountsController : ControllerBase
 {
