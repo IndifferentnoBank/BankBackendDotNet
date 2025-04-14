@@ -1,7 +1,6 @@
 using System.Reflection;
 using CoreService.Application.BackgroundService;
-using CoreService.Application.Helpers.BankAccountNumberGenerator;
-using CoreService.Application.Helpers.TransactionExecutor;
+using CoreService.Application.Helpers;
 using CoreService.Contracts.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,10 +16,14 @@ public static class DependencyInjection
         builder.Services.AddAutoMapper(typeof(MappingProfile));
         builder.Services.AddScoped<IBankAccountNumberGenerator, BankAccountNumberGenerator>();
         builder.Services.AddScoped<ITransactionExecutor, TransactionExecutor>();
+        builder.Services.AddScoped<ICommissionService, CommissionService>();
         
         builder.Services.AddQuartz();
         builder.Services.AddQuartzHostedService();
         
         builder.Services.AddScoped<TransactionRetryJob>();
+        
+        builder.Services.Configure<CommissionSettings>(builder.Configuration.GetSection("Commission"));
+        
     }
 }

@@ -12,4 +12,5 @@ public interface IBankAccountRepository : IGenericRepository<BankAccount>
     Task<bool> CheckIfBankAccountBelongsToUserAsync(Guid bankAccountId, Guid userId);
     Task<IQueryable<BankAccount>> GetAllBankAccountsAsync();
     Task<BankAccount> GetMasterAccountAsync();
+    Task<Guid> GetMasterAccountIdAsync();
 }

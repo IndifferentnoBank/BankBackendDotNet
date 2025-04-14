@@ -2,7 +2,6 @@ using System.Text.Json;
 using Common.Configurations;
 using Common.Kafka.Consumer;
 using Confluent.Kafka;
-using CoreService.Application.Helpers.TransactionExecutor;
 using CoreService.Domain.Entities;
 using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;

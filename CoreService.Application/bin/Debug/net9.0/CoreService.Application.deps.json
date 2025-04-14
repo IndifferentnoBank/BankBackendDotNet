@@ -485,6 +485,7 @@
       "CoreService.Infrastructure/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
+          "CoreService.Contracts": "1.0.0",
           "CoreService.Domain": "1.0.0"
         },
         "runtime": {

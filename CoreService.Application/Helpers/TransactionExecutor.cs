@@ -4,7 +4,7 @@ using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
 using CoreService.Domain.Enums;
 
-namespace CoreService.Application.Helpers.TransactionExecutor;
+namespace CoreService.Application.Helpers;
 
 public class TransactionExecutor : ITransactionExecutor
 {

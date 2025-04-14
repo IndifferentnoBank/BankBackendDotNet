@@ -9,6 +9,7 @@
       "CoreService.Infrastructure/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
+          "CoreService.Contracts": "1.0.0",
           "CoreService.Domain": "1.0.0"
         },
         "runtime": {
@@ -306,6 +307,18 @@
           }
         }
       },
+      "CoreService.Contracts/1.0.0": {
+        "dependencies": {
+          "Common": "1.0.0",
+          "CoreService.Domain": "1.0.0"
+        },
+        "runtime": {
+          "CoreService.Contracts.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "CoreService.Domain/1.0.0": {
         "runtime": {
           "CoreService.Domain.dll": {
@@ -435,6 +448,11 @@
       "hashPath": "swashbuckle.aspnetcore.swaggergen.7.3.1.nupkg.sha512"
     },
     "Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CoreService.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

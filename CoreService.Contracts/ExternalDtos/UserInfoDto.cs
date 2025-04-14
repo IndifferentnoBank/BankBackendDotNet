@@ -1,4 +1,4 @@
-namespace CoreService.Infrastructure.ExternalServices.ExternalDtos;
+namespace CoreService.Contracts.ExternalDtos;
 
 public class UserInfoDto
 {

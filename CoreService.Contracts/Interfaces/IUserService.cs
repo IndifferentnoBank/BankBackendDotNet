@@ -1,4 +1,4 @@
-using CoreService.Infrastructure.ExternalServices.ExternalDtos;
+using CoreService.Contracts.ExternalDtos;
 
 namespace CoreService.Contracts.Interfaces;
 

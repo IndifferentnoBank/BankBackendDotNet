@@ -16,3 +16,5 @@
 /Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/obj/Debug/net9.0/ref/CoreService.Infrastructure.dll
 /Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/bin/Debug/net9.0/CoreService.Domain.dll
 /Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/bin/Debug/net9.0/CoreService.Domain.pdb
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/bin/Debug/net9.0/CoreService.Contracts.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/bin/Debug/net9.0/CoreService.Contracts.pdb

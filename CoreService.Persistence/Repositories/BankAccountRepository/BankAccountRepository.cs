@@ -52,4 +52,10 @@ public class BankAccountRepository : GenericRepository<BankAccount>, IBankAccoun
     {
         return (await _dbContext.BankAccounts.FirstOrDefaultAsync(x => x.Name == _masterAccountName))!;
     }
+
+    public async Task<Guid> GetMasterAccountIdAsync()
+    {
+        var masterAccount = await _dbContext.BankAccounts.FirstOrDefaultAsync(x => x.Name == _masterAccountName);
+        return masterAccount!.Id;
+    }
 }
