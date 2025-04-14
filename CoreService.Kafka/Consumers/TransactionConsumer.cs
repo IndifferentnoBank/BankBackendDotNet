@@ -6,8 +6,10 @@ using CoreService.Domain.Entities;
 using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
+using CoreService.Infrastructure.SignalR;
 using CoreService.Persistence.Repositories.BankAccountRepository;
 using CoreService.Persistence.Repositories.TransactionsRepository;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 
 namespace CoreService.Kafka.Consumers;
@@ -18,14 +20,17 @@ public class TransactionConsumer : IKafkaConsumer
     private readonly ITransactionExecutor _transactionExecutor;
     private readonly ITransactionRepository _transactionRepository;
     private readonly IBankAccountRepository _bankAccountRepository;
+    private readonly IHubContext<TransactionHub> _hubContext;
+
 
     public TransactionConsumer(IOptions<KafkaConfiguration> kafkaConfigOptions,
         ITransactionExecutor transactionExecutor, ITransactionRepository transactionRepository,
-        IBankAccountRepository bankAccountRepository)
+        IBankAccountRepository bankAccountRepository, IHubContext<TransactionHub> hubContext)
     {
         _transactionExecutor = transactionExecutor;
         _transactionRepository = transactionRepository;
         _bankAccountRepository = bankAccountRepository;
+        _hubContext = hubContext;
         var config = new ConsumerConfig
         {
             BootstrapServers = kafkaConfigOptions.Value.BootstrapServers,
@@ -62,6 +67,10 @@ public class TransactionConsumer : IKafkaConsumer
                 };
 
                 await _transactionRepository.AddAsync(transactionToProcess);
+
+                await _hubContext.Clients.All.SendAsync("TransactionUpdate", "New transaction retrieved",
+                    cancellationToken);
+
                 await _transactionExecutor.ExecuteTransactionAsync(transactionToProcess);
             }
         }, cancellationToken);

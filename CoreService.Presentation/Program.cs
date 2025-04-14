@@ -14,7 +14,18 @@ builder.ConfigureCoreServiceApplication();
 builder.ConfigureCoreServiceInfrastructure();
 builder.ConfigureSwagger();
 builder.AddKafka();
-
+builder.Services.AddCors(options =>
+{
+    if (builder.Environment.IsDevelopment())
+    {
+        options.AddPolicy("AllowAll", policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    }
+});
 var app = builder.Build();
 
 await QuartzScheduler.StartTransactionScheduler(app.Services);
@@ -25,6 +36,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowAll");
+app.ConfigureCoreServiceInfrastructure();
 await app.ConfigureCoreServicePersistence();
 
 app.UseHttpsRedirection();
