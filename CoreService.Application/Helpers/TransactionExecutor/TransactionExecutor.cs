@@ -11,7 +11,8 @@ public class TransactionExecutor : ITransactionExecutor
     private readonly IBankAccountRepository _bankAccountRepository;
     private readonly ITransactionRepository _transactionRepository;
 
-    public TransactionExecutor(IBankAccountRepository bankAccountRepository, ITransactionRepository transactionRepository)
+    public TransactionExecutor(IBankAccountRepository bankAccountRepository,
+        ITransactionRepository transactionRepository)
     {
         _bankAccountRepository = bankAccountRepository;
         _transactionRepository = transactionRepository;
@@ -20,7 +21,7 @@ public class TransactionExecutor : ITransactionExecutor
     public async Task ExecuteTransactionAsync(Transaction transaction)
     {
         var bankAccount = transaction.BankAccount;
-        
+
         try
         {
             await ProcessTransaction(transaction, bankAccount);
@@ -35,50 +36,39 @@ public class TransactionExecutor : ITransactionExecutor
         await _bankAccountRepository.UpdateAsync(bankAccount);
     }
 
-    private Task ProcessTransaction(Transaction transaction, BankAccount bankAccount)
+    private async Task ProcessTransaction(Transaction transaction, BankAccount bankAccount)
     {
         switch (transaction.Type)
         {
             case TransactionType.AUTOPAY_LOAN:
-                HandleAutoPayLoan(transaction, bankAccount);
+            case TransactionType.PAY_LOAN:
+                await HandleLoanPayment(transaction, bankAccount);
                 break;
 
-            case TransactionType.PAY_LOAN:
             case TransactionType.WITHDRAW:
-                HandleWithdrawalOrLoanPayment(transaction, bankAccount);
+                HandleWithdrawal(transaction, bankAccount);
                 break;
 
             case TransactionType.DEPOSIT:
+                HandleDeposit(transaction, bankAccount);
+                break;
             case TransactionType.TAKE_LOAN:
-                HandleDepositOrLoanDisbursement(transaction, bankAccount);
+                await HandleLoanDisbursement(transaction, bankAccount);
                 break;
 
             default:
-                throw new ArgumentOutOfRangeException(nameof(transaction.Type), transaction.Type, "Invalid transaction type.");
+                throw new ArgumentOutOfRangeException(nameof(transaction.Type), transaction.Type,
+                    "Invalid transaction type.");
         }
-
-        return Task.CompletedTask;
     }
 
-    private void HandleAutoPayLoan(Transaction transaction, BankAccount bankAccount)
-    {
-        if (bankAccount.Balance < (decimal)transaction.Amount)
-        {
-            transaction.Status = TransactionStatus.Rejected;
-            return;
-        }
-
-        DeductAmountFromBalance(transaction, bankAccount);
-        transaction.Status = TransactionStatus.Completed;
-    }
-
-    private void HandleWithdrawalOrLoanPayment(Transaction transaction, BankAccount bankAccount)
+    private void HandleWithdrawal(Transaction transaction, BankAccount bankAccount)
     {
         DeductAmountFromBalance(transaction, bankAccount);
         transaction.Status = TransactionStatus.Completed;
     }
 
-    private void HandleDepositOrLoanDisbursement(Transaction transaction, BankAccount bankAccount)
+    private void HandleDeposit(Transaction transaction, BankAccount bankAccount)
     {
         AddAmountToBalance(transaction, bankAccount);
         transaction.Status = TransactionStatus.Completed;
@@ -97,5 +87,35 @@ public class TransactionExecutor : ITransactionExecutor
     private static void AddAmountToBalance(Transaction transaction, BankAccount bankAccount)
     {
         bankAccount.Balance += (decimal)transaction.Amount;
+    }
+
+    private async Task HandleLoanPayment(Transaction transaction, BankAccount bankAccount)
+    {
+        var masterAccount = await _bankAccountRepository.GetMasterAccountAsync();
+
+        if (bankAccount.Balance < (decimal)transaction.Amount)
+        {
+            transaction.Status = TransactionStatus.Rejected;
+            return;
+        }
+
+        DeductAmountFromBalance(transaction, bankAccount);
+        AddAmountToBalance(transaction, masterAccount);
+        transaction.Status = TransactionStatus.Completed;
+    }
+
+    private async Task HandleLoanDisbursement(Transaction transaction, BankAccount bankAccount)
+    {
+        var masterAccount = await _bankAccountRepository.GetMasterAccountAsync();
+
+        if (masterAccount.Balance < (decimal)transaction.Amount)
+        {
+            transaction.Status = TransactionStatus.Rejected;
+            return;
+        }
+
+        DeductAmountFromBalance(transaction, masterAccount);
+        AddAmountToBalance(transaction, bankAccount);
+        transaction.Status = TransactionStatus.Completed;
     }
 }
