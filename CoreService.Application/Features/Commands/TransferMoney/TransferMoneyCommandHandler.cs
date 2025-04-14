@@ -1,9 +1,9 @@
 using Common.Exceptions;
 using CoreService.Domain.Enums;
 using CoreService.Infrastructure.ExternalServices.UserService;
-using CoreService.Kafka.Contracts.Events;
-using CoreService.Kafka.Contracts.Interfaces;
-using CoreService.Persistence.Repositories.BankAccountRepository;
+using CoreService.Contracts.Events;
+using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Repositories;
 using MediatR;
 
 namespace CoreService.Application.Features.Commands.TransferMoney;

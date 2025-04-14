@@ -1,4 +1,4 @@
-namespace CoreService.Application.Helpers.BankAccountNumberGenerator;
+namespace CoreService.Contracts.Interfaces;
 
 public interface IBankAccountNumberGenerator
 {

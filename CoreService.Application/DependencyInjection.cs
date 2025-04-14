@@ -2,6 +2,7 @@ using System.Reflection;
 using CoreService.Application.BackgroundService;
 using CoreService.Application.Helpers.BankAccountNumberGenerator;
 using CoreService.Application.Helpers.TransactionExecutor;
+using CoreService.Contracts.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;

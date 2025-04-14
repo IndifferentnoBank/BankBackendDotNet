@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreService.Kafka", "CoreService.Kafka\CoreService.Kafka.csproj", "{FF841F03-AA30-46A5-852A-11AB6777ED81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreService.Kafka.Contracts", "CoreService.Kafka.Contracts\CoreService.Kafka.Contracts.csproj", "{E6BED854-579F-46F4-8797-1AFCE1FD0629}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreService.Contracts", "CoreService.Contracts\CoreService.Contracts.csproj", "{E6BED854-579F-46F4-8797-1AFCE1FD0629}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

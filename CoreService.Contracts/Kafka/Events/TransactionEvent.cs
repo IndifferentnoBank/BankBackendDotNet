@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CoreService.Domain.Enums;
 
-namespace CoreService.Kafka.Contracts.Events;
+namespace CoreService.Contracts.Events;
 
 public class TransactionEvent
 {

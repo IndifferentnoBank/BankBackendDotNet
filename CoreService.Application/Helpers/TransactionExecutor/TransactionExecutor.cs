@@ -1,8 +1,8 @@
 using Common.Exceptions;
+using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
 using CoreService.Domain.Enums;
-using CoreService.Persistence.Repositories.BankAccountRepository;
-using CoreService.Persistence.Repositories.TransactionsRepository;
 
 namespace CoreService.Application.Helpers.TransactionExecutor;
 

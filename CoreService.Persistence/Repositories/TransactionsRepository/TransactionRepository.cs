@@ -1,4 +1,5 @@
 using Common.GenericRepository;
+using CoreService.Contracts.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Transaction = CoreService.Domain.Entities.Transaction;
 using TransactionStatus = CoreService.Domain.Enums.TransactionStatus;

@@ -1,6 +1,6 @@
-using CoreService.Application.Helpers.TransactionExecutor;
+using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Repositories;
 using CoreService.Domain.Enums;
-using CoreService.Persistence.Repositories.TransactionsRepository;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 

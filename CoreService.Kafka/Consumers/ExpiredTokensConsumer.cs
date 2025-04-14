@@ -3,7 +3,8 @@ using Common.Configurations;
 using Common.Kafka.Consumer;
 using Confluent.Kafka;
 using CoreService.Domain.Entities;
-using CoreService.Kafka.Contracts.Events;
+using CoreService.Contracts.Events;
+using CoreService.Contracts.Repositories;
 using CoreService.Persistence.Repositories.ExpiredTokensRepository;
 using Microsoft.Extensions.Options;
 

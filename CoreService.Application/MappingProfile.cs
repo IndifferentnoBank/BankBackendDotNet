@@ -10,5 +10,6 @@ public class MappingProfile: Profile
     {
         CreateMap<Transaction, TransactionDto>();
         CreateMap<BankAccount, BankAccountDto>();
+        CreateMap<Transaction, LoanTransactionDto>();
     }
 }

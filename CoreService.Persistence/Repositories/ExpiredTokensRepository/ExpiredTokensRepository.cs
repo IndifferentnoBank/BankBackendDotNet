@@ -1,4 +1,5 @@
 using Common.GenericRepository;
+using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
 
 namespace CoreService.Persistence.Repositories.ExpiredTokensRepository;

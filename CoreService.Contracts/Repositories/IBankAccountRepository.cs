@@ -1,7 +1,7 @@
 using Common.GenericRepository;
 using CoreService.Domain.Entities;
 
-namespace CoreService.Persistence.Repositories.BankAccountRepository;
+namespace CoreService.Contracts.Repositories;
 
 public interface IBankAccountRepository : IGenericRepository<BankAccount>
 {
@@ -11,4 +11,5 @@ public interface IBankAccountRepository : IGenericRepository<BankAccount>
     Task<bool> CheckIfBankAccountExistsByAccountId(Guid id);
     Task<bool> CheckIfBankAccountBelongsToUserAsync(Guid bankAccountId, Guid userId);
     Task<IQueryable<BankAccount>> GetAllBankAccountsAsync();
+    Task<BankAccount> GetMasterAccountAsync();
 }

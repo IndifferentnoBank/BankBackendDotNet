@@ -1,6 +1,6 @@
-using CoreService.Kafka.Contracts.Events;
+using CoreService.Contracts.Events;
 
-namespace CoreService.Kafka.Contracts.Interfaces;
+namespace CoreService.Contracts.Interfaces;
 
 public interface ITransactionProducer
 {

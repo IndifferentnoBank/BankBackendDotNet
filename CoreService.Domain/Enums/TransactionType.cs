@@ -10,5 +10,4 @@ public enum TransactionType
     AUTOPAY_LOAN,
     PAY_LOAN,
     TAKE_LOAN,
-    TRANSFER
 }

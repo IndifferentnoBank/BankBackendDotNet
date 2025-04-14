@@ -1,6 +1,6 @@
 using Common.Exceptions;
+using CoreService.Contracts.Repositories;
 using CoreService.Infrastructure.ExternalServices.UserService;
-using CoreService.Persistence.Repositories.BankAccountRepository;
 using MediatR;
 
 namespace CoreService.Application.Features.Commands.CloseBankAccount;

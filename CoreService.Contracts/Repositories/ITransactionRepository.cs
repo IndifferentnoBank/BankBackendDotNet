@@ -2,7 +2,7 @@ using Common.GenericRepository;
 using CoreService.Domain.Enums;
 using Transaction = CoreService.Domain.Entities.Transaction;
 
-namespace CoreService.Persistence.Repositories.TransactionsRepository;
+namespace CoreService.Contracts.Repositories;
 
 public interface ITransactionRepository : IGenericRepository<Transaction>
 {

@@ -25,10 +25,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+await app.ConfigureCoreServicePersistence();
+
 app.UseHttpsRedirection();
 
 app.UseHttpsRedirection();
 app.MapControllers();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseMiddleware();
 

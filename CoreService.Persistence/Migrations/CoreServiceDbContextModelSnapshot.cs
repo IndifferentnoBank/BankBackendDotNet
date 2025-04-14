@@ -93,6 +93,9 @@ namespace CoreService.Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid?>("RelatedLoanId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid?>("RelatedTransactionId")
                         .HasColumnType("uuid");
 

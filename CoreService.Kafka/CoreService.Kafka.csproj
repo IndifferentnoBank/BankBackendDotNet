@@ -9,7 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Common\Common.csproj" />
       <ProjectReference Include="..\CoreService.Application\CoreService.Application.csproj" />
-      <ProjectReference Include="..\CoreService.Kafka.Contracts\CoreService.Kafka.Contracts.csproj" />
+      <ProjectReference Include="..\CoreService.Contracts\CoreService.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

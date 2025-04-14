@@ -538,6 +538,20 @@
           "bin/placeholder/Common.dll": {}
         }
       },
+      "CoreService.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Common": "1.0.0",
+          "CoreService.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CoreService.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CoreService.Contracts.dll": {}
+        }
+      },
       "CoreService.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -553,6 +567,7 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Common": "1.0.0",
+          "CoreService.Contracts": "1.0.0",
           "CoreService.Domain": "1.0.0",
           "Npgsql": "9.0.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
@@ -1489,6 +1504,11 @@
       "type": "project",
       "path": "../Common/Common.csproj",
       "msbuildProject": "../Common/Common.csproj"
+    },
+    "CoreService.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../CoreService.Contracts/CoreService.Contracts.csproj",
+      "msbuildProject": "../CoreService.Contracts/CoreService.Contracts.csproj"
     },
     "CoreService.Domain/1.0.0": {
       "type": "project",

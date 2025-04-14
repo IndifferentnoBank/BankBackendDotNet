@@ -3,10 +3,12 @@ using CoreService.Application.Features.Commands.CreateTransaction;
 using CoreService.Application.Features.Commands.TransferMoney;
 using CoreService.Application.Features.Queries.GetTransactions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreService.Presentation.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("bank_accounts")]
 public class TransactionsController : ControllerBase

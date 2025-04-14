@@ -47,4 +47,6 @@ public class Transaction
     public BankAccount BankAccount { get; init; }
     
     public Guid? RelatedTransactionId { get; set; }
+    
+    public Guid? RelatedLoanId { get; set; }
 }

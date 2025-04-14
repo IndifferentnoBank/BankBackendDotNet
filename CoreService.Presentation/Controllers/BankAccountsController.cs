@@ -5,10 +5,12 @@ using CoreService.Application.Features.Queries.GetBankAccountById;
 using CoreService.Application.Features.Queries.GetBankAccounts;
 using CoreService.Application.Features.Queries.GetBankAccountsByUser;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreService.Presentation.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("bank_accounts")]
 public class BankAccountsController : ControllerBase

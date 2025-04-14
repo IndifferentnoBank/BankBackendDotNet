@@ -1,6 +1,6 @@
 using CoreService.Domain.Entities;
 
-namespace CoreService.Application.Helpers.TransactionExecutor;
+namespace CoreService.Contracts.Interfaces;
 
 public interface ITransactionExecutor
 {

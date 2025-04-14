@@ -1,4 +1,5 @@
 using System.Text;
+using CoreService.Contracts.Interfaces;
 using Microsoft.Extensions.Configuration;
 
 namespace CoreService.Application.Helpers.BankAccountNumberGenerator

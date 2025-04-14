@@ -105,11 +105,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj": {
+                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj"
+              },
               "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/CoreService.Infrastructure.csproj": {
                 "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/CoreService.Infrastructure.csproj"
-              },
-              "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Kafka.Contracts/CoreService.Kafka.Contracts.csproj": {
-                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Kafka.Contracts/CoreService.Kafka.Contracts.csproj"
               },
               "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/CoreService.Persistence.csproj": {
                 "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/CoreService.Persistence.csproj"
@@ -154,6 +154,73 @@
               "version": "[3.13.1, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj",
+        "projectName": "CoreService.Contracts",
+        "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj",
+        "packagesPath": "/Users/andreivasilev/.nuget/packages/",
+        "outputPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/andreivasilev/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj": {
+                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj"
+              },
+              "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj": {
+                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
           "imports": [
             "net461",
             "net462",
@@ -301,70 +368,6 @@
         }
       }
     },
-    "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Kafka.Contracts/CoreService.Kafka.Contracts.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Kafka.Contracts/CoreService.Kafka.Contracts.csproj",
-        "projectName": "CoreService.Kafka.Contracts",
-        "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Kafka.Contracts/CoreService.Kafka.Contracts.csproj",
-        "packagesPath": "/Users/andreivasilev/.nuget/packages/",
-        "outputPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Kafka.Contracts/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/andreivasilev/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net9.0"
-        ],
-        "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
-            "projectReferences": {
-              "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj": {
-                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
-      },
-      "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
     "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Kafka/CoreService.Kafka.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -394,8 +397,8 @@
               "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Application/CoreService.Application.csproj": {
                 "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Application/CoreService.Application.csproj"
               },
-              "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Kafka.Contracts/CoreService.Kafka.Contracts.csproj": {
-                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Kafka.Contracts/CoreService.Kafka.Contracts.csproj"
+              "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj": {
+                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj"
               }
             }
           }
@@ -460,6 +463,9 @@
             "projectReferences": {
               "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj": {
                 "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj"
+              },
+              "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj": {
+                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj"
               },
               "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj": {
                 "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj"

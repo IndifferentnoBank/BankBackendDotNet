@@ -1382,8 +1382,8 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "AutoMapper": "14.0.0",
+          "CoreService.Contracts": "1.0.0",
           "CoreService.Infrastructure": "1.0.0",
-          "CoreService.Kafka.Contracts": "1.0.0",
           "CoreService.Persistence": "1.0.0",
           "MediatR": "12.4.1",
           "Microsoft.Extensions.Configuration": "9.0.2",
@@ -1395,6 +1395,20 @@
         },
         "runtime": {
           "bin/placeholder/CoreService.Application.dll": {}
+        }
+      },
+      "CoreService.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Common": "1.0.0",
+          "CoreService.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CoreService.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CoreService.Contracts.dll": {}
         }
       },
       "CoreService.Domain/1.0.0": {
@@ -1421,24 +1435,12 @@
           "bin/placeholder/CoreService.Infrastructure.dll": {}
         }
       },
-      "CoreService.Kafka.Contracts/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
-        "dependencies": {
-          "CoreService.Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/CoreService.Kafka.Contracts.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CoreService.Kafka.Contracts.dll": {}
-        }
-      },
       "CoreService.Persistence/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Common": "1.0.0",
+          "CoreService.Contracts": "1.0.0",
           "CoreService.Domain": "1.0.0",
           "Npgsql": "9.0.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
@@ -4177,6 +4179,11 @@
       "path": "../CoreService.Application/CoreService.Application.csproj",
       "msbuildProject": "../CoreService.Application/CoreService.Application.csproj"
     },
+    "CoreService.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../CoreService.Contracts/CoreService.Contracts.csproj",
+      "msbuildProject": "../CoreService.Contracts/CoreService.Contracts.csproj"
+    },
     "CoreService.Domain/1.0.0": {
       "type": "project",
       "path": "../CoreService.Domain/CoreService.Domain.csproj",
@@ -4186,11 +4193,6 @@
       "type": "project",
       "path": "../CoreService.Infrastructure/CoreService.Infrastructure.csproj",
       "msbuildProject": "../CoreService.Infrastructure/CoreService.Infrastructure.csproj"
-    },
-    "CoreService.Kafka.Contracts/1.0.0": {
-      "type": "project",
-      "path": "../CoreService.Kafka.Contracts/CoreService.Kafka.Contracts.csproj",
-      "msbuildProject": "../CoreService.Kafka.Contracts/CoreService.Kafka.Contracts.csproj"
     },
     "CoreService.Persistence/1.0.0": {
       "type": "project",

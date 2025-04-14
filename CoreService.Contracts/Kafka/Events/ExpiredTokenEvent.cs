@@ -1,4 +1,4 @@
-namespace CoreService.Kafka.Contracts.Events;
+namespace CoreService.Contracts.Events;
 
 public class ExpiredTokenEvent
 {

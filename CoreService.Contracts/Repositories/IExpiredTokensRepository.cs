@@ -1,7 +1,7 @@
 using Common.GenericRepository;
 using CoreService.Domain.Entities;
 
-namespace CoreService.Persistence.Repositories.ExpiredTokensRepository;
+namespace CoreService.Contracts.Repositories;
 
 public interface IExpiredTokensRepository : IGenericRepository<ExpiredToken>
 {

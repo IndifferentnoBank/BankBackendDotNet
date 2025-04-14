@@ -18,3 +18,5 @@
 /Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/obj/Debug/net9.0/CoreService.Persistence.pdb
 /Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/obj/Debug/net9.0/CoreService.Persistence.genruntimeconfig.cache
 /Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/obj/Debug/net9.0/ref/CoreService.Persistence.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/bin/Debug/net9.0/CoreService.Contracts.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Persistence/bin/Debug/net9.0/CoreService.Contracts.pdb

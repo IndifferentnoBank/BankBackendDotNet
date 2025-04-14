@@ -9,8 +9,8 @@
       "CoreService.Application/1.0.0": {
         "dependencies": {
           "AutoMapper": "14.0.0",
+          "CoreService.Contracts": "1.0.0",
           "CoreService.Infrastructure": "1.0.0",
-          "CoreService.Kafka.Contracts": "1.0.0",
           "CoreService.Persistence": "1.0.0",
           "MediatR": "12.4.1",
           "Microsoft.Extensions.Configuration": "9.0.2",
@@ -462,6 +462,18 @@
           }
         }
       },
+      "CoreService.Contracts/1.0.0": {
+        "dependencies": {
+          "Common": "1.0.0",
+          "CoreService.Domain": "1.0.0"
+        },
+        "runtime": {
+          "CoreService.Contracts.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "CoreService.Domain/1.0.0": {
         "runtime": {
           "CoreService.Domain.dll": {
@@ -482,20 +494,10 @@
           }
         }
       },
-      "CoreService.Kafka.Contracts/1.0.0": {
-        "dependencies": {
-          "CoreService.Domain": "1.0.0"
-        },
-        "runtime": {
-          "CoreService.Kafka.Contracts.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "CoreService.Persistence/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
+          "CoreService.Contracts": "1.0.0",
           "CoreService.Domain": "1.0.0",
           "Npgsql": "9.0.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
@@ -739,17 +741,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "CoreService.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "CoreService.Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "CoreService.Infrastructure/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "CoreService.Kafka.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
