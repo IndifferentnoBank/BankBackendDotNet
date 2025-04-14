@@ -377,6 +377,20 @@
           "bin/placeholder/Common.dll": {}
         }
       },
+      "CoreService.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Common": "1.0.0",
+          "CoreService.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CoreService.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CoreService.Contracts.dll": {}
+        }
+      },
       "CoreService.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -861,6 +875,11 @@
       "path": "../Common/Common.csproj",
       "msbuildProject": "../Common/Common.csproj"
     },
+    "CoreService.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../CoreService.Contracts/CoreService.Contracts.csproj",
+      "msbuildProject": "../CoreService.Contracts/CoreService.Contracts.csproj"
+    },
     "CoreService.Domain/1.0.0": {
       "type": "project",
       "path": "../CoreService.Domain/CoreService.Domain.csproj",
@@ -870,6 +889,7 @@
   "projectFileDependencyGroups": {
     "net9.0": [
       "Common >= 1.0.0",
+      "CoreService.Contracts >= 1.0.0",
       "CoreService.Domain >= 1.0.0"
     ]
   },
@@ -901,6 +921,9 @@
           "projectReferences": {
             "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj": {
               "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj"
+            },
+            "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj": {
+              "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj"
             },
             "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj": {
               "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj"

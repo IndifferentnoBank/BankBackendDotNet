@@ -1,6 +1,5 @@
 using Common.Exceptions;
 using CoreService.Domain.Enums;
-using CoreService.Infrastructure.ExternalServices.UserService;
 using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;

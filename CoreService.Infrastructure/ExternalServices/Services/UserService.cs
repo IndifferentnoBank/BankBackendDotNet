@@ -1,10 +1,10 @@
-
 using System.Net;
 using System.Text.Json;
 using Common.Exceptions;
+using CoreService.Contracts.Interfaces;
 using CoreService.Infrastructure.ExternalServices.ExternalDtos;
 
-namespace CoreService.Infrastructure.ExternalServices.UserService
+namespace CoreService.Infrastructure.ExternalServices.Services
 {
     public class UserService : IUserService
     {

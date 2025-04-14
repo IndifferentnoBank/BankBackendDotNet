@@ -327,6 +327,9 @@
               "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj": {
                 "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj"
               },
+              "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj": {
+                "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Contracts/CoreService.Contracts.csproj"
+              },
               "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj": {
                 "projectPath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Domain/CoreService.Domain.csproj"
               }

@@ -1,6 +1,6 @@
 using CoreService.Infrastructure.ExternalServices.ExternalDtos;
 
-namespace CoreService.Infrastructure.ExternalServices.UserService;
+namespace CoreService.Contracts.Interfaces;
 
 public interface IUserService
 {

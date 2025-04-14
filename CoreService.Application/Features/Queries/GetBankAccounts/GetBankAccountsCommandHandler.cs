@@ -1,10 +1,9 @@
 using AutoMapper;
 using Common.Exceptions;
 using CoreService.Application.Dtos.Responses;
+using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
-using CoreService.Infrastructure.ExternalServices.UserService;
-using CoreService.Persistence.Repositories.BankAccountRepository;
 using MediatR;
 
 namespace CoreService.Application.Features.Queries.GetBankAccounts;

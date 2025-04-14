@@ -1,4 +1,4 @@
-using CoreService.Infrastructure.ExternalServices.UserService;
+using CoreService.Contracts.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +14,6 @@ public static class DependencyInjection
             client.DefaultRequestHeaders.Add("Accept", "application/json");
         });
 
-        builder.Services.AddScoped<IUserService, UserService.UserService>();
+        builder.Services.AddScoped<IUserService, Services.UserService>();
     }
 }

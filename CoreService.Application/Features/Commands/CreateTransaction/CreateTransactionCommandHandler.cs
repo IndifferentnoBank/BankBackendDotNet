@@ -3,7 +3,6 @@ using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
 using CoreService.Domain.Enums;
-using CoreService.Infrastructure.ExternalServices.UserService;
 using MediatR;
 
 namespace CoreService.Application.Features.Commands.CreateTransaction;

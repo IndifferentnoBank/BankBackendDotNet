@@ -1,7 +1,6 @@
 using AutoMapper;
 using CoreService.Application.Dtos.Responses;
 using CoreService.Contracts.Repositories;
-using CoreService.Persistence.Repositories.TransactionsRepository;
 using MediatR;
 
 namespace CoreService.Application.Features.Queries.GetLoanPayments;
