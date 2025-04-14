@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "12HPRp4pksg=",
+  "dgSpecHash": "P9V2HZidJsQ=",
   "success": true,
   "projectFilePath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/CoreService.Presentation.csproj",
   "expectedPackageFiles": [
@@ -48,7 +48,7 @@
     "/Users/andreivasilev/.nuget/packages/quartz.extensions.hosting/3.13.1/quartz.extensions.hosting.3.13.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swagger/7.3.1/swashbuckle.aspnetcore.swagger.7.3.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggergen/7.3.1/swashbuckle.aspnetcore.swaggergen.7.3.1.nupkg.sha512",
-    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/7.3.1/swashbuckle.aspnetcore.swaggerui.7.3.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/8.1.1/swashbuckle.aspnetcore.swaggerui.8.1.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.codedom/6.0.0/system.codedom.6.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.collections.immutable/7.0.0/system.collections.immutable.7.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.composition/7.0.0/system.composition.7.0.0.nupkg.sha512",

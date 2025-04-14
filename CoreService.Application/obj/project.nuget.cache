@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tcxmdFObhy4=",
+  "dgSpecHash": "3Pi5z4Cwp9g=",
   "success": true,
   "projectFilePath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Application/CoreService.Application.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,7 @@
     "/Users/andreivasilev/.nuget/packages/quartz.extensions.hosting/3.13.1/quartz.extensions.hosting.3.13.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swagger/7.3.1/swashbuckle.aspnetcore.swagger.7.3.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggergen/7.3.1/swashbuckle.aspnetcore.swaggergen.7.3.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/8.1.1/swashbuckle.aspnetcore.swaggerui.8.1.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.diagnostics.diagnosticsource/8.0.0/system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512"
   ],
   "logs": []

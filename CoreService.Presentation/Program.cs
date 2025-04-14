@@ -1,4 +1,5 @@
 using Common.Configurations;
+using Common.Configurations.Swagger;
 using CoreService.Application;
 using CoreService.Application.BackgroundService;
 using CoreService.Infrastructure;
@@ -34,8 +35,7 @@ await QuartzScheduler.StartTransactionScheduler(app.Services);
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+   app.UseSwaggerConfiguration();
 }
 
 app.UseCors("AllowAll");

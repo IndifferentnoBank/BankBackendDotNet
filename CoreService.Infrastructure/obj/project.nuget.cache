@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "awogqCWkPDQ=",
+  "dgSpecHash": "YFkaMgEN2AY=",
   "success": true,
   "projectFilePath": "/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Infrastructure/CoreService.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -19,7 +19,8 @@
     "/Users/andreivasilev/.nuget/packages/microsoft.extensions.primitives/9.0.2/microsoft.extensions.primitives.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.openapi/1.6.22/microsoft.openapi.1.6.22.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swagger/7.3.1/swashbuckle.aspnetcore.swagger.7.3.1.nupkg.sha512",
-    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggergen/7.3.1/swashbuckle.aspnetcore.swaggergen.7.3.1.nupkg.sha512"
+    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggergen/7.3.1/swashbuckle.aspnetcore.swaggergen.7.3.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/8.1.1/swashbuckle.aspnetcore.swaggerui.8.1.1.nupkg.sha512"
   ],
   "logs": []
 }

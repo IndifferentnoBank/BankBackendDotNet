@@ -1155,7 +1155,8 @@
           "Confluent.Kafka": "2.9.0",
           "Microsoft.EntityFrameworkCore": "9.0.2",
           "Swashbuckle.AspNetCore.Swagger": "7.3.1",
-          "Swashbuckle.AspNetCore.SwaggerGen": "7.3.1"
+          "Swashbuckle.AspNetCore.SwaggerGen": "7.3.1",
+          "Swashbuckle.AspNetCore.SwaggerUI": "8.1.1"
         },
         "compile": {
           "bin/placeholder/Common.dll": {}
@@ -3631,5 +3632,16 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Warning As Error: Detected package downgrade: Swashbuckle.AspNetCore.SwaggerUI from 8.1.1 to 7.3.1. Reference the package directly from the project to select a different version. \n UserService.Persistence -> Common -> Swashbuckle.AspNetCore.SwaggerUI (>= 8.1.1) \n UserService.Persistence -> Swashbuckle.AspNetCore.SwaggerUI (>= 7.3.1)",
+      "libraryId": "Swashbuckle.AspNetCore.SwaggerUI",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }
