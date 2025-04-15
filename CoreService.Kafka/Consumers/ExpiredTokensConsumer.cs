@@ -48,7 +48,6 @@ public class ExpiredTokensConsumer : IKafkaConsumer
                 await _expiredTokensRepository.AddAsync(new ExpiredToken
                 {
                     Key = token.Key,
-                    ExpirationDate = token.ExpirationDate
                 });
             }
         }, cancellationToken);

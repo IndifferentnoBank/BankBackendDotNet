@@ -6,7 +6,5 @@ public class ExpiredToken
 {
     [Key]
     public string Key { get; set; }
-    
-    [Required]
-    public DateTime ExpirationDate { get; set; }
+
 }
