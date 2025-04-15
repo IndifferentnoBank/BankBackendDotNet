@@ -22,31 +22,32 @@ public class CurrencyService : ICurrencyService
 
     public async Task<double> ConvertCurrency(double amount, Currency fromCurrency, Currency toCurrency)
     {
+        var exchangeRate = await GetExchangeRate(fromCurrency, toCurrency);
+        return amount * (double)exchangeRate;
+    }
+
+    public async Task<double> GetExchangeRate(Currency fromCurrency, Currency toCurrency)
+    {
         var client = _httpClientFactory.CreateClient("CurrencyServiceClient");
 
-        var currencies = $"{fromCurrency},{toCurrency}";
+        var currencies = $"{toCurrency}&base_currency={fromCurrency}";
         var uri = $"latest?apikey={_config.ApiKey}&currencies={currencies}";
 
         var response = await client.GetAsync(uri);
         response.EnsureSuccessStatusCode();
 
         var content = await response.Content.ReadAsStringAsync();
-
         var options = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         };
-
         var currencyData = JsonSerializer.Deserialize<CurrencyDto>(content, options);
 
-        if (currencyData?.Data is null ||
-            !currencyData.Data.TryGetValue(fromCurrency, out var fromRate) ||
-            !currencyData.Data.TryGetValue(toCurrency, out var toRate))
+        if (currencyData?.Data == null || !currencyData.Data.TryGetValue(toCurrency, out var toRate))
         {
-            throw new Exception("Failed to retrieve currency data.");
+            throw new Exception($"Failed to retrieve exchange rate for {toCurrency}.");
         }
 
-        return amount / fromRate * toRate;
-
+        return toRate;
     }
 }

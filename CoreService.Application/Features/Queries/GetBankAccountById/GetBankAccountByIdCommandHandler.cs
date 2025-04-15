@@ -1,5 +1,6 @@
 using AutoMapper;
 using Common.Exceptions;
+using Common.Helpers;
 using CoreService.Application.Dtos.Responses;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
@@ -25,24 +26,29 @@ public class GetBankAccountByIdCommandHandler : IRequestHandler<GetBankAccountBy
         if (!await _repository.CheckIfBankAccountExistsByAccountId(request.Id))
             throw new NotFound("Bank Account Not Found");
 
-        var user = await _userService.GetUserInfoAsync(request.UserId);
-
         var bankAccount = await _repository.GetByIdAsync(request.Id);
         
-        if (user == null)
+        if (!request.UserClaims.Roles.Contains(Roles.STAFF))
         {
-            throw new Forbidden("User not found.");
+            var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId);
+
+
+            if (user == null)
+            {
+                throw new Forbidden("User not found.");
+            }
+
+            if (user.Id != bankAccount.UserId)
+            {
+                throw new Forbidden("You do not have permission to access this bank account.");
+            }
+
+            if (user.IsLocked)
+            {
+                throw new Forbidden("Your account is locked. Please contact support.");
+            }
         }
 
-        if (user.Id != bankAccount.UserId && user.Role != "STAFF")
-        {
-            throw new Forbidden("You do not have permission to access this bank account.");
-        }
-
-        if (user.IsLocked)
-        {
-            throw new Forbidden("Your account is locked. Please contact support.");
-        }
         return _mapper.Map<BankAccountDto>(bankAccount);
     }
 }

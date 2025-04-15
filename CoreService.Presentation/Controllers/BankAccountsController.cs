@@ -1,3 +1,4 @@
+using Common.Helpers;
 using CoreService.Application.Dtos.Requests;
 using CoreService.Application.Features.Commands.CloseBankAccount;
 using CoreService.Application.Features.Commands.CreateBankAccount;
@@ -23,35 +24,35 @@ public class BankAccountsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetBankAccounts(Guid userId, string? accountNumber = null, string? accountName = null)
+    public async Task<IActionResult> GetBankAccounts(string? accountNumber = null, string? accountName = null)
     {
-        return Ok(await _mediator.Send(new GetBankAccountsCommand(userId, accountNumber, accountName)));
+        return Ok(await _mediator.Send(new GetBankAccountsCommand(User.GetUserClaims(), accountNumber, accountName)));
     }
 
     [HttpGet]
     [Route("{id:guid}")]
-    public async Task<IActionResult> GetBankAccount(Guid id, Guid userId)
+    public async Task<IActionResult> GetBankAccount(Guid id)
     {
-        return Ok(await _mediator.Send(new GetBankAccountByIdCommand(id, userId)));
+        return Ok(await _mediator.Send(new GetBankAccountByIdCommand(id, User.GetUserClaims())));
     }
 
     [HttpGet]
     [Route("{clientId:guid}/bank_accounts")]
-    public async Task<IActionResult> GetBankAccounts(Guid userId, Guid clientId)
+    public async Task<IActionResult> GetBankAccounts(Guid clientId)
     {
-        return Ok(await _mediator.Send(new GetBankAccountsByUserCommand(userId, clientId)));
+        return Ok(await _mediator.Send(new GetBankAccountsByUserCommand(User.GetUserClaims(), clientId)));
     }
 
     [HttpDelete]
     [Route("{id:guid}")]
-    public async Task<IActionResult> ClosBankAccount(Guid id, Guid userId)
+    public async Task<IActionResult> ClosBankAccount(Guid id)
     {
-        return Ok(await _mediator.Send(new CloseBankAccountCommand(id, userId)));
+        return Ok(await _mediator.Send(new CloseBankAccountCommand(id, User.GetUserClaims().UserId)));
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateBankAccount([FromBody] CreateBankAccountDto accountDto, Guid userId)
+    public async Task<IActionResult> CreateBankAccount([FromBody] CreateBankAccountDto accountDto)
     {
-        return Ok(await _mediator.Send(new CreateBankAccountCommand(userId, accountDto)));
+        return Ok(await _mediator.Send(new CreateBankAccountCommand(User.GetUserClaims().UserId, accountDto)));
     }
 }

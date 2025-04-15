@@ -8,6 +8,7 @@ using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using CoreService.Infrastructure.SignalR;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace CoreService.Kafka.Consumers;
@@ -19,16 +20,18 @@ public class TransactionConsumer : IKafkaConsumer
     private readonly ITransactionRepository _transactionRepository;
     private readonly IBankAccountRepository _bankAccountRepository;
     private readonly IHubContext<TransactionHub> _hubContext;
+    private readonly ILogger<TransactionConsumer> _logger;
 
 
     public TransactionConsumer(IOptions<KafkaConfiguration> kafkaConfigOptions,
         ITransactionExecutor transactionExecutor, ITransactionRepository transactionRepository,
-        IBankAccountRepository bankAccountRepository, IHubContext<TransactionHub> hubContext)
+        IBankAccountRepository bankAccountRepository, IHubContext<TransactionHub> hubContext, ILogger<TransactionConsumer> logger)
     {
         _transactionExecutor = transactionExecutor;
         _transactionRepository = transactionRepository;
         _bankAccountRepository = bankAccountRepository;
         _hubContext = hubContext;
+        _logger = logger;
         var config = new ConsumerConfig
         {
             BootstrapServers = kafkaConfigOptions.Value.BootstrapServers,
@@ -47,6 +50,7 @@ public class TransactionConsumer : IKafkaConsumer
             while (!cancellationToken.IsCancellationRequested)
             {
                 var result = _consumer.Consume(cancellationToken);
+                _logger.LogInformation("Consumed message {Message}", result.Message.Value);
                 var transaction = JsonSerializer.Deserialize<TransactionEvent>(result.Message.Value);
 
                 var bankAccount = await _bankAccountRepository.GetByIdAsync(transaction.BankAccountId);

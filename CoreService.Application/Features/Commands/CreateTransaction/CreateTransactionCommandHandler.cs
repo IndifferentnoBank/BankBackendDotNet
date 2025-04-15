@@ -64,11 +64,11 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         return Unit.Value;
     }
 
-    private async Task CheckMasterAccount(double Amount)
+    private async Task CheckMasterAccount(double amount)
     {
         var masterAccount = await _bankAccountRepository.GetMasterAccountAsync();
         
-        if (masterAccount.Balance < (decimal)Amount)
+        if (masterAccount.Balance < (decimal)amount)
         {
             throw new BadRequest("Bank does not have enough money to give you a loan");
         }

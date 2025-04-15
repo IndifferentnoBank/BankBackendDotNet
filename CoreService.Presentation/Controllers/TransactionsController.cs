@@ -1,6 +1,8 @@
+using Common.Helpers;
 using CoreService.Application.Dtos.Requests;
 using CoreService.Application.Features.Commands.CreateTransaction;
 using CoreService.Application.Features.Commands.TransferMoney;
+using CoreService.Application.Features.Queries.GetLoanPayments;
 using CoreService.Application.Features.Queries.GetTransactions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -22,22 +24,29 @@ public class TransactionsController : ControllerBase
 
     [HttpGet]
     [Route("{id:guid}/transactions")]
-    public async Task<IActionResult> GetTransactions(Guid id, Guid userId, Guid clientId)
+    public async Task<IActionResult> GetTransactions(Guid id)
     {
-        return Ok(await _mediator.Send(new GetTransactionsCommand(id, userId, clientId)));
+        return Ok(await _mediator.Send(new GetTransactionsCommand(id, User.GetUserClaims())));
     }
 
     [HttpPost]
     [Route("{id:guid}/transactions")]
-    public async Task<IActionResult> CreateTransaction(Guid id, Guid userId, CreateTransactionDto transaction)
+    public async Task<IActionResult> CreateTransaction(Guid id, CreateTransactionDto transaction)
     {
-        return Ok(await _mediator.Send(new CreateTransactionCommand(id, userId, transaction)));
+        return Ok(await _mediator.Send(new CreateTransactionCommand(id, User.GetUserClaims().UserId, transaction)));
     }
 
     [HttpPost]
     [Route("/transfer")]
-    public async Task<IActionResult> TransferMoney(Guid userId, [FromBody] TransferMoneyDto transferMoneyDto)
+    public async Task<IActionResult> TransferMoney([FromBody] TransferMoneyDto transferMoneyDto)
     {
-        return Ok(await _mediator.Send(new TransferMoneyCommand(userId, transferMoneyDto)));
+        return Ok(await _mediator.Send(new TransferMoneyCommand(User.GetUserClaims().UserId, transferMoneyDto)));
+    }
+
+    [HttpGet]
+    [Route("/loan/{id:guid}/transactions")]
+    public async Task<IActionResult> GetLoanTransactions(Guid id)
+    {
+        return Ok(await _mediator.Send(new GetLoanPaymentsCommand(User.GetUserClaims(), id)));
     }
 }
