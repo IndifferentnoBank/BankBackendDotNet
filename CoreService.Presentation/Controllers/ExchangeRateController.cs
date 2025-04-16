@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoreService.Presentation.Controllers;
 
 [ApiController]
-[Route("exchange_rates")]
+[Route("core_service/exchange_rates")]
 public class ExchangeRateController : ControllerBase
 {
     private readonly IMediator _mediator;

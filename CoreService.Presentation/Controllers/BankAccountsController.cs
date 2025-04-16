@@ -13,7 +13,7 @@ namespace CoreService.Presentation.Controllers;
 
 [ApiController]
 [Authorize(Policy = "CustomPolicy")]
-[Route("bank_accounts")]
+[Route("core_service/bank_accounts")]
 public class BankAccountsController : ControllerBase
 {
     private readonly IMediator _mediator;
