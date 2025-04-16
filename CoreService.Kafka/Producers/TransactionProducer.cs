@@ -1,8 +1,7 @@
-using Common.Configurations;
 using Common.Kafka.Producer;
-using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Kafka.Events;
+using CoreService.Kafka.Config;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -14,7 +13,7 @@ public class TransactionProducer : ITransactionProducer
     private readonly ILogger<TransactionProducer> _logger;
     private readonly string _topic;
 
-    public TransactionProducer(IOptions<KafkaConfiguration> kafkaConfiguration,
+    public TransactionProducer(IOptions<KafkaProducerConfiguration> kafkaConfiguration,
         IKafkaProducer<TransactionEvent> kafkaProducer, ILogger<TransactionProducer> logger)
     {
         _kafkaProducer = kafkaProducer;

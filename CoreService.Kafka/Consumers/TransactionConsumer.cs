@@ -1,16 +1,12 @@
 using System.Text.Json;
-using Common.Configurations;
 using Common.Kafka.Consumer;
 using Confluent.Kafka;
 using CoreService.Domain.Entities;
-using CoreService.Contracts.Events;
 using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Kafka.Events;
 using CoreService.Contracts.Repositories;
-using CoreService.Domain.Enums;
-using CoreService.Infrastructure.SignalR;
-using Microsoft.AspNetCore.SignalR;
+using CoreService.Kafka.Config;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -26,25 +22,30 @@ public class TransactionConsumer : IKafkaConsumer
     private readonly ITransactionHub _transactionHub;
 
 
-    public TransactionConsumer(IOptions<KafkaConfiguration> kafkaConfigOptions,
-        ITransactionExecutor transactionExecutor, ITransactionRepository transactionRepository,
-        IBankAccountRepository bankAccountRepository, ILogger<TransactionConsumer> logger,
-        ITransactionHub transactionHub)
+    public TransactionConsumer(
+        IOptions<BankTransactionsConsumerConfig> configOptions,
+        ITransactionExecutor executor,
+        ITransactionRepository trRepo,
+        IBankAccountRepository accRepo,
+        ILogger<TransactionConsumer> logger,
+        ITransactionHub hub)
     {
-        _transactionExecutor = transactionExecutor;
-        _transactionRepository = transactionRepository;
-        _bankAccountRepository = bankAccountRepository;
+        var config = configOptions.Value;
+        _transactionExecutor = executor;
+        _transactionRepository = trRepo;
+        _bankAccountRepository = accRepo;
         _logger = logger;
-        _transactionHub = transactionHub;
-        var config = new ConsumerConfig
+        _transactionHub = hub;
+
+        var consumerConfig = new ConsumerConfig
         {
-            BootstrapServers = kafkaConfigOptions.Value.BootstrapServers,
-            GroupId = kafkaConfigOptions.Value.GroupId,
+            BootstrapServers = config.BootstrapServers,
+            GroupId = config.GroupId,
             AutoOffsetReset = AutoOffsetReset.Earliest
         };
 
-        _consumer = new ConsumerBuilder<string, string>(config).Build();
-        _consumer.Subscribe(kafkaConfigOptions.Value.Topic);
+        _consumer = new ConsumerBuilder<string, string>(consumerConfig).Build();
+        _consumer.Subscribe(config.Topic);
     }
 
     public Task ConsumeAsync(CancellationToken cancellationToken)

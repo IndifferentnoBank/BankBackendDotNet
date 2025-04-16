@@ -20,3 +20,22 @@ services:
     - "/Users/andreivasilev/Desktop/BankBackendDotNet:/src:rw"
     - "/Users/andreivasilev/.nuget/packages:/home/app/.nuget/packages"
     working_dir: "/app"
+  userservice.presentation:
+    build:
+      context: "/Users/andreivasilev/Desktop/BankBackendDotNet"
+      dockerfile: "UserService.Presentation/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/UserService.Presentation.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "userservice.presentation:dev"
+    ports: []
+    volumes:
+    - "/Users/andreivasilev/Desktop/BankBackendDotNet/UserService.Presentation:/app:rw"
+    - "/Users/andreivasilev/Desktop/BankBackendDotNet:/src:rw"
+    - "/Users/andreivasilev/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"

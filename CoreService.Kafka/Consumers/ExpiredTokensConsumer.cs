@@ -1,5 +1,5 @@
 using System.Text.Json;
-using Common.Configurations;
+using Common.Kafka.Configs;
 using Common.Kafka.Consumer;
 using Confluent.Kafka;
 using CoreService.Domain.Entities;
@@ -16,20 +16,24 @@ public class ExpiredTokensConsumer : IKafkaConsumer
     private readonly IExpiredTokensRepository _expiredTokensRepository;
     private readonly ILogger<ExpiredTokensConsumer> _logger;
 
-    public ExpiredTokensConsumer(IOptions<KafkaConfiguration> kafkaConfigOptions,
-        IExpiredTokensRepository expiredTokensRepository, ILogger<ExpiredTokensConsumer> logger)
+    public ExpiredTokensConsumer(
+        IOptions<ExpiredTokensConsumerConfig> configOptions,
+        IExpiredTokensRepository repo,
+        ILogger<ExpiredTokensConsumer> logger)
     {
-        _expiredTokensRepository = expiredTokensRepository;
+        var config = configOptions.Value;
+        _expiredTokensRepository = repo;
         _logger = logger;
-        var config = new ConsumerConfig
+
+        var consumerConfig = new ConsumerConfig
         {
-            BootstrapServers = kafkaConfigOptions.Value.BootstrapServers,
-            GroupId = kafkaConfigOptions.Value.GroupId,
+            BootstrapServers = config.BootstrapServers,
+            GroupId = config.GroupId,
             AutoOffsetReset = AutoOffsetReset.Earliest
         };
 
-        _consumer = new ConsumerBuilder<string, string>(config).Build();
-        _consumer.Subscribe(kafkaConfigOptions.Value.Topic);
+        _consumer = new ConsumerBuilder<string, string>(consumerConfig).Build();
+        _consumer.Subscribe(config.Topic);
     }
 
 
