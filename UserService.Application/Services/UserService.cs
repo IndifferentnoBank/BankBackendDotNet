@@ -5,6 +5,7 @@ using AutoMapper;
 using UserSevice.Persistence.Repositories.UserRepository;
 using UserService.Domain.Entities;
 using System.Data;
+using UserService.Domain.Enums;
 
 namespace UserService.Application.Services
 {
@@ -27,26 +28,27 @@ namespace UserService.Application.Services
             if (await _userRepository.CheckIfUserExistsByEmail(createUserDto.Email))
                 throw new BadRequest($"User with {createUserDto.Email} already exist");
 
-            var passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(createUserDto.Password, 11);
+            //var passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(createUserDto.Password, 11);
+            User newUser = _mapper.Map<User>(createUserDto);
 
-            var user = await _userRepository.CreateUserAsync(createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, createUserDto.Role, passwordHash);
+            var user = await _userRepository.CreateUserAsync(createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, newUser.Role);
             if (user == null)
                 throw new BadRequest("User could not be created.");
 
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task<String> LoginUser(LoginUserDto loginUserDto)
-        {
-            if (!await _userRepository.CheckIfUserExistsByPhone(loginUserDto.PhoneNumber))
-                throw new NotFound($"User with {loginUserDto.PhoneNumber} not found");
+        //public async Task<String> LoginUser(LoginUserDto loginUserDto)
+        //{
+        //    if (!await _userRepository.CheckIfUserExistsByPhone(loginUserDto.PhoneNumber))
+        //        throw new NotFound($"User with {loginUserDto.PhoneNumber} not found");
 
-            var user = await _userRepository.GetUserByPhoneAsync(loginUserDto.PhoneNumber);
+        //    var user = await _userRepository.GetUserByPhoneAsync(loginUserDto.PhoneNumber);
 
-            if (!BCrypt.Net.BCrypt.EnhancedVerify(loginUserDto.Password, user.Password))
-                throw new BadRequest("Wrong password");
-            return user.Id.ToString();
-        }
+        //    if (!BCrypt.Net.BCrypt.EnhancedVerify(loginUserDto.Password, user.Password))
+        //        throw new BadRequest("Wrong password");
+        //    return user.Id.ToString();
+        //}
 
         public async Task<UserDto> UpdateUser(Guid id, CreateUserDto createUserDto)
         {
@@ -61,9 +63,9 @@ namespace UserService.Application.Services
             if (user.Email != createUserDto.Email && await _userRepository.CheckIfUserExistsByEmail(createUserDto.Email))
                 throw new BadRequest($"User with {createUserDto.Email} already exist");
 
-            var passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(createUserDto.Password, 11);
-
-            user = await _userRepository.UpdateUserAsync(id, createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, createUserDto.Role, passwordHash);
+            //var passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(createUserDto.Password, 11);
+            User newUser = _mapper.Map<User>(createUserDto);
+            user = await _userRepository.UpdateUserAsync(id, createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, newUser.Role);
 
             return _mapper.Map<UserDto>(user);
         }
@@ -100,5 +102,6 @@ namespace UserService.Application.Services
             var users = await _userRepository.GetAllUsersAsync();
             return _mapper.Map<List<UserDto>>(users);
         }
+
     }
 }

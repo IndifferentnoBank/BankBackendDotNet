@@ -16,7 +16,7 @@ namespace UserService.Application.Services
         Task LockUnlockUser(Guid id, bool isLocked);
         Task<UserDto> GetUserById(Guid id);
         Task<String> GetUserByPhone(string phone);
-        Task<String> LoginUser(LoginUserDto loginUserDto);
+        //Task<String> LoginUser(LoginUserDto loginUserDto);
         Task<List<UserDto>> GetAllUsers();
         
     }

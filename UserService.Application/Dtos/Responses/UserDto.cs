@@ -25,6 +25,6 @@ namespace UserService.Application.Dtos.Responses
         public bool IsLocked { get; set; }
 
         [Required]
-        public UserRole Role { get; set; }
+        public List<UserRole> Role { get; set; }
     }
 }

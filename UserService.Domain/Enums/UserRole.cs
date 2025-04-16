@@ -2,8 +2,10 @@
 
 namespace UserService.Domain.Enums;
 [JsonConverter(typeof(JsonStringEnumConverter))]
+
+[Flags]
 public enum UserRole
 {
-    CUSTOMER,
-    STAFF
+    CUSTOMER=1,
+    STAFF=2
 }

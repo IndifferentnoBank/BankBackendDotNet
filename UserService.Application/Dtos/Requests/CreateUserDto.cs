@@ -18,9 +18,10 @@ namespace UserService.Application.Dtos.Requests
         public string Passport { get; set; }
 
         [Required]
-        public UserRole Role { get; set; }
-        [Required]
-        public string Password { get; set; }
+        public List<UserRole> Role { get; set; }
+
+        //[Required]
+        //public string Password { get; set; }
 
     }
 }
