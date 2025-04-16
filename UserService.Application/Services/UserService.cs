@@ -5,6 +5,7 @@ using AutoMapper;
 using UserSevice.Persistence.Repositories.UserRepository;
 using UserService.Domain.Entities;
 using System.Data;
+using UserService.Domain.Enums;
 
 namespace UserService.Application.Services
 {
@@ -28,8 +29,9 @@ namespace UserService.Application.Services
                 throw new BadRequest($"User with {createUserDto.Email} already exist");
 
             //var passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(createUserDto.Password, 11);
+            User newUser = _mapper.Map<User>(createUserDto);
 
-            var user = await _userRepository.CreateUserAsync(createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, createUserDto.Role);
+            var user = await _userRepository.CreateUserAsync(createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, newUser.Role);
             if (user == null)
                 throw new BadRequest("User could not be created.");
 
@@ -62,8 +64,8 @@ namespace UserService.Application.Services
                 throw new BadRequest($"User with {createUserDto.Email} already exist");
 
             //var passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(createUserDto.Password, 11);
-
-            user = await _userRepository.UpdateUserAsync(id, createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, createUserDto.Role);
+            User newUser = _mapper.Map<User>(createUserDto);
+            user = await _userRepository.UpdateUserAsync(id, createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, newUser.Role);
 
             return _mapper.Map<UserDto>(user);
         }
@@ -100,5 +102,6 @@ namespace UserService.Application.Services
             var users = await _userRepository.GetAllUsersAsync();
             return _mapper.Map<List<UserDto>>(users);
         }
+
     }
 }
