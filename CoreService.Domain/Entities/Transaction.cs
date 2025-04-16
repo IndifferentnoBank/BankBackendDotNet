@@ -30,6 +30,9 @@ public class Transaction
     [Range(0.01, double.MaxValue)]
     public double Amount { get; init; }
 
+    [Required]
+    public Currency Currency { get; set; }
+
     public string? Comment { get; init; }
     
     [Required]
@@ -42,4 +45,8 @@ public class Transaction
     public Guid BankAccountId { get; init; } 
     
     public BankAccount BankAccount { get; init; }
+    
+    public Guid? RelatedTransactionId { get; set; }
+    
+    public Guid? RelatedLoanId { get; set; }
 }

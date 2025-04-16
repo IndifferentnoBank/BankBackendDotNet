@@ -8,6 +8,8 @@ public class CoreServiceDbContext : DbContext
     public DbSet<BankAccount> BankAccounts { get; set; }
 
     public DbSet<Transaction> Transactions { get; set; }
+    
+    public DbSet<ExpiredToken> ExpiredTokens { get; set; }
 
 
     public CoreServiceDbContext(DbContextOptions<CoreServiceDbContext> options) : base(options)

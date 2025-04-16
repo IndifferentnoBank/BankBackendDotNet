@@ -1,8 +1,7 @@
 using Common.Exceptions;
-using CoreService.Application.Helpers.BankAccountNumberGenerator;
+using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
-using CoreService.Infrastructure.ExternalServices.UserService;
-using CoreService.Persistence.Repositories.BankAccountRepository;
 using MediatR;
 
 namespace CoreService.Application.Features.Commands.CreateBankAccount;
@@ -31,7 +30,7 @@ public class CreateBankAccountCommandHandler : IRequestHandler<CreateBankAccount
         var bankAccountNumber = await GenerateUniqueBankAccountNumber();
 
         var bankAccount = new BankAccount(request.UserId, request.CreateBankAccountDto.Name,
-            bankAccountNumber);
+            bankAccountNumber, request.CreateBankAccountDto.Currency);
 
         await _bankAccountRepository.AddAsync(bankAccount);
 

@@ -1,10 +1,8 @@
 using Common.Exceptions;
-using CoreService.Application.Helpers.TransactionExecutor;
+using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
 using CoreService.Domain.Enums;
-using CoreService.Infrastructure.ExternalServices.UserService;
-using CoreService.Persistence.Repositories.BankAccountRepository;
-using CoreService.Persistence.Repositories.TransactionsRepository;
 using MediatR;
 
 namespace CoreService.Application.Features.Commands.CreateTransaction;
@@ -36,7 +34,6 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
 
         if (user.IsLocked) throw new Forbidden("Account Locked");
 
-
         var bankAccount = await _bankAccountRepository.GetByIdAsync(request.BankAccountId);
 
         if (bankAccount.UserId != request.UserId) throw new Forbidden("You are not allowed to create this transaction");
@@ -52,6 +49,11 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
             }
         }
 
+        if (request.CreateTransactionDto.Type is TransactionType.TAKE_LOAN)
+        {
+           await CheckMasterAccount(request.CreateTransactionDto.Amount);
+        }
+        
         var transaction = new Transaction(request.CreateTransactionDto.Type, request.CreateTransactionDto.Amount,
             request.CreateTransactionDto.Comment, bankAccount);
 
@@ -61,4 +63,15 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
 
         return Unit.Value;
     }
+
+    private async Task CheckMasterAccount(double amount)
+    {
+        var masterAccount = await _bankAccountRepository.GetMasterAccountAsync();
+        
+        if (masterAccount.Balance < (decimal)amount)
+        {
+            throw new BadRequest("Bank does not have enough money to give you a loan");
+        }
+    }
+    
 }

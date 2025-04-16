@@ -1,8 +1,11 @@
 using Common.Configurations;
+using Common.Configurations.Swagger;
 using CoreService.Application;
 using CoreService.Application.BackgroundService;
 using CoreService.Infrastructure;
+using CoreService.Kafka;
 using CoreService.Persistence;
+using CoreService.Presentation.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,22 +15,41 @@ builder.ConfigureCoreServicePersistence();
 builder.ConfigureCoreServiceApplication();
 builder.ConfigureCoreServiceInfrastructure();
 builder.ConfigureSwagger();
-
+builder.AddKafka();
+builder.ConfigureCoreServiceAuthorization();
+builder.Services.AddCors(options =>
+{
+    if (builder.Environment.IsDevelopment())
+    {
+        options.AddPolicy("AllowAll", policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    }
+});
 var app = builder.Build();
 
 await QuartzScheduler.StartTransactionScheduler(app.Services);
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerConfiguration();
 }
 
-app.UseHttpsRedirection();
+app.UseCors("AllowAll");
+app.ConfigureCoreServiceInfrastructure();
+await app.ConfigureCoreServicePersistence();
 
 app.UseHttpsRedirection();
-app.MapControllers();
 
 app.UseMiddleware();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+
 
 app.Run();

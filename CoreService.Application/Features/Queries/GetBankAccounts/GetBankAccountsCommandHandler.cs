@@ -1,9 +1,10 @@
 using AutoMapper;
 using Common.Exceptions;
+using Common.Helpers;
 using CoreService.Application.Dtos.Responses;
+using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
-using CoreService.Infrastructure.ExternalServices.UserService;
-using CoreService.Persistence.Repositories.BankAccountRepository;
 using MediatR;
 
 namespace CoreService.Application.Features.Queries.GetBankAccounts;
@@ -14,7 +15,8 @@ public class GetBankAccountsCommandHandler : IRequestHandler<GetBankAccountsComm
     private readonly IUserService _userService;
     private readonly IBankAccountRepository _bankAccountRepository;
 
-    public GetBankAccountsCommandHandler(IMapper mapper, IBankAccountRepository bankAccountRepository, IUserService userService)
+    public GetBankAccountsCommandHandler(IMapper mapper, IBankAccountRepository bankAccountRepository,
+        IUserService userService)
     {
         _mapper = mapper;
         _bankAccountRepository = bankAccountRepository;
@@ -23,9 +25,7 @@ public class GetBankAccountsCommandHandler : IRequestHandler<GetBankAccountsComm
 
     public async Task<List<BankAccountDto>> Handle(GetBankAccountsCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userService.GetUserInfoAsync(request.UserId);
-        
-        if (user.Role != "STAFF") throw new Forbidden("You do not have permission");
+        if (!request.UserClaims.Roles.Contains(Roles.STAFF)) throw new Forbidden("You do not have permission");
 
         var bankAccounts = await _bankAccountRepository.GetAllBankAccountsAsync();
 

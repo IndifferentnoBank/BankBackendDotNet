@@ -13,12 +13,13 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.3.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\CoreService.Application\CoreService.Application.csproj" />
       <ProjectReference Include="..\CoreService.Infrastructure\CoreService.Infrastructure.csproj" />
+      <ProjectReference Include="..\CoreService.Kafka\CoreService.Kafka.csproj" />
     </ItemGroup>
 
     <ItemGroup>

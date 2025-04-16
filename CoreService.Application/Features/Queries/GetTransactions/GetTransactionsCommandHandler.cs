@@ -1,9 +1,11 @@
 using AutoMapper;
 using Common.Exceptions;
+using Common.Helpers;
 using CoreService.Application.Dtos.Responses;
-using CoreService.Infrastructure.ExternalServices.UserService;
-using CoreService.Persistence.Repositories.BankAccountRepository;
-using CoreService.Persistence.Repositories.TransactionsRepository;
+using CoreService.Contracts.ExternalDtos;
+using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Repositories;
+using CoreService.Infrastructure.SignalR;
 using MediatR;
 
 namespace CoreService.Application.Features.Queries.GetTransactions;
@@ -29,14 +31,12 @@ public class GetTransactionsCommandHandler : IRequestHandler<GetTransactionsComm
         if (!await _bankAccountRepository.CheckIfBankAccountExistsByAccountId(request.BankAccountId))
             throw new NotFound("Bank Account Not Found");
 
-        if (!await _bankAccountRepository.CheckIfBankAccountBelongsToUserAsync(request.BankAccountId, request.UserId))
-            throw new Forbidden("This bank account is not belong to this user");
-
-        var user = await _userService.GetUserInfoAsync(request.UserId);
-
-        if (user.Id != request.ClientId && user.Role != "STAFF")
-            throw new Forbidden("You do not have permission to access this command");
-
+        if (!request.UserClaims.Roles.Contains(Roles.STAFF))
+        {
+            if (!await _bankAccountRepository.CheckIfBankAccountBelongsToUserAsync(request.BankAccountId,
+                    request.UserClaims.UserId))
+                throw new Forbidden("This bank account is not belong to this user");
+        }
 
         var transactions = await _transactionRepository.FindAsync(x => x.BankAccountId == request.BankAccountId);
 
