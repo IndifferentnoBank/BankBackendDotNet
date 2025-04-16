@@ -12,8 +12,8 @@ using UserSevice.Persistence;
 namespace UserService.Persistence.Migrations
 {
     [DbContext(typeof(UserServiceDbContext))]
-    [Migration("20250306114359_SecondTry")]
-    partial class SecondTry
+    [Migration("20250416165725_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,10 +43,6 @@ namespace UserService.Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Passport")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 

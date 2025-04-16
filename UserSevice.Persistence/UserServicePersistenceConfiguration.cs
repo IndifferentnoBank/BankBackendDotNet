@@ -16,5 +16,12 @@ namespace UserSevice.Persistence
 
             builder.Services.AddTransient<IUserRepository, UserRepository>();
         }
+
+        public static void ConfigureUserServicePersistence(this WebApplication application)
+        {
+            using var scope = application.Services.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<UserServiceDbContext>();
+            context.Database.Migrate();
+        }
     }
 }

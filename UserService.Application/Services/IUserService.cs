@@ -12,12 +12,12 @@ namespace UserService.Application.Services
     public interface IUserService
     {
         Task<UserDto> CreateUser(CreateUserDto createUserDto);
-        Task<UserDto> UpdateUser(Guid id, CreateUserDto createUserDto);
-        Task LockUnlockUser(Guid id, bool isLocked);
-        Task<UserDto> GetUserById(Guid id);
+        Task<UserDto> UpdateUser(Guid userId, Guid id, CreateUserDto createUserDto);
+        Task LockUnlockUser(Guid userId, Guid id, bool isLocked);
+        Task<UserDto> GetUserById(Guid userId, Guid id);
         Task<String> GetUserByPhone(string phone);
         //Task<String> LoginUser(LoginUserDto loginUserDto);
-        Task<List<UserDto>> GetAllUsers();
+        Task<List<UserDto>> GetAllUsers(Guid userId);
         
     }
 }

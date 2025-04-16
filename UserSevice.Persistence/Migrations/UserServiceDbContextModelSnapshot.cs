@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using UserSevice.Persistence;
@@ -12,11 +11,9 @@ using UserSevice.Persistence;
 namespace UserService.Persistence.Migrations
 {
     [DbContext(typeof(UserServiceDbContext))]
-    [Migration("20250307152841_passwordAdded")]
-    partial class passwordAdded
+    partial class UserServiceDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +21,16 @@ namespace UserService.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("UserService.Domain.Entities.ExpiredToken", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("ExpiredTokens");
+                });
 
             modelBuilder.Entity("UserService.Domain.Entities.User", b =>
                 {
@@ -43,10 +50,6 @@ namespace UserService.Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Passport")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 

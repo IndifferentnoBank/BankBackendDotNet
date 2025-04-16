@@ -50,8 +50,13 @@ namespace UserService.Application.Services
         //    return user.Id.ToString();
         //}
 
-        public async Task<UserDto> UpdateUser(Guid id, CreateUserDto createUserDto)
+        public async Task<UserDto> UpdateUser(Guid userId, Guid id, CreateUserDto createUserDto)
         {
+            var userCheck = await _userRepository.GetUserByIdAsync(userId);
+
+            if ((userId != id) && (userCheck.Role != UserRole.STAFF))
+                throw new Forbidden($"User have't rights");
+
             if (!await _userRepository.CheckIfUserExistsById(id))
                 throw new NotFound($"User with {id} not found");
 
@@ -70,21 +75,30 @@ namespace UserService.Application.Services
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task LockUnlockUser(Guid id, bool isLocked)
+        public async Task LockUnlockUser(Guid userId, Guid id, bool isLocked)
         {
+            var user = await _userRepository.GetUserByIdAsync(userId);
+
+            if (user.Role != UserRole.STAFF)
+                throw new Forbidden($"User have't rights");
+
             var success = await _userRepository.LockUnlockUserAsync(id, isLocked);
             if (!success)
                 throw new NotFound("User not found.");
         }
 
-        public async Task<UserDto> GetUserById(Guid id)
+        public async Task<UserDto> GetUserById(Guid userId, Guid id)
         {
+            var user = await _userRepository.GetUserByIdAsync(userId);
 
-            var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null)
+            if ((userId != id) && (user.Role != UserRole.STAFF))
+                throw new Forbidden($"User have't rights");
+
+            var userById = await _userRepository.GetUserByIdAsync(id);
+            if (userById == null)
                 throw new NotFound("User not found.");
 
-            return _mapper.Map<UserDto>(user);
+            return _mapper.Map<UserDto>(userById);
         }
 
         public async Task<String> GetUserByPhone(string phone)
@@ -96,9 +110,13 @@ namespace UserService.Application.Services
             return user.Id.ToString();
         }
 
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<List<UserDto>> GetAllUsers(Guid userId)
         {
-          
+            var user = await _userRepository.GetUserByIdAsync(userId);
+
+            if (user.Role != UserRole.STAFF)
+                throw new Unauthorized($"User have't rights");
+
             var users = await _userRepository.GetAllUsersAsync();
             return _mapper.Map<List<UserDto>>(users);
         }
