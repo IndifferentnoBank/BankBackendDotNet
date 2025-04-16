@@ -2,6 +2,7 @@ using Common.Exceptions;
 using CoreService.Domain.Enums;
 using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Kafka.Events;
 using CoreService.Contracts.Repositories;
 using MediatR;
 
@@ -60,8 +61,8 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
 
             amountToWithdraw = await _currencyService.ConvertCurrency(amount + commission, fromBankAccount.Currency,
                 request.TransferMoneyDto.Currency);
-            
-            
+
+
             commission = await _currencyService.ConvertCurrency(commission, fromBankAccount.Currency,
                 Currency.RUB);
         }
@@ -72,7 +73,7 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
                 toBankAccount.Currency);
         }
 
-        var fromUser = await _userService.GetUserInfoAsync(fromBankAccount.UserId);
+        /*var fromUser = await _userService.GetUserInfoAsync(fromBankAccount.UserId);
 
         if (fromUser != null && fromUser.IsLocked)
             throw new Forbidden("User is blocked");
@@ -80,7 +81,7 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
         var toUser = await _userService.GetUserInfoAsync(toBankAccount.UserId);
 
         if (toUser != null && toUser.IsLocked)
-            throw new Forbidden("User is blocked");
+            throw new Forbidden("User is blocked");*/
 
         var withdraw = new TransactionEvent
         {
@@ -107,8 +108,7 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
         withdraw.RelatedTransactionId = deposit.Id;
         deposit.RelatedTransactionId = withdraw.Id;
 
-        
-        
+
         await _transactionProducer.ProduceTransactionEventAsync(withdraw);
 
         if (commission > 0)
@@ -123,8 +123,10 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
                 Status = TransactionStatus.Processing,
                 BankAccountId = await _bankAccountRepository.GetMasterAccountIdAsync(),
             };
+
+            await _transactionProducer.ProduceTransactionEventAsync(commissionTransaction);
         }
-        
+
         await _transactionProducer.ProduceTransactionEventAsync(deposit);
 
         return Unit.Value;

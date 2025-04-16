@@ -23,9 +23,12 @@ public class CreateBankAccountCommandHandler : IRequestHandler<CreateBankAccount
 
     public async Task<Unit> Handle(CreateBankAccountCommand request, CancellationToken cancellationToken)
     {
+        
+        /*
         var user = await _userService.GetUserInfoAsync(request.UserId);
         
         if (user.IsLocked) throw new Forbidden("You are not allowed to create bank account.");
+        */
 
         var bankAccountNumber = await GenerateUniqueBankAccountNumber();
 

@@ -48,8 +48,8 @@ public class TransactionExecutor : ITransactionExecutor
             Status = transaction.Status
         };
 
-        await _transactionHub.SendTransactionUpdate(transactionDto);
-        await _transactionHub.SendTransactionUpdateToBankAccount(bankAccount.Id, transactionDto);
+        //await _transactionHub.SendTransactionUpdate(transactionDto);
+        //await _transactionHub.SendTransactionUpdateToBankAccount(bankAccount.Id, transactionDto);
     }
 
     private async Task ProcessTransaction(Transaction transaction, BankAccount bankAccount)

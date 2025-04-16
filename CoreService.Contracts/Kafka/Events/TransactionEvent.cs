@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CoreService.Domain.Enums;
 
-namespace CoreService.Contracts.Events;
+namespace CoreService.Contracts.Kafka.Events;
 
 public class TransactionEvent
 {
@@ -29,6 +29,7 @@ public class TransactionEvent
     [ForeignKey("BankAccount")]
     public Guid BankAccountId { get; init; } 
     
-    
     public Guid? RelatedTransactionId { get; set; }
+    
+    public Guid? RelatedLoanId { get; set; }
 }

@@ -6,6 +6,7 @@ using CoreService.Domain.Entities;
 using CoreService.Contracts.Events;
 using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Kafka.Events;
 using CoreService.Contracts.Repositories;
 using CoreService.Domain.Enums;
 using CoreService.Infrastructure.SignalR;
@@ -83,9 +84,8 @@ public class TransactionConsumer : IKafkaConsumer
                     Status = transaction.Status
                 };
 
-
-                await _transactionHub.SendTransactionUpdate(transactionDto);
-                await _transactionHub.SendTransactionUpdateToBankAccount(transaction.BankAccountId, transactionDto);
+                //await _transactionHub.SendTransactionUpdate(transactionDto);
+                //await _transactionHub.SendTransactionUpdateToBankAccount(transaction.BankAccountId, transactionDto);
 
                 await _transactionExecutor.ExecuteTransactionAsync(transactionToProcess);
             }

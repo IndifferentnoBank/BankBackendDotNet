@@ -1,4 +1,5 @@
 using CoreService.Contracts.Events;
+using CoreService.Contracts.Kafka.Events;
 
 namespace CoreService.Contracts.Interfaces;
 

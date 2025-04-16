@@ -2,6 +2,7 @@ using Common.Configurations;
 using Common.Kafka.Producer;
 using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Kafka.Events;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 

@@ -8,7 +8,7 @@ public class Transaction
 {
     public Transaction() { }
 
-    public Transaction(TransactionType transactionType, double amount, string? comment, BankAccount bankAccount)
+    public Transaction(TransactionType transactionType, double amount, string? comment, BankAccount bankAccount, Guid? loanId)
     {
         Id = Guid.NewGuid();
         Date = DateTime.UtcNow;
@@ -18,6 +18,7 @@ public class Transaction
         BankAccountId = bankAccount.Id;
         BankAccount = bankAccount;
         Status = TransactionStatus.Processing;
+        RelatedLoanId = loanId;
     }
     
     [Key]

@@ -21,11 +21,12 @@ public class CloseBankAccountCommandHandler: IRequestHandler<CloseBankAccountCom
        if(!await _bankAccountRepository.CheckIfBankAccountExistsByAccountId(request.BankAccountId))
            throw new NotFound("Bank account not found");
        
-       var user = await _userService.GetUserInfoAsync(request.UserId);
+       //var user = await _userService.GetUserInfoAsync(request.UserId);
        
        var bankAccount = await _bankAccountRepository.GetByIdAsync(request.BankAccountId);
-       
-       if(!await _bankAccountRepository.CheckIfBankAccountBelongsToUserAsync(request.BankAccountId, user.Id))
+
+       var userId = request.UserId; //todo: replace with user
+       if(!await _bankAccountRepository.CheckIfBankAccountBelongsToUserAsync(request.BankAccountId, userId))
            throw new Forbidden("This bank account is not belong to this user");
 
        if(bankAccount.isClosed) throw new BadRequest("This bank account is closed");

@@ -30,7 +30,7 @@ public class GetBankAccountByIdCommandHandler : IRequestHandler<GetBankAccountBy
         
         if (!request.UserClaims.Roles.Contains(Roles.STAFF))
         {
-            var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId);
+            /*var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId);
 
 
             if (user == null)
@@ -46,7 +46,7 @@ public class GetBankAccountByIdCommandHandler : IRequestHandler<GetBankAccountBy
             if (user.IsLocked)
             {
                 throw new Forbidden("Your account is locked. Please contact support.");
-            }
+            }*/
         }
 
         return _mapper.Map<BankAccountDto>(bankAccount);

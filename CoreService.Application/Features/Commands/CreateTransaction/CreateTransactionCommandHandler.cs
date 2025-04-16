@@ -1,5 +1,7 @@
 using Common.Exceptions;
+using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;
+using CoreService.Contracts.Kafka.Events;
 using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
 using CoreService.Domain.Enums;
@@ -9,19 +11,16 @@ namespace CoreService.Application.Features.Commands.CreateTransaction;
 
 public class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand, Unit>
 {
-    private readonly ITransactionRepository _transactionRepository;
     private readonly IBankAccountRepository _bankAccountRepository;
-    private readonly ITransactionExecutor _transactionExecutor;
+    private readonly ITransactionProducer _transactionProducer;
     private readonly IUserService _userService;
 
 
-    public CreateTransactionCommandHandler(ITransactionRepository transactionRepository,
-        IBankAccountRepository bankAccountRepository, ITransactionExecutor transactionExecutor,
-        IUserService userService)
+    public CreateTransactionCommandHandler(IBankAccountRepository bankAccountRepository,
+        ITransactionProducer transactionProducer, IUserService userService)
     {
-        _transactionRepository = transactionRepository;
         _bankAccountRepository = bankAccountRepository;
-        _transactionExecutor = transactionExecutor;
+        _transactionProducer = transactionProducer;
         _userService = userService;
     }
 
@@ -30,9 +29,11 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         if (!await _bankAccountRepository.CheckIfBankAccountExistsByAccountId(request.BankAccountId))
             throw new NotFound("Bank Account Not Found");
 
+        /*
         var user = await _userService.GetUserInfoAsync(request.UserId);
 
         if (user.IsLocked) throw new Forbidden("Account Locked");
+        */
 
         var bankAccount = await _bankAccountRepository.GetByIdAsync(request.BankAccountId);
 
@@ -51,27 +52,33 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
 
         if (request.CreateTransactionDto.Type is TransactionType.TAKE_LOAN)
         {
-           await CheckMasterAccount(request.CreateTransactionDto.Amount);
+            await CheckMasterAccount(request.CreateTransactionDto.Amount);
         }
+
+        var transactionEvent = new TransactionEvent()
+        {
+            Amount = request.CreateTransactionDto.Amount,
+            Currency = bankAccount.Currency,
+            Comment = request.CreateTransactionDto.Comment,
+            Type = request.CreateTransactionDto.Type,
+            Status = TransactionStatus.Processing,
+            BankAccountId = bankAccount.Id,
+            RelatedTransactionId = null,
+            RelatedLoanId = request.CreateTransactionDto.RelatedLoanId
+        };
+
+        await _transactionProducer.ProduceTransactionEventAsync(transactionEvent);
         
-        var transaction = new Transaction(request.CreateTransactionDto.Type, request.CreateTransactionDto.Amount,
-            request.CreateTransactionDto.Comment, bankAccount);
-
-        await _transactionRepository.AddAsync(transaction);
-
-        await _transactionExecutor.ExecuteTransactionAsync(transaction);
-
         return Unit.Value;
     }
 
     private async Task CheckMasterAccount(double amount)
     {
         var masterAccount = await _bankAccountRepository.GetMasterAccountAsync();
-        
+
         if (masterAccount.Balance < (decimal)amount)
         {
             throw new BadRequest("Bank does not have enough money to give you a loan");
         }
     }
-    
 }
