@@ -44,11 +44,12 @@ await app.ConfigureCoreServicePersistence();
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseMiddleware();
 
 app.Run();
