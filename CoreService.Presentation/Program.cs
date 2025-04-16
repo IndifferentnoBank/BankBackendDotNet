@@ -35,7 +35,7 @@ await QuartzScheduler.StartTransactionScheduler(app.Services);
 
 if (app.Environment.IsDevelopment())
 {
-   app.UseSwaggerConfiguration();
+    app.UseSwaggerConfiguration();
 }
 
 app.UseCors("AllowAll");
@@ -44,11 +44,10 @@ await app.ConfigureCoreServicePersistence();
 
 app.UseHttpsRedirection();
 
-app.UseHttpsRedirection();
-app.MapControllers();
-
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllers();
 
 app.UseMiddleware();
 

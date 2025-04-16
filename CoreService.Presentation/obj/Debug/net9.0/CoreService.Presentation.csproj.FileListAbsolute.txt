@@ -179,3 +179,11 @@
 /Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/CoreService.Kafka.pdb
 /Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/CoreService.Contracts.dll
 /Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/CoreService.Contracts.pdb
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/CoreService.Presentation/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll

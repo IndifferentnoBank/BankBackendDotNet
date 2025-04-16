@@ -26,27 +26,31 @@ public class TransactionsController : ControllerBase
     [Route("{id:guid}/transactions")]
     public async Task<IActionResult> GetTransactions(Guid id)
     {
-        return Ok(await _mediator.Send(new GetTransactionsCommand(id, User.GetUserClaims())));
+        return Ok(await _mediator.Send(new GetTransactionsCommand(id,
+            JwtHelper.ExtractUserClaimsFromHeader(HttpContext))));
     }
 
     [HttpPost]
     [Route("{id:guid}/transactions")]
     public async Task<IActionResult> CreateTransaction(Guid id, CreateTransactionDto transaction)
     {
-        return Ok(await _mediator.Send(new CreateTransactionCommand(id, User.GetUserClaims().UserId, transaction)));
+        return Ok(await _mediator.Send(new CreateTransactionCommand(id,
+            JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, transaction)));
     }
 
     [HttpPost]
     [Route("/transfer")]
     public async Task<IActionResult> TransferMoney([FromBody] TransferMoneyDto transferMoneyDto)
     {
-        return Ok(await _mediator.Send(new TransferMoneyCommand(User.GetUserClaims().UserId, transferMoneyDto)));
+        return Ok(await _mediator.Send(
+            new TransferMoneyCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, transferMoneyDto)));
     }
 
     [HttpGet]
     [Route("/loan/{id:guid}/transactions")]
     public async Task<IActionResult> GetLoanTransactions(Guid id)
     {
-        return Ok(await _mediator.Send(new GetLoanPaymentsCommand(User.GetUserClaims(), id)));
+        return Ok(await _mediator.Send(new GetLoanPaymentsCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext),
+            id)));
     }
 }

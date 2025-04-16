@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "BkzC1qP1ClI=",
+  "dgSpecHash": "Ip491lFrg90=",
   "success": true,
   "projectFilePath": "/Users/andreivasilev/Desktop/BankBackendDotNet/Common/Common.csproj",
   "expectedPackageFiles": [
     "/Users/andreivasilev/.nuget/packages/confluent.kafka/2.9.0/confluent.kafka.2.9.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/librdkafka.redist/2.8.0/librdkafka.redist.2.8.0.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.4/microsoft.aspnetcore.authentication.jwtbearer.9.0.4.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.entityframeworkcore/9.0.2/microsoft.entityframeworkcore.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.2/microsoft.entityframeworkcore.abstractions.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.2/microsoft.entityframeworkcore.analyzers.9.0.2.nupkg.sha512",
@@ -17,10 +18,17 @@
     "/Users/andreivasilev/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.2/microsoft.extensions.logging.abstractions.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.extensions.options/9.0.2/microsoft.extensions.options.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.extensions.primitives/9.0.2/microsoft.extensions.primitives.9.0.2.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.abstractions/8.0.1/microsoft.identitymodel.abstractions.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.0.1/microsoft.identitymodel.jsonwebtokens.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.logging/8.0.1/microsoft.identitymodel.logging.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.protocols/8.0.1/microsoft.identitymodel.protocols.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/8.0.1/microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.tokens/8.0.1/microsoft.identitymodel.tokens.8.0.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.openapi/1.6.22/microsoft.openapi.1.6.22.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swagger/7.3.1/swashbuckle.aspnetcore.swagger.7.3.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggergen/7.3.1/swashbuckle.aspnetcore.swaggergen.7.3.1.nupkg.sha512",
-    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/8.1.1/swashbuckle.aspnetcore.swaggerui.8.1.1.nupkg.sha512"
+    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/8.1.1/swashbuckle.aspnetcore.swaggerui.8.1.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/system.identitymodel.tokens.jwt/8.0.1/system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
   ],
   "logs": []
 }

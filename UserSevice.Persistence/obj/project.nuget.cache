@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "9iMsaZv3tGo=",
-  "success": false,
+  "dgSpecHash": "3xIx9qa6iWY=",
+  "success": true,
   "projectFilePath": "/Users/andreivasilev/Desktop/BankBackendDotNet/UserSevice.Persistence/UserService.Persistence.csproj",
   "expectedPackageFiles": [
     "/Users/andreivasilev/.nuget/packages/confluent.kafka/2.9.0/confluent.kafka.2.9.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/librdkafka.redist/2.8.0/librdkafka.redist.2.8.0.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.4/microsoft.aspnetcore.authentication.jwtbearer.9.0.4.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.build.framework/17.8.3/microsoft.build.framework.17.8.3.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.build.locator/1.7.8/microsoft.build.locator.1.7.8.nupkg.sha512",
@@ -34,6 +35,12 @@
     "/Users/andreivasilev/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.2/microsoft.extensions.logging.abstractions.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.extensions.options/9.0.2/microsoft.extensions.options.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.extensions.primitives/9.0.2/microsoft.extensions.primitives.9.0.2.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.abstractions/8.0.1/microsoft.identitymodel.abstractions.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.0.1/microsoft.identitymodel.jsonwebtokens.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.logging/8.0.1/microsoft.identitymodel.logging.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.protocols/8.0.1/microsoft.identitymodel.protocols.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/8.0.1/microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/microsoft.identitymodel.tokens/8.0.1/microsoft.identitymodel.tokens.8.0.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/microsoft.openapi/1.6.22/microsoft.openapi.1.6.22.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/npgsql/9.0.3/npgsql.9.0.3.nupkg.sha512",
@@ -41,7 +48,7 @@
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore/7.2.0/swashbuckle.aspnetcore.7.2.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swagger/7.3.1/swashbuckle.aspnetcore.swagger.7.3.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggergen/7.3.1/swashbuckle.aspnetcore.swaggergen.7.3.1.nupkg.sha512",
-    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/7.3.1/swashbuckle.aspnetcore.swaggerui.7.3.1.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/swashbuckle.aspnetcore.swaggerui/8.1.1/swashbuckle.aspnetcore.swaggerui.8.1.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.codedom/6.0.0/system.codedom.6.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.collections.immutable/7.0.0/system.collections.immutable.7.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.composition/7.0.0/system.composition.7.0.0.nupkg.sha512",
@@ -50,21 +57,12 @@
     "/Users/andreivasilev/.nuget/packages/system.composition.hosting/7.0.0/system.composition.hosting.7.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.composition.runtime/7.0.0/system.composition.runtime.7.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.composition.typedparts/7.0.0/system.composition.typedparts.7.0.0.nupkg.sha512",
+    "/Users/andreivasilev/.nuget/packages/system.identitymodel.tokens.jwt/8.0.1/system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.io.pipelines/7.0.0/system.io.pipelines.7.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.reflection.metadata/7.0.0/system.reflection.metadata.7.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.text.json/9.0.2/system.text.json.9.0.2.nupkg.sha512",
     "/Users/andreivasilev/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: Swashbuckle.AspNetCore.SwaggerUI from 8.1.1 to 7.3.1. Reference the package directly from the project to select a different version. \n UserService.Persistence -> Common -> Swashbuckle.AspNetCore.SwaggerUI (>= 8.1.1) \n UserService.Persistence -> Swashbuckle.AspNetCore.SwaggerUI (>= 7.3.1)",
-      "libraryId": "Swashbuckle.AspNetCore.SwaggerUI",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  "logs": []
 }

@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[2.9.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.2, )"
@@ -699,7 +703,7 @@
             },
             "Swashbuckle.AspNetCore.SwaggerUI": {
               "target": "Package",
-              "version": "[7.3.1, )"
+              "version": "[8.1.1, )"
             }
           },
           "imports": [
@@ -815,7 +819,7 @@
             },
             "Swashbuckle.AspNetCore.SwaggerUI": {
               "target": "Package",
-              "version": "[7.3.1, )"
+              "version": "[8.1.1, )"
             }
           },
           "imports": [

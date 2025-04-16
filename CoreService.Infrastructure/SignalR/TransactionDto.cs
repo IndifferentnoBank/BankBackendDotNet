@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using CoreService.Domain.Enums;
 
-namespace CoreService.Application.Dtos.Responses;
+namespace CoreService.Infrastructure.SignalR;
 
 public class TransactionDto
 {

@@ -26,33 +26,38 @@ public class BankAccountsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetBankAccounts(string? accountNumber = null, string? accountName = null)
     {
-        return Ok(await _mediator.Send(new GetBankAccountsCommand(User.GetUserClaims(), accountNumber, accountName)));
+        return Ok(await _mediator.Send(new GetBankAccountsCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext),
+            accountNumber, accountName)));
     }
 
     [HttpGet]
     [Route("{id:guid}")]
     public async Task<IActionResult> GetBankAccount(Guid id)
     {
-        return Ok(await _mediator.Send(new GetBankAccountByIdCommand(id, User.GetUserClaims())));
+        return Ok(await _mediator.Send(new GetBankAccountByIdCommand(id,
+            JwtHelper.ExtractUserClaimsFromHeader(HttpContext))));
     }
 
     [HttpGet]
     [Route("{clientId:guid}/bank_accounts")]
     public async Task<IActionResult> GetBankAccounts(Guid clientId)
     {
-        return Ok(await _mediator.Send(new GetBankAccountsByUserCommand(User.GetUserClaims(), clientId)));
+        return Ok(await _mediator.Send(
+            new GetBankAccountsByUserCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext), clientId)));
     }
 
     [HttpDelete]
     [Route("{id:guid}")]
     public async Task<IActionResult> ClosBankAccount(Guid id)
     {
-        return Ok(await _mediator.Send(new CloseBankAccountCommand(id, User.GetUserClaims().UserId)));
+        return Ok(await _mediator.Send(new CloseBankAccountCommand(id,
+            JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId)));
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateBankAccount([FromBody] CreateBankAccountDto accountDto)
     {
-        return Ok(await _mediator.Send(new CreateBankAccountCommand(User.GetUserClaims().UserId, accountDto)));
+        return Ok(await _mediator.Send(
+            new CreateBankAccountCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, accountDto)));
     }
 }

@@ -46,3 +46,5 @@ D:/3grade/Патерны/UserService.Application/obj/Debug/net9.0/ref/UserServic
 /Users/andreivasilev/Desktop/BankBackendDotNet/UserService.Application/obj/Debug/net9.0/refint/UserService.Application.dll
 /Users/andreivasilev/Desktop/BankBackendDotNet/UserService.Application/obj/Debug/net9.0/UserService.Application.pdb
 /Users/andreivasilev/Desktop/BankBackendDotNet/UserService.Application/obj/Debug/net9.0/ref/UserService.Application.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/UserService.Application/bin/Debug/net9.0/CoreService.Contracts.dll
+/Users/andreivasilev/Desktop/BankBackendDotNet/UserService.Application/bin/Debug/net9.0/CoreService.Contracts.pdb
