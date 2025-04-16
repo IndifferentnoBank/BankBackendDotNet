@@ -1,5 +1,6 @@
 using AutoMapper;
 using CoreService.Application.Dtos.Responses;
+using CoreService.Contracts.ExternalDtos;
 using CoreService.Domain.Entities;
 using CoreService.Infrastructure.SignalR;
 

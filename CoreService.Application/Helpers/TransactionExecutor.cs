@@ -1,4 +1,5 @@
 using Common.Exceptions;
+using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
@@ -10,12 +11,14 @@ public class TransactionExecutor : ITransactionExecutor
 {
     private readonly IBankAccountRepository _bankAccountRepository;
     private readonly ITransactionRepository _transactionRepository;
+    private readonly ITransactionHub _transactionHub;
 
     public TransactionExecutor(IBankAccountRepository bankAccountRepository,
-        ITransactionRepository transactionRepository)
+        ITransactionRepository transactionRepository, ITransactionHub transactionHub)
     {
         _bankAccountRepository = bankAccountRepository;
         _transactionRepository = transactionRepository;
+        _transactionHub = transactionHub;
     }
 
     public async Task ExecuteTransactionAsync(Transaction transaction)
@@ -34,6 +37,19 @@ public class TransactionExecutor : ITransactionExecutor
 
         await _transactionRepository.UpdateAsync(transaction);
         await _bankAccountRepository.UpdateAsync(bankAccount);
+
+        var transactionDto = new TransactionDto
+        {
+            Id = transaction.Id,
+            Date = transaction.Date,
+            Amount = transaction.Amount,
+            Comment = transaction.Comment,
+            Type = transaction.Type,
+            Status = transaction.Status
+        };
+
+        await _transactionHub.SendTransactionUpdate(transactionDto);
+        await _transactionHub.SendTransactionUpdateToBankAccount(bankAccount.Id, transactionDto);
     }
 
     private async Task ProcessTransaction(Transaction transaction, BankAccount bankAccount)

@@ -4,8 +4,10 @@ using Common.Kafka.Consumer;
 using Confluent.Kafka;
 using CoreService.Domain.Entities;
 using CoreService.Contracts.Events;
+using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
+using CoreService.Domain.Enums;
 using CoreService.Infrastructure.SignalR;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
@@ -19,19 +21,20 @@ public class TransactionConsumer : IKafkaConsumer
     private readonly ITransactionExecutor _transactionExecutor;
     private readonly ITransactionRepository _transactionRepository;
     private readonly IBankAccountRepository _bankAccountRepository;
-    private readonly IHubContext<TransactionHub> _hubContext;
     private readonly ILogger<TransactionConsumer> _logger;
+    private readonly ITransactionHub _transactionHub;
 
 
     public TransactionConsumer(IOptions<KafkaConfiguration> kafkaConfigOptions,
         ITransactionExecutor transactionExecutor, ITransactionRepository transactionRepository,
-        IBankAccountRepository bankAccountRepository, IHubContext<TransactionHub> hubContext, ILogger<TransactionConsumer> logger)
+        IBankAccountRepository bankAccountRepository, ILogger<TransactionConsumer> logger,
+        ITransactionHub transactionHub)
     {
         _transactionExecutor = transactionExecutor;
         _transactionRepository = transactionRepository;
         _bankAccountRepository = bankAccountRepository;
-        _hubContext = hubContext;
         _logger = logger;
+        _transactionHub = transactionHub;
         var config = new ConsumerConfig
         {
             BootstrapServers = kafkaConfigOptions.Value.BootstrapServers,
@@ -70,8 +73,19 @@ public class TransactionConsumer : IKafkaConsumer
 
                 await _transactionRepository.AddAsync(transactionToProcess);
 
-                await _hubContext.Clients.All.SendAsync("TransactionUpdate", "New transaction retrieved",
-                    cancellationToken);
+                var transactionDto = new TransactionDto
+                {
+                    Id = transaction.Id,
+                    Date = transaction.Date,
+                    Amount = transaction.Amount,
+                    Comment = transaction.Comment,
+                    Type = transaction.Type,
+                    Status = transaction.Status
+                };
+
+
+                await _transactionHub.SendTransactionUpdate(transactionDto);
+                await _transactionHub.SendTransactionUpdateToBankAccount(transaction.BankAccountId, transactionDto);
 
                 await _transactionExecutor.ExecuteTransactionAsync(transactionToProcess);
             }

@@ -1,8 +1,10 @@
+using CoreService.Contracts.ExternalDtos;
+using CoreService.Contracts.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CoreService.Infrastructure.SignalR;
 
-public class TransactionHub : Hub
+public class TransactionHub : Hub, ITransactionHub
 {
     private const string AllTransactionsGroup = "AllTransactions";
 
