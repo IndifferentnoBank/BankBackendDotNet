@@ -22,6 +22,16 @@ namespace UserService.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("UserService.Domain.Entities.ExpiredToken", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("ExpiredTokens");
+                });
+
             modelBuilder.Entity("UserService.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -43,17 +53,12 @@ namespace UserService.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

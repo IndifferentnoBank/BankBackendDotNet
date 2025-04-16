@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Common.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using UserService.Domain.Entities;
 using UserService.Domain.Enums;
 
 [ApiController]
+[Authorize(Policy = "CustomPolicy")]
 [Route("api/users")]
 public class UserController : ControllerBase
 {
@@ -35,21 +37,21 @@ public class UserController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(Guid id, [FromBody] CreateUserDto createUserDto)
     {
-        var user = await _userService.UpdateUser(id, createUserDto);
+        var user = await _userService.UpdateUser(JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, id, createUserDto);
         return Ok(user);
     }
 
     [HttpPost("lock-unlock/{id}")]
     public async Task<IActionResult> LockUnlockUser(Guid id, [FromQuery] bool isLocked)
     {
-        await _userService.LockUnlockUser(id, isLocked);
+        await _userService.LockUnlockUser(JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, id, isLocked);
         return Ok(new { Message = "User status updated." });
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUserById(Guid id)
     {
-        var user = await _userService.GetUserById(id);
+        var user = await _userService.GetUserById(JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId,id);
         return Ok(user);
     }
 
@@ -63,7 +65,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllUsers()
     {
-        var users = await _userService.GetAllUsers();
+        var users = await _userService.GetAllUsers(JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId);
         return Ok(users);
     }
 }

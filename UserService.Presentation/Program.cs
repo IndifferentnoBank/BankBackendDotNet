@@ -1,4 +1,5 @@
 using Common.Middleware;
+using UserService.Presentation.Authorization;
 using UserService.Application;
 using UserSevice.Persistence;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+builder.ConfigureUserServiceAuthorization();
 builder.ConfigureUserServicePersistence();
 builder.ConfigureUserServiceApplication();
 
@@ -20,11 +22,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.ConfigureUserServicePersistence();
+
 app.UseMiddleware<Middleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseAuthentication();
 app.MapControllers();
 
 app.Run();
