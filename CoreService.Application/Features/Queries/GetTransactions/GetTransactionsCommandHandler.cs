@@ -14,16 +14,14 @@ public class GetTransactionsCommandHandler : IRequestHandler<GetTransactionsComm
 {
     private readonly IBankAccountRepository _bankAccountRepository;
     private readonly ITransactionRepository _transactionRepository;
-    private readonly IUserService _userService;
     private readonly IMapper _mapper;
 
     public GetTransactionsCommandHandler(IBankAccountRepository bankAccountRepository,
-        ITransactionRepository transactionRepository, IMapper mapper, IUserService userService)
+        ITransactionRepository transactionRepository, IMapper mapper)
     {
         _bankAccountRepository = bankAccountRepository;
         _transactionRepository = transactionRepository;
         _mapper = mapper;
-        _userService = userService;
     }
 
     public async Task<List<TransactionDto>> Handle(GetTransactionsCommand request, CancellationToken cancellationToken)

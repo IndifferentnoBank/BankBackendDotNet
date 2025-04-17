@@ -35,7 +35,7 @@ public class TransactionsController : ControllerBase
     public async Task<IActionResult> CreateTransaction(Guid id, CreateTransactionDto transaction)
     {
         return Ok(await _mediator.Send(new CreateTransactionCommand(id,
-            JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, transaction)));
+            JwtHelper.ExtractUserClaimsFromHeader(HttpContext), transaction)));
     }
 
     [HttpPost]
@@ -43,7 +43,7 @@ public class TransactionsController : ControllerBase
     public async Task<IActionResult> TransferMoney([FromBody] TransferMoneyDto transferMoneyDto)
     {
         return Ok(await _mediator.Send(
-            new TransferMoneyCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, transferMoneyDto)));
+            new TransferMoneyCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext), transferMoneyDto)));
     }
 
     [HttpGet]

@@ -4,5 +4,5 @@ namespace CoreService.Contracts.Interfaces;
 
 public interface IUserService
 {
-    Task<UserInfoDto?> GetUserInfoAsync(Guid userId);
+    Task<UserInfoDto> GetUserInfoAsync(Guid userId, string token);
 }

@@ -1,4 +1,5 @@
 using Common.Exceptions;
+using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Kafka.Events;
 using CoreService.Contracts.Repositories;
@@ -30,15 +31,14 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         if (!await _bankAccountRepository.CheckIfBankAccountExistsByAccountId(request.BankAccountId))
             throw new NotFound("Bank Account Not Found");
 
-        /*
-        var user = await _userService.GetUserInfoAsync(request.UserId);
+        
+        var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId, request.UserClaims.Token);
 
         if (user.IsLocked) throw new Forbidden("Account Locked");
-        */
 
         var bankAccount = await _bankAccountRepository.GetByIdAsync(request.BankAccountId);
 
-        if (bankAccount.UserId != request.UserId) throw new Forbidden("You are not allowed to create this transaction");
+        if (bankAccount.UserId != user.Id) throw new Forbidden("You are not allowed to create this transaction");
 
         if (bankAccount.isClosed)
             throw new BadRequest("Bank Account Is Closed");

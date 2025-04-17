@@ -2,6 +2,7 @@ using AutoMapper;
 using Common.Exceptions;
 using Common.Helpers;
 using CoreService.Application.Dtos.Responses;
+using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using MediatR;
@@ -27,10 +28,10 @@ public class GetBankAccountsByUserCommandHandler : IRequestHandler<GetBankAccoun
     {
         if (!request.UserClaims.Roles.Contains(Roles.STAFF))
         {
-            /*var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId);
+            var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId, request.UserClaims.Token);
 
             if (user.Id != request.ClientId)
-                throw new Forbidden("You do not have permission to access this command");*/
+                throw new Forbidden("You do not have permission to access this command");
         }
 
         var bankAccounts = await _bankAccountRepository.FindAsync(x => x.UserId == request.ClientId);

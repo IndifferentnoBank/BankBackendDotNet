@@ -1,4 +1,5 @@
 using Common.Exceptions;
+using CoreService.Contracts.ExternalDtos;
 using CoreService.Domain.Enums;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Kafka.Events;
@@ -28,10 +29,10 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
 
     public async Task<Unit> Handle(TransferMoneyCommand request, CancellationToken cancellationToken)
     {
-        /*var fromUser = await _userService.GetUserInfoAsync(request.UserId);
+        var fromUser = await _userService.GetUserInfoAsync(request.UserClaims.UserId, request.UserClaims.Token);
 
         if (fromUser != null && fromUser.IsLocked)
-            throw new Forbidden("User is blocked");*/
+            throw new Forbidden("User is blocked");
 
         var amount = request.TransferMoneyDto.Amount;
 
@@ -48,7 +49,7 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
         var fromBankAccount = await _bankAccountRepository.GetByIdAsync(request.TransferMoneyDto.FromBankAccountId);
         var toBankAccount = await _bankAccountRepository.GetByIdAsync(request.TransferMoneyDto.ToBankAccountId);
 
-        if (fromBankAccount.UserId != request.UserId)
+        if (fromBankAccount.UserId != fromUser.Id)
             throw new Forbidden("You are not allowed to transfer money from this bank account.");
 
         if (fromBankAccount.isClosed || toBankAccount.isClosed)

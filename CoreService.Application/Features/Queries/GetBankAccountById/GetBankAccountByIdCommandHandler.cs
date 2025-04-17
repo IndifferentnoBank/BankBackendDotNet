@@ -2,6 +2,7 @@ using AutoMapper;
 using Common.Exceptions;
 using Common.Helpers;
 using CoreService.Application.Dtos.Responses;
+using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using MediatR;
@@ -27,11 +28,10 @@ public class GetBankAccountByIdCommandHandler : IRequestHandler<GetBankAccountBy
             throw new NotFound("Bank Account Not Found");
 
         var bankAccount = await _repository.GetByIdAsync(request.Id);
-        
+
         if (!request.UserClaims.Roles.Contains(Roles.STAFF))
         {
-            /*var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId);
-
+            var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId, request.UserClaims.Token);
 
             if (user == null)
             {
@@ -46,7 +46,7 @@ public class GetBankAccountByIdCommandHandler : IRequestHandler<GetBankAccountBy
             if (user.IsLocked)
             {
                 throw new Forbidden("Your account is locked. Please contact support.");
-            }*/
+            }
         }
 
         return _mapper.Map<BankAccountDto>(bankAccount);
