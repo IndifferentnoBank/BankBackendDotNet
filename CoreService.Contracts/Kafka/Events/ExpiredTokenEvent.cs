@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace CoreService.Contracts.Kafka.Events;
 
 public class ExpiredTokenEvent
 {
-    public string Key { get; set; }
+    [JsonPropertyName("deleted_token")] 
+    public string DeletedToken { get; set; }
 }

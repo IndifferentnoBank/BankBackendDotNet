@@ -36,7 +36,7 @@ public class AuthorizationHandler : AuthorizationHandler<AuthorizationRequiremen
                 .Where(x => x.Key == token)
                 .FirstOrDefaultAsync();
 
-            if (tokenEntity != null) throw new Unauthorized();
+            if (tokenEntity != null) throw new Unauthorized("Your token is blocked");
 
             context.Succeed(requirement);
         }

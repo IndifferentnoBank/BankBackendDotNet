@@ -12,15 +12,17 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
 {
     private readonly IBankAccountRepository _bankAccountRepository;
     private readonly ITransactionProducer _transactionProducer;
+    private readonly ICurrencyService _currencyService;
     private readonly IUserService _userService;
 
 
     public CreateTransactionCommandHandler(IBankAccountRepository bankAccountRepository,
-        ITransactionProducer transactionProducer, IUserService userService)
+        ITransactionProducer transactionProducer, IUserService userService, ICurrencyService currencyService)
     {
         _bankAccountRepository = bankAccountRepository;
         _transactionProducer = transactionProducer;
         _userService = userService;
+        _currencyService = currencyService;
     }
 
     public async Task<Unit> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
@@ -41,11 +43,25 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         if (bankAccount.isClosed)
             throw new BadRequest("Bank Account Is Closed");
 
-        if (request.CreateTransactionDto.Type is TransactionType.WITHDRAW or TransactionType.PAY_LOAN)
+        if (request.CreateTransactionDto.Type is TransactionType.WITHDRAW or TransactionType.PAY_LOAN
+            or TransactionType.AUTOPAY_LOAN)
         {
-            if (bankAccount.Balance < Convert.ToDecimal(request.CreateTransactionDto.Amount))
+            if (bankAccount.Currency == request.CreateTransactionDto.Currency)
             {
-                throw new BadRequest("Insufficient Balance");
+                if (bankAccount.Balance < Convert.ToDecimal(request.CreateTransactionDto.Amount))
+                {
+                    throw new BadRequest("Insufficient Balance");
+                }
+            }
+            else
+            {
+                var amount = await _currencyService.ConvertCurrency(request.CreateTransactionDto.Amount,
+                    request.CreateTransactionDto.Currency, bankAccount.Currency);
+
+                if (bankAccount.Balance < Convert.ToDecimal(amount))
+                {
+                    throw new BadRequest("Insufficient Balance");
+                }
             }
         }
 
@@ -56,9 +72,8 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
 
         var transactionEvent = new TransactionEvent()
         {
-            
             Amount = request.CreateTransactionDto.Amount,
-            Currency = bankAccount.Currency,
+            Currency = request.CreateTransactionDto.Currency,
             Comment = request.CreateTransactionDto.Comment,
             Type = request.CreateTransactionDto.Type,
             Status = TransactionStatus.Processing,
@@ -68,7 +83,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         };
 
         await _transactionProducer.ProduceTransactionEventAsync(transactionEvent);
-        
+
         return Unit.Value;
     }
 

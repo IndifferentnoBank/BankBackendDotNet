@@ -56,12 +56,16 @@ public class ExpiredTokensConsumer : IKafkaConsumer
 
                     var expiredToken = new ExpiredToken
                     {
-                        Key = tokenEvent.Key
+                        Key = tokenEvent.DeletedToken
                     };
 
-                    await _scopeFactory.CreateScope().ServiceProvider.GetRequiredService<IExpiredTokensRepository>()
-                        .AddAsync(expiredToken);
-                    _logger.LogInformation("Added expired token with key: {Key}", tokenEvent.Key);
+                    var tokensRepository = _scopeFactory.CreateScope().ServiceProvider
+                        .GetRequiredService<IExpiredTokensRepository>();
+
+                    if (!await tokensRepository.CheckIfTokenAlreadyExists(tokenEvent.DeletedToken))
+                        await tokensRepository.AddAsync(expiredToken);
+                    
+                    _logger.LogInformation("Added expired token with key: {Key}", tokenEvent.DeletedToken);
                 }
                 catch (ConsumeException ex)
                 {

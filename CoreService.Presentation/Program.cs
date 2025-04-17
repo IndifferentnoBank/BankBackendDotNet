@@ -2,10 +2,12 @@ using Common.Configurations;
 using Common.Configurations.Swagger;
 using CoreService.Application;
 using CoreService.Application.BackgroundService;
+using CoreService.Application.Helpers;
 using CoreService.Infrastructure;
 using CoreService.Kafka;
 using CoreService.Persistence;
 using CoreService.Presentation.Authorization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +44,11 @@ app.UseCors("AllowAll");
 app.ConfigureCoreServiceInfrastructure();
 await app.ConfigureCoreServicePersistence();
 await app.AddKafka();
+
+var options = app.Services.GetRequiredService<IOptions<CommissionSettings>>();
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+logger.LogInformation($"Commission Rate: {options.Value.Commission}");
 
 app.UseHttpsRedirection();
 

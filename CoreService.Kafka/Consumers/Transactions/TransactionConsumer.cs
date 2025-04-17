@@ -85,6 +85,7 @@ public class TransactionConsumer : IKafkaConsumer
 
                     var transactionRepository = scope.ServiceProvider.GetRequiredService<ITransactionRepository>();
 
+                    if (await transactionRepository.CheckIfTransactionExistAsync(transaction.Id)) continue;
                     await transactionRepository.AddAsync(transaction);
 
                     var transactionDto = new TransactionDto

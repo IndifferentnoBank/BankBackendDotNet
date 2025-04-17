@@ -28,6 +28,11 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
 
     public async Task<Unit> Handle(TransferMoneyCommand request, CancellationToken cancellationToken)
     {
+        /*var fromUser = await _userService.GetUserInfoAsync(request.UserId);
+
+        if (fromUser != null && fromUser.IsLocked)
+            throw new Forbidden("User is blocked");*/
+
         var amount = request.TransferMoneyDto.Amount;
 
         if (request.TransferMoneyDto.Amount <= 0)
@@ -43,6 +48,9 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
         var fromBankAccount = await _bankAccountRepository.GetByIdAsync(request.TransferMoneyDto.FromBankAccountId);
         var toBankAccount = await _bankAccountRepository.GetByIdAsync(request.TransferMoneyDto.ToBankAccountId);
 
+        if (fromBankAccount.UserId != request.UserId)
+            throw new Forbidden("You are not allowed to transfer money from this bank account.");
+
         if (fromBankAccount.isClosed || toBankAccount.isClosed)
             throw new BadRequest("Bank account is closed.");
 
@@ -54,13 +62,18 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
         double commission = 0;
 
 
-        if (fromBankAccount.Currency != request.TransferMoneyDto.Currency)
+        if (fromBankAccount.Currency != request.TransferMoneyDto.Currency ||
+            toBankAccount.Currency != request.TransferMoneyDto.Currency)
         {
             commission = _commissionService.GetCommission(amount);
 
-            amountToWithdraw = await _currencyService.ConvertCurrency(amount + commission, fromBankAccount.Currency,
-                request.TransferMoneyDto.Currency);
+            amountToWithdraw = await _currencyService.ConvertCurrency(amount + commission,
+                request.TransferMoneyDto.Currency, fromBankAccount.Currency);
 
+            if (fromBankAccount.Balance < Convert.ToDecimal(amountToWithdraw))
+            {
+                throw new BadRequest("Insufficient Balance");
+            }
 
             commission = await _currencyService.ConvertCurrency(commission, fromBankAccount.Currency,
                 Currency.RUB);
@@ -72,11 +85,7 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
                 toBankAccount.Currency);
         }
 
-        /*var fromUser = await _userService.GetUserInfoAsync(fromBankAccount.UserId);
-
-        if (fromUser != null && fromUser.IsLocked)
-            throw new Forbidden("User is blocked");
-
+/*
         var toUser = await _userService.GetUserInfoAsync(toBankAccount.UserId);
 
         if (toUser != null && toUser.IsLocked)
