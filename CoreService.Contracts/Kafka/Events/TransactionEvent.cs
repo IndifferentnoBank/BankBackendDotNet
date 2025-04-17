@@ -26,10 +26,11 @@ public class TransactionEvent
     [Required] 
     public TransactionStatus Status { get; set; } = TransactionStatus.Processing;
     
-    [ForeignKey("BankAccount")]
     public Guid BankAccountId { get; init; } 
     
     public Guid? RelatedTransactionId { get; set; }
     
     public Guid? RelatedLoanId { get; set; }
+    
+    public Guid? TransferBankAccountId { get; set; }
 }

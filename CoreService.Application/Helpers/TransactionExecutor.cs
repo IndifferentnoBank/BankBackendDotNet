@@ -62,10 +62,12 @@ public class TransactionExecutor : ITransactionExecutor
                 break;
 
             case TransactionType.WITHDRAW:
+            case TransactionType.TRANSFER_WITHDRAW:
                 HandleWithdrawal(transaction, bankAccount);
                 break;
 
             case TransactionType.DEPOSIT:
+            case TransactionType.TRANSFER_DEPOSIT:
                 HandleDeposit(transaction, bankAccount);
                 break;
             case TransactionType.TAKE_LOAN:

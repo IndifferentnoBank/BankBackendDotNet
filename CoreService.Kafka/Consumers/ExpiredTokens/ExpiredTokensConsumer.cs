@@ -63,9 +63,10 @@ public class ExpiredTokensConsumer : IKafkaConsumer
                         .GetRequiredService<IExpiredTokensRepository>();
 
                     if (!await tokensRepository.CheckIfTokenAlreadyExists(tokenEvent.DeletedToken))
+                    {
                         await tokensRepository.AddAsync(expiredToken);
-                    
-                    _logger.LogInformation("Added expired token with key: {Key}", tokenEvent.DeletedToken);
+                        _logger.LogInformation("Added expired token with key: {Key}", tokenEvent.DeletedToken);
+                    }
                 }
                 catch (ConsumeException ex)
                 {

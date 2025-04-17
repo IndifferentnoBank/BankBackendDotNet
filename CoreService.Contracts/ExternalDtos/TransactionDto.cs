@@ -24,4 +24,6 @@ public class TransactionDto
     
     [Required]
     public TransactionStatus Status { get; set; }
+    
+    public Guid? TransferBankAccountId { get; set; }
 }

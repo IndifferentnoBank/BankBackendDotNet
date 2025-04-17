@@ -93,22 +93,21 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
 
         var withdraw = new TransactionEvent
         {
-            Date = default,
             Amount = amountToWithdraw,
             Currency = fromBankAccount.Currency,
             Comment = request.TransferMoneyDto.Comment,
-            Type = TransactionType.WITHDRAW,
+            Type = TransactionType.TRANSFER_WITHDRAW,
             Status = TransactionStatus.Processing,
             BankAccountId = fromBankAccount.Id,
+            TransferBankAccountId = toBankAccount.Id
         };
 
         var deposit = new TransactionEvent
         {
-            Date = default,
             Amount = amountToDeposit,
             Currency = toBankAccount.Currency,
             Comment = request.TransferMoneyDto.Comment,
-            Type = TransactionType.DEPOSIT,
+            Type = TransactionType.TRANSFER_DEPOSIT,
             Status = TransactionStatus.Processing,
             BankAccountId = toBankAccount.Id,
         };
