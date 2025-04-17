@@ -13,8 +13,10 @@ public class TransactionProducer : ITransactionProducer
     private readonly ILogger<TransactionProducer> _logger;
     private readonly string _topic;
 
-    public TransactionProducer(IOptions<KafkaProducerConfiguration> kafkaConfiguration,
-        IKafkaProducer<TransactionEvent> kafkaProducer, ILogger<TransactionProducer> logger)
+    public TransactionProducer(
+        IOptions<KafkaProducerConfiguration> kafkaConfiguration,
+        IKafkaProducer<TransactionEvent> kafkaProducer,
+        ILogger<TransactionProducer> logger)
     {
         _kafkaProducer = kafkaProducer;
         _logger = logger;
@@ -23,8 +25,16 @@ public class TransactionProducer : ITransactionProducer
 
     public async Task ProduceTransactionEventAsync(TransactionEvent transactionEvent)
     {
-        var key = transactionEvent.Id.ToString();
-        await _kafkaProducer.ProduceAsync(_topic, key, transactionEvent);
-        _logger.LogInformation("Transaction event produced: {id}", transactionEvent.Id);
+        try
+        {
+            var key = transactionEvent.Id.ToString();
+            await _kafkaProducer.ProduceAsync(_topic, key, transactionEvent);
+            _logger.LogInformation("Transaction event produced: {id}", transactionEvent.Id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to produce transaction event: {id}", transactionEvent.Id);
+            throw; 
+        }
     }
 }

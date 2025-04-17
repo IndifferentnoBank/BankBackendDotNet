@@ -6,10 +6,10 @@ namespace CoreService.Contracts.Kafka.Events;
 
 public class TransactionEvent
 {
-    public Guid Id { get; init; }
-    
-    [Required]
-    public DateTime Date { get; init; } 
+    public Guid Id { get; init; } = Guid.NewGuid();
+
+    [Required] 
+    public DateTime Date { get; init; } = DateTime.UtcNow;
 
     [Required]
     [Range(0.01, double.MaxValue)]

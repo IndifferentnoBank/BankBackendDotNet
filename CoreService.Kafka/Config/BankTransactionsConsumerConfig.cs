@@ -1,9 +1,8 @@
-using Common.Configurations;
+using Common.Kafka.Configs;
 
 namespace CoreService.Kafka.Config;
 
-public class BankTransactionsConsumerConfig : KafkaConfiguration
+public class BankTransactionsConsumerConfig : KafkaConsumerConfig
 {
-    public string Topic { get; set; }
-    public string GroupId { get; set; }
+
 }

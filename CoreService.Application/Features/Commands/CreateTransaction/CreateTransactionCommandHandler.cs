@@ -1,5 +1,4 @@
 using Common.Exceptions;
-using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Kafka.Events;
 using CoreService.Contracts.Repositories;
@@ -57,6 +56,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
 
         var transactionEvent = new TransactionEvent()
         {
+            
             Amount = request.CreateTransactionDto.Amount,
             Currency = bankAccount.Currency,
             Comment = request.CreateTransactionDto.Comment,

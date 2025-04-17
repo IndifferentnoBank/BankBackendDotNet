@@ -41,6 +41,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowAll");
 app.ConfigureCoreServiceInfrastructure();
 await app.ConfigureCoreServicePersistence();
+await app.AddKafka();
 
 app.UseHttpsRedirection();
 
