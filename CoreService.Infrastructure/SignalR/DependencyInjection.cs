@@ -10,6 +10,7 @@ public static class DependencyInjection
     {
         builder.Services.AddSignalR();
         builder.Services.AddSingleton<ITransactionHub, TransactionHub>();
+        builder.Services.AddSingleton<ITransactionNotifier, TransactionNotifier>();
     }
 
     public static void ConfigureCoreServiceSignalR(this WebApplication app)
