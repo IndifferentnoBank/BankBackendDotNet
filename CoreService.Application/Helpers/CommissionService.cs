@@ -9,7 +9,7 @@ public class CommissionService : ICommissionService
 
     public CommissionService(IOptions<CommissionSettings> options)
     {
-        _commissionPercent = options.Value.Commission;
+        _commissionPercent = options.Value.CurrencyCommission;
     }
 
     public double GetCommission(double amount)

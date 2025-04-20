@@ -1,7 +1,5 @@
-using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Logging;
 
 namespace CoreService.Infrastructure.SignalR;
 

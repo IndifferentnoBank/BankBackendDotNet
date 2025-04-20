@@ -48,7 +48,7 @@ await app.AddKafka();
 var options = app.Services.GetRequiredService<IOptions<CommissionSettings>>();
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
-logger.LogInformation($"Commission Rate: {options.Value.Commission}");
+logger.LogInformation($"Commission Rate: {options.Value.CurrencyCommission}");
 
 app.UseHttpsRedirection();
 

@@ -12,7 +12,7 @@ public static class DependencyInjection
 {
     public static void ConfigureCoreServiceApplication(this WebApplicationBuilder builder)
     {
-        builder.Services.Configure<CommissionSettings>(builder.Configuration.GetSection("Commission"));
+        builder.Services.Configure<CommissionSettings>(builder.Configuration.GetSection("Commissions"));
         
         builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         builder.Services.AddAutoMapper(typeof(MappingProfile));
