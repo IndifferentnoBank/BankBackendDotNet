@@ -1,5 +1,3 @@
-using CoreService.Contracts.ExternalDtos;
-
 namespace CoreService.Contracts.Interfaces;
 
 public interface ITransactionHub

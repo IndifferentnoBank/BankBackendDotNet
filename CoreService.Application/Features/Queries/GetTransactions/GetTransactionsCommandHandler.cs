@@ -1,11 +1,8 @@
 using AutoMapper;
 using Common.Exceptions;
 using Common.Helpers;
-using CoreService.Application.Dtos.Responses;
 using CoreService.Contracts.ExternalDtos;
-using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
-using CoreService.Infrastructure.SignalR;
 using MediatR;
 
 namespace CoreService.Application.Features.Queries.GetTransactions;

@@ -1,5 +1,4 @@
 using Common.Exceptions;
-using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using MediatR;
 

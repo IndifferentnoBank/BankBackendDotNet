@@ -4,7 +4,7 @@ using CoreService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace CoreService.Persistence.Repositories.BankAccountRepository;
+namespace CoreService.Persistence.Repositories;
 
 public class BankAccountRepository : GenericRepository<BankAccount>, IBankAccountRepository
 {

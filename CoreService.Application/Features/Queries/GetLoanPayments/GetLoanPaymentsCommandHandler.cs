@@ -1,4 +1,6 @@
 using AutoMapper;
+using Common.Exceptions;
+using Common.Helpers;
 using CoreService.Application.Dtos.Responses;
 using CoreService.Contracts.Repositories;
 using MediatR;
@@ -19,7 +21,10 @@ public class GetLoanPaymentsCommandHandler : IRequestHandler<GetLoanPaymentsComm
     public async Task<List<LoanTransactionDto>> Handle(GetLoanPaymentsCommand request,
         CancellationToken cancellationToken)
     {
-        //todo: add role check and loan check
+        
+        if (!request.UserClaims.Roles.Contains(Roles.STAFF))
+            throw new Forbidden("You do not have permission to access this command");
+        //todo: add loan check
 
         var transactions = await _transactionRepository.FindAsync(x => x.RelatedLoanId == request.LoanId);
 

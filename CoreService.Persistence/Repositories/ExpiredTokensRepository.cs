@@ -3,7 +3,7 @@ using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoreService.Persistence.Repositories.ExpiredTokensRepository;
+namespace CoreService.Persistence.Repositories;
 
 public class ExpiredTokensRepository : GenericRepository<ExpiredToken>, IExpiredTokensRepository
 {

@@ -18,17 +18,18 @@ public class TransactionConsumer : IKafkaConsumer
     private readonly IConsumer<string, string> _consumer;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ILogger<TransactionConsumer> _logger;
-    private readonly ITransactionHub _transactionHub;
+    private readonly ITransactionNotifier _transactionNotifier;
 
     public TransactionConsumer(
         IOptions<BankTransactionsConsumerConfig> configOptions,
         ILogger<TransactionConsumer> logger,
-        ITransactionHub hub, IServiceScopeFactory scopeFactory)
+        ITransactionNotifier transactionNotifier,
+        IServiceScopeFactory scopeFactory)
     {
         var config = configOptions.Value;
 
         _logger = logger;
-        _transactionHub = hub;
+        _transactionNotifier = transactionNotifier;
         _scopeFactory = scopeFactory;
 
         var consumerConfig = new ConsumerConfig
@@ -98,8 +99,8 @@ public class TransactionConsumer : IKafkaConsumer
                         Status = transaction.Status
                     };
 
-                    //await _transactionHub.SendTransactionUpdate(transactionDto);
-                    //await _transactionHub.SendTransactionUpdateToBankAccount(transaction.BankAccountId, transactionDto);
+                    await _transactionNotifier.SendTransactionUpdate(transactionDto);
+                    await _transactionNotifier.SendTransactionUpdateToBankAccount(transaction.BankAccountId, transactionDto);
 
                     var transactionExecutor = scope.ServiceProvider
                         .GetRequiredService<ITransactionExecutor>();

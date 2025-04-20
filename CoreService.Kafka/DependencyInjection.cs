@@ -1,11 +1,8 @@
 using Common.Kafka.Configs;
-using Common.Kafka.Consumer;
 using Common.Kafka.Producer;
-using Confluent.Kafka;
-using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Kafka.Events;
+using CoreService.Contracts.Kafka.Interfaces;
 using CoreService.Kafka.Config;
-using CoreService.Kafka.Consumers;
 using CoreService.Kafka.Consumers.ExpiredTokens;
 using CoreService.Kafka.Consumers.Transactions;
 using CoreService.Kafka.KafkaTopicsInitializer;

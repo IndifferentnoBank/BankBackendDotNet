@@ -1,9 +1,8 @@
 using Common.Exceptions;
-using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Kafka.Events;
+using CoreService.Contracts.Kafka.Interfaces;
 using CoreService.Contracts.Repositories;
-using CoreService.Domain.Entities;
 using CoreService.Domain.Enums;
 using MediatR;
 

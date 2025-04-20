@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Transaction = CoreService.Domain.Entities.Transaction;
 using TransactionStatus = CoreService.Domain.Enums.TransactionStatus;
 
-namespace CoreService.Persistence.Repositories.TransactionsRepository;
+namespace CoreService.Persistence.Repositories;
 
 public class TransactionRepository : GenericRepository<Transaction>, ITransactionRepository
 {
