@@ -16,4 +16,10 @@
     <ProjectReference Include="..\CreditRatingService.Contracts\CreditRatingService.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore">
+      <HintPath>..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\9.0.0\Microsoft.AspNetCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
