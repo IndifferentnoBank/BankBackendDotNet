@@ -1,4 +1,5 @@
-﻿using CreditRatingService.Application.Dtos.Pesponses;
+﻿using Common.Helpers;
+using CreditRatingService.Application.Dtos.Pesponses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace CreditRatingService.Application.Services
 {
     public interface IOverdueTransactionService
     {
-        Task<List<overdueCreditTransactionDto>> AnalyzeLoanPaymentsAsync(Guid loanId);
+        Task<List<overdueCreditTransactionDto>> AnalyzeLoanPaymentsAsync(Guid loanId, UserClaims userClaims);
     }
 }

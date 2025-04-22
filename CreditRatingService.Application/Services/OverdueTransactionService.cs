@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CreditRatingService.Application.Dtos.Pesponses;
+using Common.Helpers;
 
 namespace CreditRatingService.Application.Services
 {
@@ -20,10 +21,10 @@ namespace CreditRatingService.Application.Services
             _coreService = coreService;
         }
 
-        public async Task<List<overdueCreditTransactionDto>> AnalyzeLoanPaymentsAsync(Guid loanId)
+        public async Task<List<overdueCreditTransactionDto>> AnalyzeLoanPaymentsAsync(Guid loanId, UserClaims userClaims)
         {
             var loan = await _loanService.GetLoanByLoanIdAsync(loanId);
-            var transactions = await _coreService.GetTransactionByLoanIdAsync(loanId);
+            var transactions = await _coreService.GetTransactionByLoanIdAsync(loanId, userClaims.Token);
 
             var plannedPayments = GeneratePlannedPayments(loan.StartDate, loan.EndDate, loan.MonthlyPayment, loan.Id);
             var actualPayments = transactions

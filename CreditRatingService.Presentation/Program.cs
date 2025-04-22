@@ -11,10 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
-//builder.ConfigureCreditRatingServiceAuthorization();
+builder.ConfigureCreditRatingServiceAuthorization();
 builder.ConfigureCreditRatingServiceInfrastructure();
 builder.ConfigureCreditRatingServicePersistence();
-//builder.ConfigureCreditRatingServiceApplication();
+builder.ConfigureCreditRatingServiceApplication();
 
 var app = builder.Build();
 

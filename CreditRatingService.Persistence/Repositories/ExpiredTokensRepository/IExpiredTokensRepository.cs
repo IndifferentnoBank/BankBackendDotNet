@@ -5,5 +5,5 @@ namespace CreditRatingService.Contracts.Repositories;
 
 public interface IExpiredTokensRepository : IGenericRepository<ExpiredToken>
 {
-    
+    Task<bool> CheckIfTokenAlreadyExists(string token);
 }
