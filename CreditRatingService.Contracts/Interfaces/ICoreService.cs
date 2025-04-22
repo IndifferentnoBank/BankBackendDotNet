@@ -9,6 +9,6 @@ namespace CreditRatingService.Contracts.Interfaces
 {
     public interface ICoreService
     {
-        Task<List<LoanTransactionDto>> GetTransactionByLoanIdAsync(Guid loanId);
+        Task<List<LoanTransactionDto>> GetTransactionByLoanIdAsync(Guid loanId, string token);
     }
 }

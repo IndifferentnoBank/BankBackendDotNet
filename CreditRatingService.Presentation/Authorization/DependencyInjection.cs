@@ -6,7 +6,7 @@ namespace CreditRatingService.Presentation.Authorization;
 
 public static class DependencyInjection
 {
-    public static void ConfigureUserServiceAuthorization(this WebApplicationBuilder builder)
+    public static void ConfigureCreditRatingServiceAuthorization(this WebApplicationBuilder builder)
     {
         builder.Services.AddHttpContextAccessor();
         builder.AddAuth();

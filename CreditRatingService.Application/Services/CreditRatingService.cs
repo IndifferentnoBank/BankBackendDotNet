@@ -1,4 +1,6 @@
-﻿using CreditRatingService.Application.Dtos.Pesponses;
+﻿using Common.Helpers;
+using Common.Exceptions;
+using CreditRatingService.Application.Dtos.Pesponses;
 using CreditRatingService.Contracts.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -21,15 +23,19 @@ namespace CreditRatingService.Application.Services
             _analyzer = analyzer;
         }
 
-        public async Task<CreditRatingDto> CalculateUserRatingAsync(Guid userId)
+        public async Task<CreditRatingDto> CalculateUserRatingAsync(Guid userId, UserClaims userClaims)
         {
+            if (!userClaims.Roles.Contains(Roles.STAFF))
+            {
+                throw new Forbidden("You have not role for this action");
+            }
             var loans = await _loanService.GetLoansByUserIdAsync(userId);
 
             int overdueCount = 0;
 
             foreach (var loan in loans)
             {
-                var overduePayments = await _analyzer.AnalyzeLoanPaymentsAsync(loan.Id);
+                var overduePayments = await _analyzer.AnalyzeLoanPaymentsAsync(loan.Id, userClaims);
                 overdueCount += overduePayments.Count(p => p.isOverdue);
             }
 

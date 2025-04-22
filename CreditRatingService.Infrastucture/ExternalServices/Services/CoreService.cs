@@ -26,9 +26,11 @@ namespace CreditRatingService.Infrastucture.ExternalServices.Services
             _coreServiceClientConfig = config.Value;
         }
 
-        public async Task<List<LoanTransactionDto>> GetTransactionByLoanIdAsync(Guid loanId)
+        public async Task<List<LoanTransactionDto>> GetTransactionByLoanIdAsync(Guid loanId, string token)
         {
             var client = _httpClientFactory.CreateClient("CoreServiceClient");
+
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             var requestUri = $"{_coreServiceClientConfig.EndpointName}{loanId}/transactions";
 
