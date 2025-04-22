@@ -41,21 +41,21 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         if (bankAccount.isClosed)
             throw new BadRequest("Bank Account Is Closed");
 
-        double amount = 0;
+        var amount = request.CreateTransactionDto.Amount;
 
         if (request.CreateTransactionDto.Type is TransactionType.WITHDRAW or TransactionType.PAY_LOAN
             or TransactionType.AUTOPAY_LOAN)
         {
             if (bankAccount.Currency == request.CreateTransactionDto.Currency)
             {
-                if (bankAccount.Balance < Convert.ToDecimal(request.CreateTransactionDto.Amount))
+                if (bankAccount.Balance < Convert.ToDecimal(amount))
                 {
                     throw new BadRequest("Insufficient Balance");
                 }
             }
             else
             {
-                amount = await _currencyService.ConvertCurrency(request.CreateTransactionDto.Amount,
+                amount = await _currencyService.ConvertCurrency(amount,
                     request.CreateTransactionDto.Currency, bankAccount.Currency);
 
                 if (bankAccount.Balance < Convert.ToDecimal(amount))
@@ -68,12 +68,8 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         {
             if (request.CreateTransactionDto.Currency != bankAccount.Currency)
             {
-                amount = await _currencyService.ConvertCurrency(request.CreateTransactionDto.Amount,
+                amount = await _currencyService.ConvertCurrency(amount,
                     request.CreateTransactionDto.Currency, bankAccount.Currency);
-            }
-            else
-            {
-                amount = request.CreateTransactionDto.Amount;
             }
         }
 
