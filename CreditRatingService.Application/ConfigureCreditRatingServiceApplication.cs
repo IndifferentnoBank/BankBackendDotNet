@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CreditRatingService.Application.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CreditRatingService.Application
 {
@@ -6,6 +8,8 @@ namespace CreditRatingService.Application
     {
         public static void ConfigureCreditRatingServiceApplication(this WebApplicationBuilder builder)
         {
+            builder.Services.AddScoped<ICreditRatingService, Services.CreditRatingService>();
+            builder.Services.AddScoped<IOverdueTransactionService, OverdueTransactionService>();
         }
     }
 }

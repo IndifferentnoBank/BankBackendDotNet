@@ -1,3 +1,4 @@
+using Common.Configurations.Swagger;
 using Common.Middleware;
 using CreditRatingService.Presentation.Authorization;
 using CreditRatingService.Application;
@@ -15,14 +16,14 @@ builder.ConfigureCreditRatingServiceAuthorization();
 builder.ConfigureCreditRatingServiceInfrastructure();
 builder.ConfigureCreditRatingServicePersistence();
 builder.ConfigureCreditRatingServiceApplication();
+builder.ConfigureSwagger();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerConfiguration();
 }
 
 app.ConfigureCreditRatingServicePersistence();

@@ -1,6 +1,5 @@
 using Common.GenericRepository;
 using CreditRatingService.Persistence;
-using CreditRatingService.Contracts.Repositories;
 using CreditRatingService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 

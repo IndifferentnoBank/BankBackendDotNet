@@ -1,7 +1,7 @@
 using Common.GenericRepository;
 using CreditRatingService.Domain.Entities;
 
-namespace CreditRatingService.Contracts.Repositories;
+namespace CreditRatingService.Persistence.Repositories.ExpiredTokensRepository;
 
 public interface IExpiredTokensRepository : IGenericRepository<ExpiredToken>
 {

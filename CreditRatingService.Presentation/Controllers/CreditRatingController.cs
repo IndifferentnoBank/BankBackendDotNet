@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CreditRatingService.Presentation.Controllers
 {
-    [Route("api/CreditRatings")]
+    [Route("api/loan")]
     [Authorize(Policy = "CustomPolicy")]
     [ApiController]
     public class CreditRatingController : ControllerBase
@@ -20,13 +20,13 @@ namespace CreditRatingService.Presentation.Controllers
             _creditRatingService = creditRatingService;
         }
 
-        [HttpGet("{loanId}")]
+        [HttpGet("{loanId}/overdue_transactions")]
         public async Task<IActionResult> GetOverdueTransactions(Guid loanId)
         {
             var loans = await _analyzer.AnalyzeLoanPaymentsAsync(loanId, JwtHelper.ExtractUserClaimsFromHeader(HttpContext));
             return Ok(loans);
         }
-        [HttpGet("{userId}")]
+        [HttpGet("{userId}/credit_rating")]
         public async Task<IActionResult> GetCreditRating(Guid userId)
         {
             var loans = await _creditRatingService.CalculateUserRatingAsync(userId, JwtHelper.ExtractUserClaimsFromHeader(HttpContext));
