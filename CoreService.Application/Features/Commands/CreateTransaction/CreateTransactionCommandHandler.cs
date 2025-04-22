@@ -30,7 +30,6 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         if (!await _bankAccountRepository.CheckIfBankAccountExistsByAccountId(request.BankAccountId))
             throw new NotFound("Bank Account Not Found");
 
-        
         var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId, request.UserClaims.Token);
 
         if (user.IsLocked) throw new Forbidden("Account Locked");
@@ -41,6 +40,8 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
 
         if (bankAccount.isClosed)
             throw new BadRequest("Bank Account Is Closed");
+
+        double amount = 0;
 
         if (request.CreateTransactionDto.Type is TransactionType.WITHDRAW or TransactionType.PAY_LOAN
             or TransactionType.AUTOPAY_LOAN)
@@ -54,7 +55,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
             }
             else
             {
-                var amount = await _currencyService.ConvertCurrency(request.CreateTransactionDto.Amount,
+                amount = await _currencyService.ConvertCurrency(request.CreateTransactionDto.Amount,
                     request.CreateTransactionDto.Currency, bankAccount.Currency);
 
                 if (bankAccount.Balance < Convert.ToDecimal(amount))
@@ -63,15 +64,27 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
                 }
             }
         }
+        else
+        {
+            if (request.CreateTransactionDto.Currency != bankAccount.Currency)
+            {
+                amount = await _currencyService.ConvertCurrency(request.CreateTransactionDto.Amount,
+                    request.CreateTransactionDto.Currency, bankAccount.Currency);
+            }
+            else
+            {
+                amount = request.CreateTransactionDto.Amount;
+            }
+        }
 
         if (request.CreateTransactionDto.Type is TransactionType.TAKE_LOAN)
         {
-            await CheckMasterAccount(request.CreateTransactionDto.Amount);
+            await CheckMasterAccount(amount);
         }
 
         var transactionEvent = new TransactionEvent()
         {
-            Amount = request.CreateTransactionDto.Amount,
+            Amount = amount,
             Currency = request.CreateTransactionDto.Currency,
             Comment = request.CreateTransactionDto.Comment,
             Type = request.CreateTransactionDto.Type,
