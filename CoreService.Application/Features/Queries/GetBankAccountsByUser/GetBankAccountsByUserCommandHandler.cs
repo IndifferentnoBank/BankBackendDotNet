@@ -27,10 +27,10 @@ public class GetBankAccountsByUserCommandHandler : IRequestHandler<GetBankAccoun
     {
         if (!request.UserClaims.Roles.Contains(Roles.STAFF))
         {
-            /*var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId);
+            var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId, request.UserClaims.Token);
 
             if (user.Id != request.ClientId)
-                throw new Forbidden("You do not have permission to access this command");*/
+                throw new Forbidden("You do not have permission to access this command");
         }
 
         var bankAccounts = await _bankAccountRepository.FindAsync(x => x.UserId == request.ClientId);

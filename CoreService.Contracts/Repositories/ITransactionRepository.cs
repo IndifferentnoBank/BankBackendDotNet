@@ -9,4 +9,5 @@ public interface ITransactionRepository : IGenericRepository<Transaction>
     Task<List<Transaction>> GetAllByAccountIdAsync(Guid accountId);
     Task<Transaction?> GetByIdAsync(Guid transactionId);
     Task<List<Transaction>> GetByStatusAsync(TransactionStatus status);
+    Task<bool> CheckIfTransactionExistAsync(Guid id);
 }

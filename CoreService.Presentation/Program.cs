@@ -19,15 +19,12 @@ builder.AddKafka();
 builder.ConfigureCoreServiceAuthorization();
 builder.Services.AddCors(options =>
 {
-    if (builder.Environment.IsDevelopment())
+    options.AddPolicy("AllowAll", policy =>
     {
-        options.AddPolicy("AllowAll", policy =>
-        {
-            policy.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-    }
+        policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 var app = builder.Build();
 
@@ -41,6 +38,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowAll");
 app.ConfigureCoreServiceInfrastructure();
 await app.ConfigureCoreServicePersistence();
+await app.AddKafka();
 
 app.UseHttpsRedirection();
 

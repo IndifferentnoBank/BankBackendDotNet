@@ -1,7 +1,5 @@
-using System.IdentityModel.Tokens.Jwt;
 using CoreService.Application.Features.Queries.GetExchangeRate;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreService.Presentation.Controllers;

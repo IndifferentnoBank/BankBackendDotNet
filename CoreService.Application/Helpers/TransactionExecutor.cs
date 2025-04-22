@@ -11,14 +11,14 @@ public class TransactionExecutor : ITransactionExecutor
 {
     private readonly IBankAccountRepository _bankAccountRepository;
     private readonly ITransactionRepository _transactionRepository;
-    private readonly ITransactionHub _transactionHub;
+    private readonly ITransactionNotifier _transactionNotifier;
 
     public TransactionExecutor(IBankAccountRepository bankAccountRepository,
-        ITransactionRepository transactionRepository, ITransactionHub transactionHub)
+        ITransactionRepository transactionRepository, ITransactionNotifier transactionNotifier)
     {
         _bankAccountRepository = bankAccountRepository;
         _transactionRepository = transactionRepository;
-        _transactionHub = transactionHub;
+        _transactionNotifier = transactionNotifier;
     }
 
     public async Task ExecuteTransactionAsync(Transaction transaction)
@@ -48,8 +48,8 @@ public class TransactionExecutor : ITransactionExecutor
             Status = transaction.Status
         };
 
-        //await _transactionHub.SendTransactionUpdate(transactionDto);
-        //await _transactionHub.SendTransactionUpdateToBankAccount(bankAccount.Id, transactionDto);
+        await _transactionNotifier.SendTransactionUpdate(transactionDto);
+        await _transactionNotifier.SendTransactionUpdateToBankAccount(bankAccount.Id, transactionDto);
     }
 
     private async Task ProcessTransaction(Transaction transaction, BankAccount bankAccount)
@@ -62,10 +62,12 @@ public class TransactionExecutor : ITransactionExecutor
                 break;
 
             case TransactionType.WITHDRAW:
+            case TransactionType.TRANSFER_WITHDRAW:
                 HandleWithdrawal(transaction, bankAccount);
                 break;
 
             case TransactionType.DEPOSIT:
+            case TransactionType.TRANSFER_DEPOSIT:
                 HandleDeposit(transaction, bankAccount);
                 break;
             case TransactionType.TAKE_LOAN:

@@ -1,5 +1,4 @@
 using Common.Exceptions;
-using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using MediatR;
 
@@ -8,12 +7,10 @@ namespace CoreService.Application.Features.Commands.CloseBankAccount;
 public class CloseBankAccountCommandHandler: IRequestHandler<CloseBankAccountCommand, Unit>
 {
     private readonly IBankAccountRepository _bankAccountRepository;
-    private readonly IUserService _userService;
 
-    public CloseBankAccountCommandHandler(IBankAccountRepository bankAccountRepository, IUserService userService)
+    public CloseBankAccountCommandHandler(IBankAccountRepository bankAccountRepository)
     {
         _bankAccountRepository = bankAccountRepository;
-        _userService = userService;
     }
 
     public async Task<Unit> Handle(CloseBankAccountCommand request, CancellationToken cancellationToken)
@@ -21,11 +18,9 @@ public class CloseBankAccountCommandHandler: IRequestHandler<CloseBankAccountCom
        if(!await _bankAccountRepository.CheckIfBankAccountExistsByAccountId(request.BankAccountId))
            throw new NotFound("Bank account not found");
        
-       //var user = await _userService.GetUserInfoAsync(request.UserId);
-       
        var bankAccount = await _bankAccountRepository.GetByIdAsync(request.BankAccountId);
 
-       var userId = request.UserId; //todo: replace with user
+       var userId = request.UserId;
        if(!await _bankAccountRepository.CheckIfBankAccountBelongsToUserAsync(request.BankAccountId, userId))
            throw new Forbidden("This bank account is not belong to this user");
 

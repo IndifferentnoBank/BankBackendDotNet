@@ -1,4 +1,3 @@
-using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 
@@ -7,18 +6,7 @@ namespace CoreService.Infrastructure.SignalR;
 public class TransactionHub : Hub, ITransactionHub
 {
     private const string AllTransactionsGroup = "AllTransactions";
-
-    public async Task SendTransactionUpdate(TransactionDto transaction)
-    {
-        await Clients.Group(AllTransactionsGroup).SendAsync("ReceiveTransactionUpdate", transaction);
-    }
-
-    public async Task SendTransactionUpdateToBankAccount(Guid bankAccountId, TransactionDto transaction)
-    {
-        string groupName = GetGroupNameForBankAccount(bankAccountId);
-        await Clients.Group(groupName).SendAsync("ReceiveTransactionUpdateByBankAccountId", transaction);
-    }
-
+    
     public async Task JoinAllTransactionsGroup()
     {
         await Groups.AddToGroupAsync(Context.ConnectionId, AllTransactionsGroup);

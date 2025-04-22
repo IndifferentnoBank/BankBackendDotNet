@@ -14,5 +14,5 @@ public class UserInfoDto
 
     public bool IsLocked { get; set; }
 
-    public string Role { get; set; }
+    public List<string> Role { get; set; }
 }

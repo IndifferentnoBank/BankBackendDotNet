@@ -23,7 +23,7 @@ public class CurrencyService : ICurrencyService
     public async Task<double> ConvertCurrency(double amount, Currency fromCurrency, Currency toCurrency)
     {
         var exchangeRate = await GetExchangeRate(fromCurrency, toCurrency);
-        return amount * (double)exchangeRate;
+        return amount * exchangeRate;
     }
 
     public async Task<double> GetExchangeRate(Currency fromCurrency, Currency toCurrency)

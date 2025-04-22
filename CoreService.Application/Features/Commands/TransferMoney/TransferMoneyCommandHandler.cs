@@ -1,8 +1,8 @@
 using Common.Exceptions;
 using CoreService.Domain.Enums;
-using CoreService.Contracts.Events;
 using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Kafka.Events;
+using CoreService.Contracts.Kafka.Interfaces;
 using CoreService.Contracts.Repositories;
 using MediatR;
 
@@ -29,6 +29,11 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
 
     public async Task<Unit> Handle(TransferMoneyCommand request, CancellationToken cancellationToken)
     {
+        var fromUser = await _userService.GetUserInfoAsync(request.UserClaims.UserId, request.UserClaims.Token);
+
+        if (fromUser != null && fromUser.IsLocked)
+            throw new Forbidden("User is blocked");
+
         var amount = request.TransferMoneyDto.Amount;
 
         if (request.TransferMoneyDto.Amount <= 0)
@@ -44,6 +49,9 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
         var fromBankAccount = await _bankAccountRepository.GetByIdAsync(request.TransferMoneyDto.FromBankAccountId);
         var toBankAccount = await _bankAccountRepository.GetByIdAsync(request.TransferMoneyDto.ToBankAccountId);
 
+        if (fromBankAccount.UserId != fromUser.Id)
+            throw new Forbidden("You are not allowed to transfer money from this bank account.");
+
         if (fromBankAccount.isClosed || toBankAccount.isClosed)
             throw new BadRequest("Bank account is closed.");
 
@@ -52,18 +60,24 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
 
         var amountToWithdraw = amount;
         var amountToDeposit = amount;
-        double commission = 0;
+        double currencyCommission = 0;
+        double transactionCommission = _commissionService.GetTransactionCommission(
+            await _currencyService.ConvertCurrency(amount, request.TransferMoneyDto.Currency, Currency.RUB));
 
-
-        if (fromBankAccount.Currency != request.TransferMoneyDto.Currency)
+        if (fromBankAccount.Currency != request.TransferMoneyDto.Currency ||
+            toBankAccount.Currency != request.TransferMoneyDto.Currency)
         {
-            commission = _commissionService.GetCommission(amount);
+            currencyCommission = _commissionService.GetCurrencyCommission(amount);
 
-            amountToWithdraw = await _currencyService.ConvertCurrency(amount + commission, fromBankAccount.Currency,
-                request.TransferMoneyDto.Currency);
+            amountToWithdraw = await _currencyService.ConvertCurrency(amount + currencyCommission,
+                request.TransferMoneyDto.Currency, fromBankAccount.Currency);
 
+            if (fromBankAccount.Balance < Convert.ToDecimal(amountToWithdraw))
+            {
+                throw new BadRequest("Insufficient Balance");
+            }
 
-            commission = await _currencyService.ConvertCurrency(commission, fromBankAccount.Currency,
+            currencyCommission = await _currencyService.ConvertCurrency(currencyCommission, fromBankAccount.Currency,
                 Currency.RUB);
         }
 
@@ -73,34 +87,29 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
                 toBankAccount.Currency);
         }
 
-        /*var fromUser = await _userService.GetUserInfoAsync(fromBankAccount.UserId);
 
-        if (fromUser != null && fromUser.IsLocked)
-            throw new Forbidden("User is blocked");
-
-        var toUser = await _userService.GetUserInfoAsync(toBankAccount.UserId);
+        var toUser = await _userService.GetUserInfoAsync(toBankAccount.UserId, request.UserClaims.Token);
 
         if (toUser != null && toUser.IsLocked)
-            throw new Forbidden("User is blocked");*/
+            throw new Forbidden("User is blocked");
 
         var withdraw = new TransactionEvent
         {
-            Date = default,
             Amount = amountToWithdraw,
             Currency = fromBankAccount.Currency,
             Comment = request.TransferMoneyDto.Comment,
-            Type = TransactionType.WITHDRAW,
+            Type = TransactionType.TRANSFER_WITHDRAW,
             Status = TransactionStatus.Processing,
             BankAccountId = fromBankAccount.Id,
+            TransferBankAccountId = toBankAccount.Id
         };
 
         var deposit = new TransactionEvent
         {
-            Date = default,
             Amount = amountToDeposit,
             Currency = toBankAccount.Currency,
             Comment = request.TransferMoneyDto.Comment,
-            Type = TransactionType.DEPOSIT,
+            Type = TransactionType.TRANSFER_DEPOSIT,
             Status = TransactionStatus.Processing,
             BankAccountId = toBankAccount.Id,
         };
@@ -111,12 +120,12 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
 
         await _transactionProducer.ProduceTransactionEventAsync(withdraw);
 
-        if (commission > 0)
+        if (currencyCommission > 0)
         {
             var commissionTransaction = new TransactionEvent
             {
                 Date = default,
-                Amount = commission,
+                Amount = currencyCommission,
                 Currency = Currency.RUB,
                 Comment = "Commission",
                 Type = TransactionType.DEPOSIT,
@@ -125,6 +134,22 @@ public class TransferMoneyCommandHandler : IRequestHandler<TransferMoneyCommand,
             };
 
             await _transactionProducer.ProduceTransactionEventAsync(commissionTransaction);
+        }
+
+        if (transactionCommission > 0)
+        {
+            var transactionCommissionTransaction = new TransactionEvent
+            {
+                Date = default,
+                Amount = transactionCommission,
+                Currency = Currency.RUB,
+                Comment = "Commission",
+                Type = TransactionType.DEPOSIT,
+                Status = TransactionStatus.Processing,
+                BankAccountId = await _bankAccountRepository.GetMasterAccountIdAsync(),
+            };
+
+            await _transactionProducer.ProduceTransactionEventAsync(transactionCommissionTransaction);
         }
 
         await _transactionProducer.ProduceTransactionEventAsync(deposit);

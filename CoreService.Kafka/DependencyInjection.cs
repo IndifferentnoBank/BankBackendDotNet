@@ -1,10 +1,11 @@
 using Common.Kafka.Configs;
-using Common.Kafka.Consumer;
 using Common.Kafka.Producer;
-using CoreService.Kafka.Consumers;
-using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Kafka.Events;
+using CoreService.Contracts.Kafka.Interfaces;
 using CoreService.Kafka.Config;
+using CoreService.Kafka.Consumers.ExpiredTokens;
+using CoreService.Kafka.Consumers.Transactions;
+using CoreService.Kafka.KafkaTopicsInitializer;
 using CoreService.Kafka.Producers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,9 +28,19 @@ public static class DependencyInjection
         builder.Services.AddSingleton<IKafkaProducer<TransactionEvent>, KafkaProducer<TransactionEvent>>();
         builder.Services.AddSingleton<ITransactionProducer, TransactionProducer>();
 
-        builder.Services.AddScoped<IKafkaConsumer, TransactionConsumer>();
-        builder.Services.AddScoped<IKafkaConsumer, ExpiredTokensConsumer>();
+        builder.Services.AddScoped<TransactionConsumer>();
+        builder.Services.AddScoped<ExpiredTokensConsumer>();
 
-        builder.Services.AddHostedService<KafkaBackgroundService>();
+        builder.Services.AddHostedService<TransactionConsumerService>();
+        builder.Services.AddHostedService<ExpiredTokensConsumerService>();
+
+        builder.Services.AddTransient<IKafkaTopicsInitializer, KafkaTopicsInitialization>();
+    }
+    
+    public static async Task AddKafka(this WebApplication application)
+    {
+        var scope =  application.Services.CreateScope();
+        var initializer = scope.ServiceProvider.GetRequiredService<IKafkaTopicsInitializer>();
+        await initializer.InitializeTopicsAsync();
     }
 }
