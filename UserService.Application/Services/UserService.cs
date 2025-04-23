@@ -87,13 +87,13 @@ namespace UserService.Application.Services
             return _mapper.Map<UserDto>(userById);
         }
 
-        public async Task<String> GetUserByPhone(string phone)
+        public async Task<ShortenUserDto> GetUserByPhone(string phone)
         {
             var user = await _userRepository.GetUserByPhoneAsync(phone);
             if (user == null)
                 throw new NotFound("User not found.");
 
-            return user.Id.ToString();
+            return new ShortenUserDto(user);
         }
 
         public async Task<List<UserDto>> GetAllUsers(Guid userId)

@@ -1,6 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using Common.Configurations;
 using Common.Exceptions;
 using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
@@ -11,7 +10,7 @@ namespace CoreService.Infrastructure.ExternalServices.Services
     public class UserService : IUserService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly HttpClientConfig _userServiceClientConfig;
+        private readonly UserServiceClientConfig _userServiceClientConfig;
 
 
         public UserService(IHttpClientFactory httpClientFactory, IOptions<HttpClientsConfig> config )
@@ -27,7 +26,7 @@ namespace CoreService.Infrastructure.ExternalServices.Services
             
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var requestUri = $"{_userServiceClientConfig.EndpointName}{userId}";
+            var requestUri = $"{_userServiceClientConfig.UserEndpoont}{userId}";
 
             var response = await client.GetAsync(requestUri);
 
@@ -40,6 +39,33 @@ namespace CoreService.Infrastructure.ExternalServices.Services
 
                 var content = await response.Content.ReadAsStringAsync();
                 return JsonSerializer.Deserialize<UserInfoDto>(content, options);
+            }
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new NotFound("Provided user does not exist");
+            }
+
+            throw new HttpRequestException($"Request failed with status code {response.StatusCode}");
+        }
+
+        public async Task<ShortenUserDto> GetUserByPhoneNumberAsync(string phone)
+        {
+            var client = _httpClientFactory.CreateClient("UserServiceClient");
+            
+            var requestUri = $"{_userServiceClientConfig.PhoneEndpoint}?phone={phone}";
+
+            var response = await client.GetAsync(requestUri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<ShortenUserDto>(content, options);
             }
 
             if (response.StatusCode == HttpStatusCode.NotFound)

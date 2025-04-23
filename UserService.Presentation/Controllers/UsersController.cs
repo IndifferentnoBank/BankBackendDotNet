@@ -58,8 +58,8 @@ public class UserController : ControllerBase
     [HttpGet("phone")]
     public async Task<IActionResult> GetUserByPhone([FromQuery] string phone)
     {
-        var userIdResponse = await _userService.GetUserByPhone(phone);
-        return Ok(new { userId = $"{userIdResponse}" });
+        var response = await _userService.GetUserByPhone(phone);
+        return Ok(response);
     }
 
     [HttpGet]
