@@ -81,7 +81,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         var transactionEvent = new TransactionEvent()
         {
             Amount = amount,
-            Currency = request.CreateTransactionDto.Currency,
+            Currency = bankAccount.Currency,
             Comment = request.CreateTransactionDto.Comment,
             Type = request.CreateTransactionDto.Type,
             Status = TransactionStatus.Processing,
