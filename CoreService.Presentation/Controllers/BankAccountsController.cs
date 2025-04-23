@@ -13,7 +13,7 @@ namespace CoreService.Presentation.Controllers;
 
 [ApiController]
 [Authorize(Policy = "CustomPolicy")]
-[Route("bank_accounts")]
+[Route("core_service/bank_accounts")]
 public class BankAccountsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -58,6 +58,6 @@ public class BankAccountsController : ControllerBase
     public async Task<IActionResult> CreateBankAccount([FromBody] CreateBankAccountDto accountDto)
     {
         return Ok(await _mediator.Send(
-            new CreateBankAccountCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, accountDto)));
+            new CreateBankAccountCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext), accountDto)));
     }
 }

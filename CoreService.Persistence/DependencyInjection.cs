@@ -1,9 +1,7 @@
 using Common.GenericRepository;
 using CoreService.Contracts.Repositories;
 using CoreService.Persistence.Initializer;
-using CoreService.Persistence.Repositories.BankAccountRepository;
-using CoreService.Persistence.Repositories.ExpiredTokensRepository;
-using CoreService.Persistence.Repositories.TransactionsRepository;
+using CoreService.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

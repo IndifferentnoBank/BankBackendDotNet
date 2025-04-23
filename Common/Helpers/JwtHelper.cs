@@ -8,7 +8,7 @@ public static class JwtHelper
 {
     public static UserClaims ExtractUserClaimsFromHeader(HttpContext httpContext)
     {
-        var token = httpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
+        var token = GetToken(httpContext);
 
         var handler = new JwtSecurityTokenHandler();
         var jwtToken = handler.ReadJwtToken(token);
@@ -23,9 +23,15 @@ public static class JwtHelper
                 .Select(r => Enum.TryParse<Roles>(r.Value, out var parsed) ? parsed : (Roles?)null)
                 .Where(r => r.HasValue)
                 .Select(r => r!.Value)
-                .ToList()
+                .ToList(),
+            Token = token
         };
 
         return userClaims;
+    }
+
+    public static string GetToken(HttpContext httpContext)
+    {
+        return httpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
     }
 }

@@ -2,5 +2,6 @@ namespace CoreService.Contracts.Interfaces;
 
 public interface ICommissionService
 {
-    double GetCommission(double amount);
+    double GetCurrencyCommission(double amount);
+    double GetTransactionCommission(double amount);
 }

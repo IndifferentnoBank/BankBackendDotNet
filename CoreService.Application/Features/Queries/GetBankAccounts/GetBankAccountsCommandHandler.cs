@@ -2,7 +2,6 @@ using AutoMapper;
 using Common.Exceptions;
 using Common.Helpers;
 using CoreService.Application.Dtos.Responses;
-using CoreService.Contracts.Interfaces;
 using CoreService.Contracts.Repositories;
 using CoreService.Domain.Entities;
 using MediatR;
@@ -12,15 +11,12 @@ namespace CoreService.Application.Features.Queries.GetBankAccounts;
 public class GetBankAccountsCommandHandler : IRequestHandler<GetBankAccountsCommand, List<BankAccountDto>>
 {
     private readonly IMapper _mapper;
-    private readonly IUserService _userService;
     private readonly IBankAccountRepository _bankAccountRepository;
 
-    public GetBankAccountsCommandHandler(IMapper mapper, IBankAccountRepository bankAccountRepository,
-        IUserService userService)
+    public GetBankAccountsCommandHandler(IMapper mapper, IBankAccountRepository bankAccountRepository)
     {
         _mapper = mapper;
         _bankAccountRepository = bankAccountRepository;
-        _userService = userService;
     }
 
     public async Task<List<BankAccountDto>> Handle(GetBankAccountsCommand request, CancellationToken cancellationToken)

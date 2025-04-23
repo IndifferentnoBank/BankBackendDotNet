@@ -13,6 +13,9 @@ public class TransactionDto
 
     [Required]
     public double Amount { get; set; }
+    
+    [Required]
+    public Currency Currency { get; set; }
 
     public string? Comment { get; set; } 
     
@@ -21,4 +24,6 @@ public class TransactionDto
     
     [Required]
     public TransactionStatus Status { get; set; }
+    
+    public Guid? TransferBankAccountId { get; set; }
 }

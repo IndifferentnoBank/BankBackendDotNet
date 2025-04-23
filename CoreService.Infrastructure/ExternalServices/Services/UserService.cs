@@ -20,9 +20,12 @@ namespace CoreService.Infrastructure.ExternalServices.Services
             _userServiceClientConfig = config.Value.UserServiceClient;
         }
 
-        public async Task<UserInfoDto?> GetUserInfoAsync(Guid userId)
+        public async Task<UserInfoDto> GetUserInfoAsync(Guid userId, string token)
         {
+            
             var client = _httpClientFactory.CreateClient("UserServiceClient");
+            
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             var requestUri = $"{_userServiceClientConfig.EndpointName}{userId}";
 

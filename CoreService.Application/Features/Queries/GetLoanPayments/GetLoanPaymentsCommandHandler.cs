@@ -1,4 +1,6 @@
 using AutoMapper;
+using Common.Exceptions;
+using Common.Helpers;
 using CoreService.Application.Dtos.Responses;
 using CoreService.Contracts.Repositories;
 using MediatR;
@@ -19,7 +21,8 @@ public class GetLoanPaymentsCommandHandler : IRequestHandler<GetLoanPaymentsComm
     public async Task<List<LoanTransactionDto>> Handle(GetLoanPaymentsCommand request,
         CancellationToken cancellationToken)
     {
-        //todo: add role check and loan check
+        
+        //todo: add loan check
 
         var transactions = await _transactionRepository.FindAsync(x => x.RelatedLoanId == request.LoanId);
 

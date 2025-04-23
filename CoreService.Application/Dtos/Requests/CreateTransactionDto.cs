@@ -10,6 +10,9 @@ public class CreateTransactionDto
     [Required]
     [Range(0.01, double.MaxValue)]
     public double Amount { get; set; }
+    
+    [Required]
+    public Currency Currency { get; set; }
 
     public string? Comment { get; set; }
 

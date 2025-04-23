@@ -36,6 +36,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreService.Kafka", "CoreSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreService.Contracts", "CoreService.Contracts\CoreService.Contracts.csproj", "{E6BED854-579F-46F4-8797-1AFCE1FD0629}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreditRatingService", "CreditRatingService", "{693B2ABF-9184-429F-8427-46229A956AD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditRatingService.Application", "CreditRatingService.Application\CreditRatingService.Application.csproj", "{BE29BE76-E296-4DE5-85CA-A802A816715E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditRatingService.Domain", "CreditRatingService.Domain\CreditRatingService.Domain.csproj", "{63C04546-3FE3-441A-A68C-847A5F32EC25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditRatingService.Persistence", "CreditRatingService.Persistence\CreditRatingService.Persistence.csproj", "{2F3AC701-57A9-4EB2-92B0-87B481321892}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditRatingService.Presentation", "CreditRatingService.Presentation\CreditRatingService.Presentation.csproj", "{EE95A075-421C-4E0D-9D55-27B4189738ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditRatingService.Infrastucture", "CreditRatingService.Infrastucture\CreditRatingService.Infrastucture.csproj", "{6C4C2D3F-822A-413E-9F1F-9D79BF69D883}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditRatingService.Contracts", "CreditRatingService.Contracts\CreditRatingService.Contracts.csproj", "{662186EC-6858-41A6-AB71-5BD0381D78A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +104,30 @@ Global
 		{E6BED854-579F-46F4-8797-1AFCE1FD0629}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6BED854-579F-46F4-8797-1AFCE1FD0629}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6BED854-579F-46F4-8797-1AFCE1FD0629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE29BE76-E296-4DE5-85CA-A802A816715E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE29BE76-E296-4DE5-85CA-A802A816715E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE29BE76-E296-4DE5-85CA-A802A816715E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE29BE76-E296-4DE5-85CA-A802A816715E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63C04546-3FE3-441A-A68C-847A5F32EC25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63C04546-3FE3-441A-A68C-847A5F32EC25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63C04546-3FE3-441A-A68C-847A5F32EC25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63C04546-3FE3-441A-A68C-847A5F32EC25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F3AC701-57A9-4EB2-92B0-87B481321892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F3AC701-57A9-4EB2-92B0-87B481321892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F3AC701-57A9-4EB2-92B0-87B481321892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F3AC701-57A9-4EB2-92B0-87B481321892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE95A075-421C-4E0D-9D55-27B4189738ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE95A075-421C-4E0D-9D55-27B4189738ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE95A075-421C-4E0D-9D55-27B4189738ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE95A075-421C-4E0D-9D55-27B4189738ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C4C2D3F-822A-413E-9F1F-9D79BF69D883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C4C2D3F-822A-413E-9F1F-9D79BF69D883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C4C2D3F-822A-413E-9F1F-9D79BF69D883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C4C2D3F-822A-413E-9F1F-9D79BF69D883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{662186EC-6858-41A6-AB71-5BD0381D78A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{662186EC-6858-41A6-AB71-5BD0381D78A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{662186EC-6858-41A6-AB71-5BD0381D78A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{662186EC-6858-41A6-AB71-5BD0381D78A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +144,12 @@ Global
 		{BEAE9195-0AD4-491A-8255-A4F4926B816C} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
 		{FF841F03-AA30-46A5-852A-11AB6777ED81} = {E4F72841-A04B-4FFF-9184-FFEB4BEDD387}
 		{E6BED854-579F-46F4-8797-1AFCE1FD0629} = {E4F72841-A04B-4FFF-9184-FFEB4BEDD387}
+		{BE29BE76-E296-4DE5-85CA-A802A816715E} = {693B2ABF-9184-429F-8427-46229A956AD8}
+		{63C04546-3FE3-441A-A68C-847A5F32EC25} = {693B2ABF-9184-429F-8427-46229A956AD8}
+		{2F3AC701-57A9-4EB2-92B0-87B481321892} = {693B2ABF-9184-429F-8427-46229A956AD8}
+		{EE95A075-421C-4E0D-9D55-27B4189738ED} = {693B2ABF-9184-429F-8427-46229A956AD8}
+		{6C4C2D3F-822A-413E-9F1F-9D79BF69D883} = {693B2ABF-9184-429F-8427-46229A956AD8}
+		{662186EC-6858-41A6-AB71-5BD0381D78A2} = {693B2ABF-9184-429F-8427-46229A956AD8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2767A4CC-E2FE-4631-A1DE-E7FCE775AD40}

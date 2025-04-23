@@ -50,4 +50,6 @@ public class Transaction
     public Guid? RelatedTransactionId { get; set; }
     
     public Guid? RelatedLoanId { get; set; }
+    
+    public Guid? TransferBankAccountId { get; set; }
 }

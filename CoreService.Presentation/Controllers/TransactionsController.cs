@@ -12,7 +12,7 @@ namespace CoreService.Presentation.Controllers;
 
 [ApiController]
 [Authorize(Policy = "CustomPolicy")]
-[Route("bank_accounts")]
+[Route("core_service")]
 public class TransactionsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -23,7 +23,7 @@ public class TransactionsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{id:guid}/transactions")]
+    [Route("bank_accounts/{id:guid}/transactions")]
     public async Task<IActionResult> GetTransactions(Guid id)
     {
         return Ok(await _mediator.Send(new GetTransactionsCommand(id,
@@ -31,23 +31,23 @@ public class TransactionsController : ControllerBase
     }
 
     [HttpPost]
-    [Route("{id:guid}/transactions")]
+    [Route("bank_accounts/{id:guid}/transactions")]
     public async Task<IActionResult> CreateTransaction(Guid id, CreateTransactionDto transaction)
     {
         return Ok(await _mediator.Send(new CreateTransactionCommand(id,
-            JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, transaction)));
+            JwtHelper.ExtractUserClaimsFromHeader(HttpContext), transaction)));
     }
 
     [HttpPost]
-    [Route("/transfer")]
+    [Route("transfer")]
     public async Task<IActionResult> TransferMoney([FromBody] TransferMoneyDto transferMoneyDto)
     {
         return Ok(await _mediator.Send(
-            new TransferMoneyCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext).UserId, transferMoneyDto)));
+            new TransferMoneyCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext), transferMoneyDto)));
     }
 
     [HttpGet]
-    [Route("/loan/{id:guid}/transactions")]
+    [Route("loan/{id:guid}/transactions")]
     public async Task<IActionResult> GetLoanTransactions(Guid id)
     {
         return Ok(await _mediator.Send(new GetLoanPaymentsCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext),

@@ -4,7 +4,6 @@ using UserService.Application.Dtos.Responses;
 using AutoMapper;
 using UserSevice.Persistence.Repositories.UserRepository;
 using UserService.Domain.Entities;
-using System.Data;
 using UserService.Domain.Enums;
 
 namespace UserService.Application.Services
@@ -23,12 +22,11 @@ namespace UserService.Application.Services
         public async Task<UserDto> CreateUser(CreateUserDto createUserDto)
         {
             if (await _userRepository.CheckIfUserExistsByPhone(createUserDto.PhoneNumber))
-                throw new BadRequest($"User with {createUserDto.PhoneNumber} already exist");
+                throw new BadRequest($"User with phone number {createUserDto.PhoneNumber} already exist");
 
             if (await _userRepository.CheckIfUserExistsByEmail(createUserDto.Email))
-                throw new BadRequest($"User with {createUserDto.Email} already exist");
+                throw new BadRequest($"User with email {createUserDto.Email} already exist");
 
-            //var passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(createUserDto.Password, 11);
             User newUser = _mapper.Map<User>(createUserDto);
 
             var user = await _userRepository.CreateUserAsync(createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, newUser.Role);
@@ -37,25 +35,14 @@ namespace UserService.Application.Services
 
             return _mapper.Map<UserDto>(user);
         }
-
-        //public async Task<String> LoginUser(LoginUserDto loginUserDto)
-        //{
-        //    if (!await _userRepository.CheckIfUserExistsByPhone(loginUserDto.PhoneNumber))
-        //        throw new NotFound($"User with {loginUserDto.PhoneNumber} not found");
-
-        //    var user = await _userRepository.GetUserByPhoneAsync(loginUserDto.PhoneNumber);
-
-        //    if (!BCrypt.Net.BCrypt.EnhancedVerify(loginUserDto.Password, user.Password))
-        //        throw new BadRequest("Wrong password");
-        //    return user.Id.ToString();
-        //}
+        
 
         public async Task<UserDto> UpdateUser(Guid userId, Guid id, CreateUserDto createUserDto)
         {
             var userCheck = await _userRepository.GetUserByIdAsync(userId);
 
-            if ((userId != id) && (userCheck.Role != UserRole.STAFF))
-                throw new Forbidden($"User have't rights");
+            if (userId != id && userCheck.Role == UserRole.CUSTOMER)
+                throw new Forbidden("User does not have rights");
 
             if (!await _userRepository.CheckIfUserExistsById(id))
                 throw new NotFound($"User with {id} not found");
@@ -63,12 +50,11 @@ namespace UserService.Application.Services
             var user = await _userRepository.GetUserByIdAsync(id);
 
             if (user.PhoneNumber != createUserDto.PhoneNumber && await _userRepository.CheckIfUserExistsByPhone(createUserDto.PhoneNumber))
-                throw new BadRequest($"User with {createUserDto.PhoneNumber} already exist");
+                throw new BadRequest($"User with phone number {createUserDto.PhoneNumber} already exist");
 
             if (user.Email != createUserDto.Email && await _userRepository.CheckIfUserExistsByEmail(createUserDto.Email))
-                throw new BadRequest($"User with {createUserDto.Email} already exist");
+                throw new BadRequest($"User with email {createUserDto.Email} already exist");
 
-            //var passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(createUserDto.Password, 11);
             User newUser = _mapper.Map<User>(createUserDto);
             user = await _userRepository.UpdateUserAsync(id, createUserDto.FullName, createUserDto.Email, createUserDto.PhoneNumber, createUserDto.Passport, newUser.Role);
 
@@ -79,8 +65,8 @@ namespace UserService.Application.Services
         {
             var user = await _userRepository.GetUserByIdAsync(userId);
 
-            if (user.Role != UserRole.STAFF)
-                throw new Forbidden($"User have't rights");
+            if (user.Role == UserRole.CUSTOMER)
+                throw new Forbidden("User does not have rights");
 
             var success = await _userRepository.LockUnlockUserAsync(id, isLocked);
             if (!success)
@@ -91,8 +77,8 @@ namespace UserService.Application.Services
         {
             var user = await _userRepository.GetUserByIdAsync(userId);
 
-            if ((userId != id) && (user.Role != UserRole.STAFF))
-                throw new Forbidden($"User have't rights");
+            if (userId != id && user.Role == UserRole.CUSTOMER)
+                throw new Forbidden("User does not have rights");
 
             var userById = await _userRepository.GetUserByIdAsync(id);
             if (userById == null)
@@ -114,8 +100,8 @@ namespace UserService.Application.Services
         {
             var user = await _userRepository.GetUserByIdAsync(userId);
 
-            if (user.Role != UserRole.STAFF)
-                throw new Unauthorized($"User have't rights");
+            if (user.Role == UserRole.CUSTOMER)
+                throw new Forbidden("User does not have rights");
 
             var users = await _userRepository.GetAllUsersAsync();
             return _mapper.Map<List<UserDto>>(users);

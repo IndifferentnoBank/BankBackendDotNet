@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <ProjectReference Include="..\Common\Common.csproj" />
+	  <ProjectReference Include="..\CreditRatingService.Application\CreditRatingService.Application.csproj" />
+	  <ProjectReference Include="..\CreditRatingService.Contracts\CreditRatingService.Contracts.csproj" />
+	  <ProjectReference Include="..\CreditRatingService.Domain\CreditRatingService.Domain.csproj" />
+	  <ProjectReference Include="..\CreditRatingService.Persistence\CreditRatingService.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
