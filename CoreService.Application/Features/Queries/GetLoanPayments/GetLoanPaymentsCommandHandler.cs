@@ -22,8 +22,6 @@ public class GetLoanPaymentsCommandHandler : IRequestHandler<GetLoanPaymentsComm
         CancellationToken cancellationToken)
     {
         
-        if (!request.UserClaims.Roles.Contains(Roles.STAFF))
-            throw new Forbidden("You do not have permission to access this command");
         //todo: add loan check
 
         var transactions = await _transactionRepository.FindAsync(x => x.RelatedLoanId == request.LoanId);

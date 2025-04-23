@@ -81,7 +81,8 @@ public class TransactionConsumer : IKafkaConsumer
                         Status = transactionEvent.Status,
                         BankAccountId = transactionEvent.BankAccountId,
                         BankAccount = bankAccount,
-                        RelatedTransactionId = transactionEvent.RelatedTransactionId
+                        RelatedTransactionId = transactionEvent.RelatedTransactionId,
+                        RelatedLoanId = transactionEvent.RelatedLoanId,
                     };
 
                     var transactionRepository = scope.ServiceProvider.GetRequiredService<ITransactionRepository>();

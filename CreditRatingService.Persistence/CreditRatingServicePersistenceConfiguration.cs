@@ -1,9 +1,8 @@
-﻿using CreditRatingService.Contracts.Repositories;
+﻿using CreditRatingService.Persistence.Repositories.ExpiredTokensRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CreditRatingService.Persistence.Repositories.ExpiredTokensRepository;
 
 namespace CreditRatingService.Persistence
 {
