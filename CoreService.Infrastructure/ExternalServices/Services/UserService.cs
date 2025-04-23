@@ -26,7 +26,7 @@ namespace CoreService.Infrastructure.ExternalServices.Services
             
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var requestUri = $"{_userServiceClientConfig.UserEndpoont}{userId}";
+            var requestUri = $"{_userServiceClientConfig.UserEndpoint}{userId}";
 
             var response = await client.GetAsync(requestUri);
 

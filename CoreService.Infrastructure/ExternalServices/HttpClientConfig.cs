@@ -16,6 +16,6 @@ public class HttpClientsConfig
 public class UserServiceClientConfig
 {
     public string BaseUrl { get; set; }
-    public string UserEndpoont { get; set; }
+    public string UserEndpoint { get; set; }
     public string PhoneEndpoint { get; set; }
 }
