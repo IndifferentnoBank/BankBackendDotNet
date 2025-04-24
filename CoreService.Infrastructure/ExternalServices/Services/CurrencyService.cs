@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Common.Configurations;
 using CoreService.Contracts.ExternalDtos;
 using CoreService.Contracts.Interfaces;
 using CoreService.Domain.Enums;

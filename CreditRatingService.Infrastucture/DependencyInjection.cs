@@ -1,5 +1,5 @@
 using Common.Kafka.Configs;
-using CreditRatingService.Infrastructure.ExternalServices;
+using CreditRatingService.Infrastucture.ExternalServices;
 using CreditRatingService.Kafka.Consumers.ExpiredTokens;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;

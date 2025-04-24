@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace CreditRatingService.Infrastructure.ExternalServices;
+namespace CreditRatingService.Infrastucture.ExternalServices;
 
 public static class DependencyInjection
 {

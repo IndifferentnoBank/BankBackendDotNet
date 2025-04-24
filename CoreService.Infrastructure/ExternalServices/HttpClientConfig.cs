@@ -1,11 +1,6 @@
-namespace CoreService.Infrastructure.ExternalServices;
+using Common.Configurations;
 
-public class HttpClientConfig
-{
-    public string BaseUrl { get; set; }
-    public string ApiKey { get; set; }
-    public string EndpointName { get; set; }
-}
+namespace CoreService.Infrastructure.ExternalServices;
 
 public class HttpClientsConfig
 {

@@ -1,16 +1,10 @@
-﻿using Common.Configurations;
-using Common.Exceptions;
+﻿using Common.Exceptions;
 using CreditRatingService.Contracts.Dtos;
 using CreditRatingService.Contracts.Interfaces;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+using Common.Configurations;
 
 namespace CreditRatingService.Infrastucture.ExternalServices.Services
 {
