@@ -3,6 +3,7 @@ using Common.Middleware;
 using UserService.Presentation.Authorization;
 using UserService.Application;
 using UserSevice.Persistence;
+using UserService.Infrastucture;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.ConfigureUserServiceAuthorization();
 builder.ConfigureUserServicePersistence();
 builder.ConfigureUserServiceApplication();
+builder.ConfigureUserServiceInfrastructure();
 builder.ConfigureSwagger();
 
 var app = builder.Build();
