@@ -50,6 +50,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditRatingService.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditRatingService.Contracts", "CreditRatingService.Contracts\CreditRatingService.Contracts.csproj", "{662186EC-6858-41A6-AB71-5BD0381D78A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Infrastructure", "UserService.Infrastructure\UserService.Infrastructure.csproj", "{9ED5A25D-6025-4106-A28C-47184AE7120A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,6 +130,10 @@ Global
 		{662186EC-6858-41A6-AB71-5BD0381D78A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{662186EC-6858-41A6-AB71-5BD0381D78A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{662186EC-6858-41A6-AB71-5BD0381D78A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ED5A25D-6025-4106-A28C-47184AE7120A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED5A25D-6025-4106-A28C-47184AE7120A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED5A25D-6025-4106-A28C-47184AE7120A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED5A25D-6025-4106-A28C-47184AE7120A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +156,7 @@ Global
 		{EE95A075-421C-4E0D-9D55-27B4189738ED} = {693B2ABF-9184-429F-8427-46229A956AD8}
 		{6C4C2D3F-822A-413E-9F1F-9D79BF69D883} = {693B2ABF-9184-429F-8427-46229A956AD8}
 		{662186EC-6858-41A6-AB71-5BD0381D78A2} = {693B2ABF-9184-429F-8427-46229A956AD8}
+		{9ED5A25D-6025-4106-A28C-47184AE7120A} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2767A4CC-E2FE-4631-A1DE-E7FCE775AD40}
