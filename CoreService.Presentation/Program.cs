@@ -6,6 +6,7 @@ using CoreService.Infrastructure;
 using CoreService.Kafka;
 using CoreService.Persistence;
 using CoreService.Presentation.Authorization;
+using CoreService.Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,7 @@ await app.AddKafka();
 app.UseHttpsRedirection();
 
 app.UseMiddleware();
+app.UseUnstableMiddleware();
 
 app.UseAuthentication();
 app.UseAuthorization();
