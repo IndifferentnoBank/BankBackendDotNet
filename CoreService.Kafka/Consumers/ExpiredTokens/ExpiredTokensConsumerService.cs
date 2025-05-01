@@ -37,7 +37,7 @@ public class ExpiredTokensConsumerService : IHostedService
 
         if (_cts != null)
         {
-            _cts.Cancel();
+            await _cts.CancelAsync();
 
             if (_backgroundTask != null)
             {

@@ -28,7 +28,7 @@ if (app.Environment.IsDevelopment())
 
 app.ConfigureCreditRatingServicePersistence();
 
-app.UseMiddleware<Middleware>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

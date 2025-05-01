@@ -28,7 +28,7 @@ if (app.Environment.IsDevelopment())
 
 app.ConfigureUserServicePersistence();
 
-app.UseMiddleware<Middleware>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

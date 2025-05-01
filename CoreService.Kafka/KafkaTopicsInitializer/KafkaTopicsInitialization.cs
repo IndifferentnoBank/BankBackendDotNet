@@ -21,9 +21,10 @@ public class KafkaTopicsInitialization : IKafkaTopicsInitializer
         var bootstrapServers = _configuration["Kafka:BootstrapServers"];
         var topics = _configuration.GetSection("Kafka:Topics").Get<List<TopicConfig>>();
 
-        using (var adminClient =
-               new AdminClientBuilder(new AdminClientConfig { BootstrapServers = bootstrapServers }).Build())
-        {
+        using var adminClient =
+            new AdminClientBuilder(new AdminClientConfig { BootstrapServers = bootstrapServers }).Build();
+        
+        if (topics != null)
             foreach (var topic in topics)
             {
                 try
@@ -35,7 +36,7 @@ public class KafkaTopicsInitialization : IKafkaTopicsInitializer
                         NumPartitions = topic.NumPartitions
                     };
 
-                    await adminClient.CreateTopicsAsync(new[] { topicSpecification });
+                    await adminClient.CreateTopicsAsync([topicSpecification]);
                     _logger.LogInformation($"Topic '{topic.Name}' created successfully.");
                 }
                 catch (CreateTopicsException e)
@@ -44,7 +45,6 @@ public class KafkaTopicsInitialization : IKafkaTopicsInitializer
                         $"An error occurred creating topic {e.Results[0].Topic}: {e.Results[0].Error.Reason}");
                 }
             }
-        }
     }
 }
 

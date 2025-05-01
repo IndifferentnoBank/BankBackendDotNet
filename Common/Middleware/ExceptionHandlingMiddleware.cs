@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Common.Middleware;
 
-public class Middleware
+public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
 
-    public Middleware(RequestDelegate next)
+    public ExceptionHandlingMiddleware(RequestDelegate next)
     {
         _next = next;
     }

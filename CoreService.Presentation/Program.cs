@@ -1,5 +1,6 @@
 using Common.Configurations;
 using Common.Configurations.Swagger;
+using Common.Logging;
 using CoreService.Application;
 using CoreService.Application.BackgroundService;
 using CoreService.Infrastructure;
@@ -17,6 +18,7 @@ builder.ConfigureCoreServiceApplication();
 builder.ConfigureCoreServiceInfrastructure();
 builder.ConfigureSwagger();
 builder.AddKafka();
+builder.Services.AddKafkaLogging(builder.Configuration);
 builder.ConfigureCoreServiceAuthorization();
 builder.Services.AddCors(options =>
 {

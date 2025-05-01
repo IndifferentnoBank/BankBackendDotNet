@@ -38,16 +38,13 @@ public static class DependencyInjection
         builder.Services.AddScoped<ICurrencyService, CurrencyService>();
     }
 
-    private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
-    {
-        return HttpPolicyExtensions
+    private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy() =>
+        HttpPolicyExtensions
             .HandleTransientHttpError()
             .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
-    }
 
-    private static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy()
-    {
-        return HttpPolicyExtensions
+    private static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy() =>
+        HttpPolicyExtensions
             .HandleTransientHttpError()
             .AdvancedCircuitBreakerAsync(
                 failureThreshold: 0.7,
@@ -55,5 +52,4 @@ public static class DependencyInjection
                 minimumThroughput: 10,
                 durationOfBreak: TimeSpan.FromSeconds(30)
             );
-    }
 }

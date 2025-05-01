@@ -1,7 +1,7 @@
+using Common.Kafka.Configs;
 using Common.Kafka.Producer;
 using CoreService.Contracts.Kafka.Events;
 using CoreService.Contracts.Kafka.Interfaces;
-using CoreService.Kafka.Config;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
