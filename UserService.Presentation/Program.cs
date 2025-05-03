@@ -4,6 +4,8 @@ using UserService.Presentation.Authorization;
 using UserService.Application;
 using UserSevice.Persistence;
 using UserService.Infrastucture;
+using UserService.Presentation.Extensions;
+using Common.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,8 @@ builder.ConfigureUserServicePersistence();
 builder.ConfigureUserServiceApplication();
 builder.ConfigureUserServiceInfrastructure();
 builder.ConfigureSwagger();
+
+builder.Services.AddKafkaLogging(builder.Configuration);
 
 var app = builder.Build();
 
@@ -30,6 +34,8 @@ app.ConfigureUserServicePersistence();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
+
+app.UseUnstableMiddleware();
 
 app.UseAuthorization();
 app.UseAuthentication();
