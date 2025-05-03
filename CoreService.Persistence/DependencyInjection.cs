@@ -20,6 +20,7 @@ public static class DependencyInjection
         builder.Services.AddTransient<IBankAccountRepository, BankAccountRepository>();
         builder.Services.AddTransient<ITransactionRepository, TransactionRepository>();
         builder.Services.AddTransient<IExpiredTokensRepository, ExpiredTokensRepository>();
+        builder.Services.AddTransient<IFireBaseTokenRepository, FireBaseTokenRepository>();
         builder.Services.AddTransient<IDbInitializer, DbInitializer>();
     }
     
