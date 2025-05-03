@@ -4,6 +4,8 @@ using CreditRatingService.Infrastucture.ExternalServices.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Polly;
+using Polly.Extensions.Http;
 
 namespace CreditRatingService.Infrastucture.ExternalServices;
 
@@ -20,7 +22,7 @@ public static class DependencyInjection
             
             client.BaseAddress = new Uri(config.BaseUrl);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
-        });
+        }).AddPolicyHandler(GetRetryPolicy()).AddPolicyHandler(GetCircuitBreakerPolicy());
        
         builder.Services.AddScoped<ICoreService, CoreService>();
 
@@ -33,8 +35,23 @@ public static class DependencyInjection
 
             client.BaseAddress = new Uri(config.BaseUrl);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
-        });
+        }).AddPolicyHandler(GetRetryPolicy()).AddPolicyHandler(GetCircuitBreakerPolicy());
 
         builder.Services.AddScoped<ILoanService, LoanService>();
     }
+
+   private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy() =>
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+
+    private static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy() =>
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .AdvancedCircuitBreakerAsync(
+                failureThreshold: 0.7,
+                samplingDuration: TimeSpan.FromSeconds(30),
+                minimumThroughput: 10,
+                durationOfBreak: TimeSpan.FromSeconds(30)
+            );
 }
