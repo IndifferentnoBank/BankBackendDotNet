@@ -10,6 +10,8 @@ public class CoreServiceDbContext : DbContext
     public DbSet<Transaction> Transactions { get; set; }
     
     public DbSet<ExpiredToken> ExpiredTokens { get; set; }
+    
+    public DbSet<FireBaseToken> FireBaseTokens { get; set; }
 
 
     public CoreServiceDbContext(DbContextOptions<CoreServiceDbContext> options) : base(options)
