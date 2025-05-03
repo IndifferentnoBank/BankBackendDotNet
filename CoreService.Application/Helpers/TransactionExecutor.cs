@@ -12,13 +12,15 @@ public class TransactionExecutor : ITransactionExecutor
     private readonly IBankAccountRepository _bankAccountRepository;
     private readonly ITransactionRepository _transactionRepository;
     private readonly ITransactionNotifier _transactionNotifier;
+    private readonly IFireBaseSender _fireBaseSender;
 
     public TransactionExecutor(IBankAccountRepository bankAccountRepository,
-        ITransactionRepository transactionRepository, ITransactionNotifier transactionNotifier)
+        ITransactionRepository transactionRepository, ITransactionNotifier transactionNotifier, IFireBaseSender fireBaseSender)
     {
         _bankAccountRepository = bankAccountRepository;
         _transactionRepository = transactionRepository;
         _transactionNotifier = transactionNotifier;
+        _fireBaseSender = fireBaseSender;
     }
 
     public async Task ExecuteTransactionAsync(Transaction transaction)
@@ -50,6 +52,9 @@ public class TransactionExecutor : ITransactionExecutor
 
         await _transactionNotifier.SendTransactionUpdate(transactionDto);
         await _transactionNotifier.SendTransactionUpdateToBankAccount(bankAccount.Id, transactionDto);
+
+        await _fireBaseSender.SendMessageToClientAsync(bankAccount.UserId, transaction);
+        await _fireBaseSender.SendMessageToStaffAsync(transaction);
     }
 
     private async Task ProcessTransaction(Transaction transaction, BankAccount bankAccount)

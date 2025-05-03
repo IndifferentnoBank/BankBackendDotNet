@@ -1,4 +1,5 @@
 using CoreService.Infrastructure.ExternalServices;
+using CoreService.Infrastructure.FireBase;
 using CoreService.Infrastructure.SignalR;
 using Microsoft.AspNetCore.Builder;
 
@@ -10,6 +11,7 @@ public static class DependencyInjection
     {
         builder.ConfigureExternalServices();
         builder.ConfigureCoreServiceSignalR();
+        builder.AddFirebase();
     }
     
     public static void ConfigureCoreServiceInfrastructure(this WebApplication app)

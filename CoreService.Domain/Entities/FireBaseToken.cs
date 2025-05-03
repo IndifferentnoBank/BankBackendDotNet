@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Common.Helpers;
 
 namespace CoreService.Domain.Entities;
 
@@ -9,4 +10,7 @@ public class FireBaseToken
     
     [Required]
     public Guid UserId { get; set; }
+    
+    [Required]
+    public Roles Service  { get; set; }
 }
