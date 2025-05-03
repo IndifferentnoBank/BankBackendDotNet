@@ -22,7 +22,6 @@ namespace CreditRatingService.Infrastucture.ExternalServices.Services
         public async Task<LoanDto?> GetLoanByLoanIdAsync(Guid loanId)
         {
             var client = _httpClientFactory.CreateClient("LoanServiceClient");
-
             var requestUri = $"{_loanServiceClientConfig.EndpointName}{loanId}";
 
             var response = await client.GetAsync(requestUri);
@@ -31,7 +30,8 @@ namespace CreditRatingService.Infrastucture.ExternalServices.Services
             {
                 var options = new JsonSerializerOptions
                 {
-                    PropertyNameCaseInsensitive = true
+                    PropertyNameCaseInsensitive = true,
+                    Converters = { new TrimmingDateTimeConverter() }
                 };
 
                 var content = await response.Content.ReadAsStringAsync();
@@ -57,11 +57,11 @@ namespace CreditRatingService.Infrastucture.ExternalServices.Services
             {
                 var options = new JsonSerializerOptions
                 {
-                    PropertyNameCaseInsensitive = true
+                    PropertyNameCaseInsensitive = true,
+                    Converters = { new TrimmingDateTimeConverter() }
                 };
 
                 var content = await response.Content.ReadAsStringAsync();
-
                 var loans = JsonSerializer.Deserialize<List<LoanDto>>(content, options);
 
                 return loans ?? new List<LoanDto>();
