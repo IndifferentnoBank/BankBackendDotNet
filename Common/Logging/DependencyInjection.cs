@@ -1,7 +1,9 @@
+using Common.Configurations;
 using Common.Kafka.Configs;
+using Common.Kafka.Producer;
+using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Common.Logging;
 
@@ -9,14 +11,16 @@ public static class DependencyInjection
 {
     public static void AddKafkaLogging(this IServiceCollection services, IConfiguration configuration)
     {
-        var kafkaProducerConfig = configuration.GetSection("Kafka:Producers:LoggingProducer")
+        services.Configure<ServiceInfoConfig>(
+            configuration.GetSection("ServiceInfo"));
+        
+        var loggingRequestProducer = configuration.GetSection("Kafka:Producers:LoggingRequestProducer")
             .Get<KafkaProducerConfiguration>();
 
-        services.AddLogging(loggingBuilder =>
-        {
-            if (kafkaProducerConfig != null)
-                loggingBuilder.AddProvider(new KafkaLoggerProvider(kafkaProducerConfig.BootstrapServers,
-                    kafkaProducerConfig.Topic));
-        });
+        services.AddTransient<KafkaTracingHandler>();
+        
+        if (loggingRequestProducer == null) return;
+        services.AddSingleton<IProducer<Null, string>>(sp => new ProducerBuilder<Null, string>(new ProducerConfig
+            { BootstrapServers = loggingRequestProducer.BootstrapServers }).Build());
     }
 }

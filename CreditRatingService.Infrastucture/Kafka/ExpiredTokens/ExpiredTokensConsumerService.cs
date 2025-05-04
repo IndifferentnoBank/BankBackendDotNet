@@ -1,8 +1,9 @@
+using CreditRatingService.Kafka.Consumers.ExpiredTokens;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace CreditRatingService.Kafka.Consumers.ExpiredTokens;
+namespace CreditRatingService.Infrastucture.Kafka.ExpiredTokens;
 
 public class ExpiredTokensConsumerService : IHostedService
 {

@@ -4,6 +4,6 @@ public static class DependencyInjection
 {
     public static void UseUnstableMiddleware(this IApplicationBuilder builder)
     {
-        // builder.UseMiddleware<UnstableMiddleware>();
+        builder.UseMiddleware<UnstableMiddleware>();
     }
 }

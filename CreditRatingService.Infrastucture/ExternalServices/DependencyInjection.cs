@@ -1,4 +1,5 @@
 using Common.Configurations;
+using Common.Logging;
 using CreditRatingService.Contracts.Interfaces;
 using CreditRatingService.Infrastucture.ExternalServices.Services;
 using Microsoft.AspNetCore.Builder;
@@ -15,32 +16,37 @@ public static class DependencyInjection
     {
         builder.Services.Configure<HttpClientConfig>(
             builder.Configuration.GetSection("CoreServiceClient"));
-        
-        builder.Services.AddHttpClient("CoreServiceClient", (sp,client) =>
-        {
-            var config = sp.GetRequiredService<IOptions<HttpClientConfig>>().Value;
-            
-            client.BaseAddress = new Uri(config.BaseUrl);
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-        }).AddPolicyHandler(GetRetryPolicy()).AddPolicyHandler(GetCircuitBreakerPolicy());
-       
+
+        builder.Services.AddHttpClient("CoreServiceClient", (sp, client) =>
+            {
+                var config = sp.GetRequiredService<IOptions<HttpClientConfig>>().Value;
+
+                client.BaseAddress = new Uri(config.BaseUrl);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            }).AddHttpMessageHandler<KafkaTracingHandler>()
+            .AddPolicyHandler(GetRetryPolicy())
+            .AddPolicyHandler(GetCircuitBreakerPolicy());
+
         builder.Services.AddScoped<ICoreService, CoreService>();
 
         builder.Services.Configure<HttpClientConfig>(
             builder.Configuration.GetSection("LoanServiceClient"));
 
         builder.Services.AddHttpClient("LoanServiceClient", (sp, client) =>
-        {
-            var config = sp.GetRequiredService<IOptions<HttpClientConfig>>().Value;
+            {
+                var config = sp.GetRequiredService<IOptions<HttpClientConfig>>().Value;
 
-            client.BaseAddress = new Uri(config.BaseUrl);
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-        }).AddPolicyHandler(GetRetryPolicy()).AddPolicyHandler(GetCircuitBreakerPolicy());
+                client.BaseAddress = new Uri(config.BaseUrl);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            })
+            .AddHttpMessageHandler<KafkaTracingHandler>()
+            .AddPolicyHandler(GetRetryPolicy())
+            .AddPolicyHandler(GetCircuitBreakerPolicy());
 
         builder.Services.AddScoped<ILoanService, LoanService>();
     }
 
-   private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy() =>
+    private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy() =>
         HttpPolicyExtensions
             .HandleTransientHttpError()
             .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));

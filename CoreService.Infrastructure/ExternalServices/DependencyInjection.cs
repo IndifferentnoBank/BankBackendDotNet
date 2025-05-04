@@ -1,4 +1,5 @@
 using Common.Configurations;
+using Common.Logging;
 using CoreService.Contracts.Interfaces;
 using CoreService.Infrastructure.ExternalServices.Services;
 using Microsoft.AspNetCore.Builder;
@@ -23,16 +24,20 @@ public static class DependencyInjection
                 client.BaseAddress = new Uri(config.BaseUrl);
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             })
+            .AddHttpMessageHandler<KafkaTracingHandler>()
             .AddPolicyHandler(GetRetryPolicy())
             .AddPolicyHandler(GetCircuitBreakerPolicy());
 
         builder.Services.AddHttpClient("CurrencyServiceClient", (sp, client) =>
-        {
-            var config = sp.GetRequiredService<IOptions<HttpClientsConfig>>().Value.CurrencyServiceClient;
+            {
+                var config = sp.GetRequiredService<IOptions<HttpClientsConfig>>().Value.CurrencyServiceClient;
 
-            client.BaseAddress = new Uri(config.BaseUrl);
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-        });
+                client.BaseAddress = new Uri(config.BaseUrl);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            })
+            .AddHttpMessageHandler<KafkaTracingHandler>()
+            .AddPolicyHandler(GetRetryPolicy())
+            .AddPolicyHandler(GetCircuitBreakerPolicy());
 
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<ICurrencyService, CurrencyService>();
