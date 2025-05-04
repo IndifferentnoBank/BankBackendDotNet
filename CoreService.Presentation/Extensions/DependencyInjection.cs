@@ -2,8 +2,8 @@ namespace CoreService.Presentation.Extensions;
 
 public static class DependencyInjection
 {
-    public static IApplicationBuilder UseUnstableMiddleware(this IApplicationBuilder builder)
+    public static void UseUnstableMiddleware(this IApplicationBuilder builder)
     {
-        return builder.UseMiddleware<UnstableMiddleware>();
+        //return builder.UseMiddleware<UnstableMiddleware>();
     }
 }

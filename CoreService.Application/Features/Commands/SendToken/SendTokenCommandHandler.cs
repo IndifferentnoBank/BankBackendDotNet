@@ -18,11 +18,11 @@ public class SendTokenCommandHandler : IRequestHandler<SendTokenCommand, Unit>
 
     public async Task<Unit> Handle(SendTokenCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId, request.UserClaims.Token);
+        //var user = await _userService.GetUserInfoAsync(request.UserClaims.UserId, request.UserClaims.Token);
 
         await _fireBaseTokenRepository.AddAsync(new FireBaseToken()
         {
-            UserId = user.Id,
+            UserId = request.UserClaims.UserId,
             Token = request.Token,
         });
 

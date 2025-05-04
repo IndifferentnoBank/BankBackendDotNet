@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreService.Presentation.Controllers;
 
-[Authorize]
+[Authorize(Policy = "CustomPolicy")]
 [ApiController]
 [Route("core_service/firebase/token")]
 public class FireBaseTokenController : ControllerBase
