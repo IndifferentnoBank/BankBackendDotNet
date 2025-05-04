@@ -1,9 +1,8 @@
 using Common.Exceptions;
-using UserService.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
-using UserSevice.Persistence;
+using UserService.Persistence;
 
 namespace UserService.Presentation.Authorization;
 

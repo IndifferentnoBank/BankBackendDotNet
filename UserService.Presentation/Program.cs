@@ -2,10 +2,10 @@ using Common.Configurations.Swagger;
 using Common.Middleware;
 using UserService.Presentation.Authorization;
 using UserService.Application;
-using UserSevice.Persistence;
-using UserService.Infrastucture;
 using UserService.Presentation.Extensions;
 using Common.Logging;
+using UserService.Infrastructure;
+using UserService.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

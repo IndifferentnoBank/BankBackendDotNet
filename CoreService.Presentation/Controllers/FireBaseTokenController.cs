@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreService.Presentation.Controllers;
 
-[Authorize(Policy = "CustomPolicy")]
 [ApiController]
+[Authorize(Policy = "CustomPolicy")]
 [Route("core_service/firebase/token")]
 public class FireBaseTokenController : ControllerBase
 {
@@ -20,10 +20,10 @@ public class FireBaseTokenController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> SaveToken([FromBody] FireBaseTokenDto dto)
+    public async Task<IActionResult> SaveToken([FromBody] FireBaseTokenDto fireBaseTokenDto)
     {
         return Ok(await _sender.Send(new SendTokenCommand(JwtHelper.ExtractUserClaimsFromHeader(HttpContext),
-            dto.Service,
-            dto.Token)));
+            fireBaseTokenDto.Service,
+            fireBaseTokenDto.Token)));
     }
 }

@@ -13,7 +13,7 @@ public static class DependencyInjection
     public static void ConfigureCoreServiceApplication(this WebApplicationBuilder builder)
     {
         builder.Services.Configure<CommissionSettings>(builder.Configuration.GetSection("Commissions"));
-        
+
         builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         builder.Services.AddAutoMapper(typeof(MappingProfile));
         builder.Services.AddScoped<IBankAccountNumberGenerator, BankAccountNumberGenerator>();
@@ -24,7 +24,5 @@ public static class DependencyInjection
         builder.Services.AddQuartzHostedService();
         
         builder.Services.AddScoped<TransactionRetryJob>();
-        
-        
     }
 }

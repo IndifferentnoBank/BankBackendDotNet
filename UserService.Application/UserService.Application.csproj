@@ -16,7 +16,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Common\Common.csproj" />
 		<ProjectReference Include="..\UserService.Domain\UserService.Domain.csproj" />
-		<ProjectReference Include="..\UserSevice.Persistence\UserService.Persistence.csproj" />
+		<ProjectReference Include="..\UserService.Persistence\UserService.Persistence.csproj" />
 	</ItemGroup>
 
 </Project>

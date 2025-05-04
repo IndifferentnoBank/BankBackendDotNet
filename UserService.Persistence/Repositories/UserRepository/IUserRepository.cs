@@ -1,10 +1,8 @@
 ﻿using Common.GenericRepository;
 using UserService.Domain.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UserService.Domain.Enums;
 
-namespace UserSevice.Persistence.Repositories.UserRepository
+namespace UserService.Persistence.Repositories.UserRepository
 {
     public interface IUserRepository : IGenericRepository<User>
     {

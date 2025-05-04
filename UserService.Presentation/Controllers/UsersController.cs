@@ -23,13 +23,7 @@ public class UserController : ControllerBase
         var user = await _userService.CreateUser(createUserDto);
         return Ok(user);
     }
-    //[HttpPost("login")]
-    //public async Task<IActionResult> LoginUser([FromBody] LoginUserDto loginUserDto)
-    //{
-    //    var userId = await _userService.LoginUser(loginUserDto);
-    //    return Ok(new { userId = $"{userId}" });
-    //}
-
+    
     [HttpPut("{id}")]
     [Authorize(Policy = "CustomPolicy")]
     public async Task<IActionResult> UpdateUser(Guid id, [FromBody] CreateUserDto createUserDto)

@@ -1,8 +1,6 @@
 using Common.GenericRepository;
 using Microsoft.EntityFrameworkCore;
-using UserService.Contracts.Repositories;
 using UserService.Domain.Entities;
-using UserSevice.Persistence;
 
 namespace UserService.Persistence.Repositories.ExpiredTokensRepository;
 

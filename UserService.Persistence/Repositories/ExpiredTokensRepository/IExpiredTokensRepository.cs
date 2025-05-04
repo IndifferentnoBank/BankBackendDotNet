@@ -1,7 +1,7 @@
 using Common.GenericRepository;
 using UserService.Domain.Entities;
 
-namespace UserService.Contracts.Repositories;
+namespace UserService.Persistence.Repositories.ExpiredTokensRepository;
 
 public interface IExpiredTokensRepository : IGenericRepository<ExpiredToken>
 {

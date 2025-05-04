@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace UserService.Kafka.Consumers.ExpiredTokens;
+namespace UserService.Infrastructure.ExpiredTokens;
 
 public class ExpiredTokensConsumerService : IHostedService
 {

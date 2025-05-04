@@ -1,9 +1,9 @@
 using Common.Kafka.Configs;
-using UserService.Kafka.Consumers.ExpiredTokens;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using UserService.Infrastructure.ExpiredTokens;
 
-namespace UserService.Infrastucture;
+namespace UserService.Infrastructure;
 
 public static class DependencyInjection
 {

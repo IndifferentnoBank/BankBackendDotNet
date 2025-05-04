@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UserService.Domain.Entities;
 
-namespace UserSevice.Persistence
+namespace UserService.Persistence
 {
     public class UserServiceDbContext : DbContext
     {

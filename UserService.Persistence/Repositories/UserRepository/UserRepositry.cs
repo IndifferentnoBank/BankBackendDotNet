@@ -1,13 +1,9 @@
 ﻿using Common.GenericRepository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders.Physical;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UserService.Domain.Entities;
 using UserService.Domain.Enums;
 
-namespace UserSevice.Persistence.Repositories.UserRepository
+namespace UserService.Persistence.Repositories.UserRepository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
@@ -28,7 +24,6 @@ namespace UserSevice.Persistence.Repositories.UserRepository
                 Passport = passport,
                 Role = role,
                 IsLocked = false
-                //Password = password
             };
 
             await _dbContext.User.AddAsync(user);
@@ -44,7 +39,6 @@ namespace UserSevice.Persistence.Repositories.UserRepository
             user.PhoneNumber = phone;
             user.Email = email;
             user.Role = role;
-           // user.Password = password;
             _dbContext.User.Update(user);
             await _dbContext.SaveChangesAsync();
 

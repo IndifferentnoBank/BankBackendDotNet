@@ -20,8 +20,5 @@ namespace UserService.Application.Dtos.Requests
         [Required]
         public List<UserRole> Role { get; set; }
 
-        //[Required]
-        //public string Password { get; set; }
-
     }
 }

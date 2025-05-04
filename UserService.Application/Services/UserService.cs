@@ -2,9 +2,9 @@
 using UserService.Application.Dtos.Requests;
 using UserService.Application.Dtos.Responses;
 using AutoMapper;
-using UserSevice.Persistence.Repositories.UserRepository;
 using UserService.Domain.Entities;
 using UserService.Domain.Enums;
+using UserService.Persistence.Repositories.UserRepository;
 
 namespace UserService.Application.Services
 {

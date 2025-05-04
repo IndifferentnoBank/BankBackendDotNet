@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace UserService.Contracts.Kafka.Events;
+namespace UserService.Infrastructure.Kafka.Events;
 
 public class ExpiredTokenEvent
 {

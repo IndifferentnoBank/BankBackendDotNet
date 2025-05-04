@@ -2,14 +2,14 @@ using System.Text.Json;
 using Common.Kafka.Configs;
 using Common.Kafka.Consumer;
 using Confluent.Kafka;
-using UserService.Contracts.Kafka.Events;
-using UserService.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using UserService.Contracts.Repositories;
+using UserService.Domain.Entities;
+using UserService.Infrastructure.Kafka.Events;
+using UserService.Persistence.Repositories.ExpiredTokensRepository;
 
-namespace UserService.Kafka.Consumers.ExpiredTokens;
+namespace UserService.Infrastructure.ExpiredTokens;
 
 public class ExpiredTokensConsumer : IKafkaConsumer
 {
