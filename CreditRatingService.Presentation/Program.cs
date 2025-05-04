@@ -18,6 +18,16 @@ builder.ConfigureCreditRatingServicePersistence();
 builder.ConfigureCreditRatingServiceApplication();
 builder.ConfigureSwagger();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -25,7 +35,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.UseSwaggerConfiguration();
 }
-
+app.UseCors("AllowAll");
 app.ConfigureCreditRatingServicePersistence();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
